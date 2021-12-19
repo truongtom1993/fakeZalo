@@ -8,20 +8,19 @@ import Footer from './assets/img/footer.png'
 
 function App() {
 
+	const getArray = (total: number) => {
+		const array = []
+		for (let i = 0; i < total; i++) {
+			array.push(<div className="h-96 bg-white border" key={i}>Index {i+ 1}</div>)
+		}
+		return array
+	}
+
 	return (
 		<div className="App ml-10 mt-10 shadow-lg">
-			<Header name='Truong Tom' time={31} />
-			<div className="main bg-gray-100 overflow-y-auto flex-grow flex-col overscroll-y-contain">
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
-				<div className="h-52 bg-white border"></div>
+			<Header name='Dang Nhat Truong' time={31} />
+			<div className="main bg-gray-100 overflow-y-scroll flex-grow flex-col overscroll-y-contain">
+				{getArray(100)}
 			</div>
 			<div className="footer ">
 				<img src={Footer} alt="footer" className='h-[48px]' />
