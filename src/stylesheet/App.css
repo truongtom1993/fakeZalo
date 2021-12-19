@@ -11,17 +11,13 @@ code {
 	flex-direction: column;
 }
 
-.main {
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-}
-.footer {
+/* .footer {
 	height: 48px;
 	background-color: #ddd;
 	background-image: url(../assets/img/footer.png);
 	background-size: contain;
-}
+	background-repeat: repeat;
+} */
 #icon_video path {
 	stroke-width: 1.3;
 }
