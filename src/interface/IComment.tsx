@@ -1,16 +1,46 @@
-interface Comment {
+
+type TypeCommentImage = {
+	type: 'image',
+	url: string,
+}
+type TypeCommentText = {
+	type: 'text',
+	content: string
+}
+type TypeCommentCall = {
+	type: 'call',
+	callType: 'incomming' | 'outgoing'
+}
+type TypeCommentRecord = {
+	type: 'record',
+	duration: number
+}
+
+type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord
+
+export enum Emoji {
+	Like = '/-strong',
+	Heart = '/-heart',
+	Lol = ':>',
+	Wow = ':o',
+	Cry = ':-((',
+	Angry = ':-h'
+}
+
+type Author = 'you' | 'me';
+export type TypeOfTime = 'left' | 'center' | 'right';
+
+export interface Comment {
 	id: string,
-	author: 'you'|'me',
-	comment: {
-		type: 'image'|'text'|'call'|'record',
-		content?: string,
-		duration?: string,
-		url?: string,
-	},
-	time: string,
+	author: Author,
+	comment: CommentType,
+	time: {
+		type?: TypeOfTime,
+		value: Date,
+	}
 	emoji?: {
-		show?: boolean,
-		type?: 'heart'|'like'|'lol'|'wow'|'cry'|'angry',
+		show?: boolean, //Neu false thi hien icon trai tim rong
+		type?: Emoji,
 		number?: number
 	},
 	separate?: {
@@ -23,10 +53,10 @@ interface Comment {
 	}
 }
 
-interface Profile {
+export interface Profile {
 	name: string,
-	status: string,
+	status: number, //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
 	avatar: string,
 }
 
-export type { Comment, Profile }
+// export type { Comment, Profile, TypeCommentImage, TypeCommentCall, TypeCommentRecord, TypeCommentText, CommentType , Emoji}

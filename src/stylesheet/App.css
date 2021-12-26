@@ -11,13 +11,6 @@ code {
 	flex-direction: column;
 }
 
-/* .footer {
-	height: 48px;
-	background-color: #ddd;
-	background-image: url(../assets/img/footer.png);
-	background-size: contain;
-	background-repeat: repeat;
-} */
 #icon_video path {
 	stroke-width: 1.2;
 }

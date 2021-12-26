@@ -8,7 +8,8 @@ module.exports = {
 		
 	},
 	fontFamily: {
-		segoe: ['Segoe UI', 'SegoeuiPc', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Lucida Grande', 'Roboto', 'Ubuntu', 'Tahoma', 'Microsoft Sans Serif', 'Arial', 'sans-serif']
+		segoe: ['Segoe UI', 'SegoeuiPc', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'sans-serif'],
+		robo: ['Roboto']
 	}
   },
   plugins: [],

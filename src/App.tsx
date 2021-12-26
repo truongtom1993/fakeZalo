@@ -2,27 +2,23 @@ import { useState } from 'react'
 import './stylesheet/reset.css'
 import './stylesheet/App.css'
 import './stylesheet/tailwind.css'
-import { data, profile } from './data/data'
+import { listComment, profile } from './data/data'
 import Header from './component/Header'
 import Footer from './assets/img/footer.png'
+import CommentMain from './component/comment'
 
 function App() {
-
-	const getArray = (total: number) => {
-		const array = []
-		for (let i = 0; i < total; i++) {
-			array.push(<div className="h-96 bg-white border" key={i}>Index {i+ 1}</div>)
-		}
-		return array
-	}
+	
 
 	return (
-		<div className="App ml-10 mt-10 shadow-lg">
-			<Header name='Dang Nhat Truong' time={31} />
-			<div className="main bg-gray-100 overflow-y-scroll flex-grow flex-col overscroll-y-contain">
-				{getArray(100)}
+		<div className="App ml-10 mt-10 mb-10 shadow-lg font-segoe">
+			<Header name={profile.name} status={profile.status} />
+			<div className="main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col overscroll-y-contain">
+				{listComment.map((element,index) => {
+					return <CommentMain key={index} data={element} isLastCommentText={(element.author=== listComment[index-1]?.author && element.comment.type !== listComment[index+1]?.comment?.type) ? true : false}/>
+				})}
 			</div>
-			<div className="footer ">
+			<div className="footer">
 				<img src={Footer} alt="footer" className='h-[48px]' />
 			</div>
 		</div>

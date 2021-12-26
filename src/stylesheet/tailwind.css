@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.emoji-sizer {
+		@apply h-3 w-3 overflow-hidden text-transparent cursor-pointer select-none;
+	}
+	.comment-text-main {
+		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] border border-gray-300 border-opacity-80 box-border
+	}
+	.icon-share-image{
+		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border cursor-pointer
+	}
+	.icon-count-heart {
+		@apply bg-white px-[0.3rem] absolute bottom-[-0.6rem] right-8 h-4 rounded-xl flex items-center text-xs shadow-sm font-robo cursor-pointer border box-content
+	}
+	.hd-label{
+		@apply bg-white rounded-[4px] absolute top-2 left-2 px-1 font-medium text-xs font-robo
+	}
+	.icon-emoji{
+		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center absolute bottom-[-0.7rem] right-1 shadow-sm cursor-pointer
+	}
+	.comment-image{
+		@apply bg-contain rounded-xl border border-gray-300
+	}
+	.comment-image-flx {
+		@apply relative ml-1 max-w-[380px] min-w-[254px]
+	}
+	.time-stamp {
+		@apply text-xs font-robo text-gray-500
+	}
+}
