@@ -10,16 +10,17 @@ const Form = () => {
 	function addComment(event: FormEvent) {
 		const data: any = {};
 		event.preventDefault();
+		const date =  new Date();
 		const eventTarget = event.target as HTMLFormElement;
 		const target = eventTarget.elements;
-		data.id = nanoid();
+		data.id = nanoid(4);
 		const author = target.namedItem("author") as RadioNodeList;
 		data.author = author.value as Author;
 		const timeType = target.namedItem("timeType") as RadioNodeList;
 		const timeValue = target.namedItem("timeValue") as HTMLInputElement;
 		data.time = {
 			type: timeType.value as TypeOfTime,
-			value: timeValue.valueAsDate,
+			value: timeValue.valueAsDate ? timeValue.valueAsDate : date,
 		};
 		const emojiIsVisible = target.namedItem("emojiIsVisible") as HTMLInputElement;
 		const emojiType = target.namedItem("emojiType") as RadioNodeList;
@@ -33,7 +34,7 @@ const Form = () => {
 		const separateTime = target.namedItem("separateTime") as HTMLInputElement;
 		data.separate = {
 			show: separateIsVisible.checked,
-			time: separateTime.value,
+			time: separateTime.value ? separateTime.value : date,
 		};
 		const replyIsVisible = target.namedItem("replyIsVisible") as HTMLInputElement;
 		const replyId = target.namedItem("replyId") as HTMLInputElement;

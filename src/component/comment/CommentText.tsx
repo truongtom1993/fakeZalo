@@ -52,6 +52,7 @@ const CommentText = ({ data, isLastComment }: Props) => {
 									{time.value.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
 								</span>
 							)}
+							
 						</div>
 					</div>
 

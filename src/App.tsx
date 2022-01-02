@@ -11,12 +11,6 @@ import Form from "./component/form";
 import { Comment } from "./interface/IComment";
 import { useAppSelector } from "./hooks";
 
-function getData(): [] | Comment[] {
-	const dataStorage = window.localStorage.getItem('data')
-	if (dataStorage) return JSON.parse(dataStorage)
-	return listComment;
-}
-
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const [data, setData] = useState(listComment)

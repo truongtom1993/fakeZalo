@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 import { Comment, Emoji } from "../interface/IComment";
 
 const data: Comment[] = [
 	{
-		id: "dfdsf",
+		id: nanoid(4),
 		author: "you",
 		comment: {
 			type: "text",
-			content: "",
+			content: "lorem ipsum",
 		},
 		time: {
 			type: "center",
@@ -39,6 +40,7 @@ const listComment = createSlice({
 			state.data.push(action.payload)
 		},
 	},
+	
 });
 export const { pushData } = listComment.actions;
 export default listComment.reducer;
