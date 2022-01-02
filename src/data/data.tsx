@@ -53,10 +53,11 @@ const listComment: Comment[] = [{
 },
 {
 	id: 'b',
-	author: 'me',
+	author: 'you',
 	comment: {
 		type: 'call',
-		callType: 'incomming'
+		callType: 'incomming',
+		duration: 15
 	},
 	time: {
 		value: new Date()
@@ -66,8 +67,8 @@ const listComment: Comment[] = [{
 ]
 
 const profile: Profile = {
-	name: 'Truong Tom',
-	status: 0,
+	name: 'Bố Hùng',
+	status: 6*60,
 	avatar: 'src/assets/img/avatar.png'
 }
 

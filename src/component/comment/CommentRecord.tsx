@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react'
-import { Comment } from '../../interface/IComment'
-import Avatar from '../Avatar';
-import { FaPlay } from 'react-icons/fa'
+import React, { Fragment } from 'react';
+import { FaPlay } from 'react-icons/fa';
 import { IoVolumeMedium } from 'react-icons/io5';
+import { Comment } from '../../interface/IComment';
+import Avatar from '../Avatar';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
@@ -32,10 +32,10 @@ const CommentRecord = ({ data }: Props) => {
 							<FaPlay className='fill-white ml-1' />
 						</div>
 
-						<div className="progess-icon-group flex self-center ml-2 justify-around w-5">
-							<div className='w-[0.3rem] h-4 bg-gray-500 rounded-md self-end'></div>
+						<div className="progess-icon-group flex self-center mt-1 ml-2 justify-around w-5">
+							<div className='w-[0.3rem] h-3 bg-gray-500 rounded-md self-end'></div>
 							<div className='w-[0.3rem] h-[0.5rem] bg-gray-500 rounded-md self-end'></div>
-							<div className='w-[0.27rem] h-5 bg-gray-500 rounded-md self-end'></div>
+							<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 						</div>
 
 						<div className="time-duration ml-3 text-gray-700 self-center mb-1">
@@ -56,10 +56,10 @@ const CommentRecord = ({ data }: Props) => {
 							<FaPlay className='fill-white ml-1' />
 						</div>
 
-						<div className="progess-icon-group flex self-center ml-2 justify-around w-5">
-							<div className='w-[0.3rem] h-4 bg-gray-500 rounded-md self-end'></div>
+						<div className="progess-icon-group flex self-center mt-1 ml-2 justify-around w-5">
+							<div className='w-[0.3rem] h-3 bg-gray-500 rounded-md self-end'></div>
 							<div className='w-[0.3rem] h-[0.5rem] bg-gray-500 rounded-md self-end'></div>
-							<div className='w-[0.27rem] h-5 bg-gray-500 rounded-md self-end'></div>
+							<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 						</div>
 
 						<div className="time-duration ml-3 text-gray-700 self-center mb-1">

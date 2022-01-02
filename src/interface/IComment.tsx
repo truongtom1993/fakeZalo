@@ -9,7 +9,8 @@ type TypeCommentText = {
 }
 type TypeCommentCall = {
 	type: 'call',
-	callType: 'incomming' | 'outgoing'
+	callType: 'incomming' | 'outgoing' | 'missed',
+	duration: number //second
 }
 type TypeCommentRecord = {
 	type: 'record',
@@ -27,7 +28,7 @@ export enum Emoji {
 	Angry = ':-h'
 }
 
-type Author = 'you' | 'me';
+export type Author = 'you' | 'me';
 export type TypeOfTime = 'left' | 'center' | 'right';
 
 export interface Comment {
@@ -45,7 +46,7 @@ export interface Comment {
 	},
 	separate?: {
 		show?: boolean,
-		time?: string
+		time?: Date
 	},
 	reply?: {
 		show?: boolean,
@@ -58,5 +59,3 @@ export interface Profile {
 	status: number, //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
 	avatar: string,
 }
-
-// export type { Comment, Profile, TypeCommentImage, TypeCommentCall, TypeCommentRecord, TypeCommentText, CommentType , Emoji}
