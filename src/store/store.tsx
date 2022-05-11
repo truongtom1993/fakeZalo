@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import ListCommentReducer from "../slice/DataSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import ListCommentReducer from '../slice/DataSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -9,11 +9,11 @@ export const store = configureStore({
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: ["your/action/type"],
+				ignoredActions: ['your/action/type'],
 				// Ignore these field paths in all actions
-				ignoredActionPaths: ["meta.arg", "payload.timestamp"],
+				ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
 				// Ignore these paths in the state
-				ignoredPaths: ["items.dates"],
+				ignoredPaths: ['items.dates'],
 			},
 		}),
 });

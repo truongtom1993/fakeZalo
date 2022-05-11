@@ -1,17 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
-import { Comment, Emoji } from "../interface/IComment";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
+import { Comment, Emoji } from '../interface/IComment';
 
 const data: Comment[] = [
 	{
 		id: nanoid(4),
-		author: "you",
+		author: 'you',
 		comment: {
-			type: "text",
-			content: "lorem ipsum",
+			type: 'text',
+			content: 'lorem ipsum',
 		},
 		time: {
-			type: "center",
+			type: 'center',
 			value: new Date(),
 		},
 		emoji: {
@@ -25,22 +25,22 @@ const data: Comment[] = [
 		},
 		reply: {
 			show: false,
-			idComment: "",
+			idComment: '',
 		},
 	},
 ];
 
 const listComment = createSlice({
-	name: "listComment",
+	name: 'listComment',
 	initialState: {
 		data,
 	},
 	reducers: {
 		pushData(state, action: PayloadAction<Comment>) {
-			state.data.push(action.payload)
+			state.data.push(action.payload);
 		},
+		changeCommentById(state, action: PayloadAction<Comment>) {},
 	},
-	
 });
 export const { pushData } = listComment.actions;
 export default listComment.reducer;

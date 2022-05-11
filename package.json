@@ -8,12 +8,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
+    "antd": "^4.20.3",
     "classnames": "^2.3.1",
     "nanoid": "^3.1.30",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "redux-persist": "^6.0.0",
+    "sass": "^1.51.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
