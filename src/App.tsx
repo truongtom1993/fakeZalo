@@ -1,29 +1,25 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
-import FormAnt from './component/form/FormAnt';
-
-import './stylesheet/reset.css';
-import './stylesheet/App.css';
-import './stylesheet/tailwind.css';
-import { listComment, profile } from './data/data';
-import Header from './component/Header';
+import { useEffect, useRef, useState } from 'react';
+import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
 import CommentMain from './component/comment';
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
-// import Form from "./component/form";
-
-import { Comment } from './interface/IComment';
+import Form from './component/form';
+import FormAnt from './component/form/FormAnt';
+import Header from './component/Header';
+import { listComment } from './data/data';
 import { useAppSelector } from './hooks';
+import './stylesheet/App.css';
+import './stylesheet/reset.css';
+import './stylesheet/tailwind.css';
 
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const [data, setData] = useState(listComment);
-	const state = useAppSelector(state => state.ListCommentReducer);
+	const commentList = useAppSelector(state => state.commentList);
 
 	useEffect(() => {
-		window.localStorage.setItem('data', JSON.stringify(state.data));
-		console.log(state.data);
-	}, [state.data]);
-	const commentContainerRef = useRef();
+		window.localStorage.setItem('data', JSON.stringify(commentList));
+	}, [commentList]);
+	const commentContainerRef = useRef(null);
 
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
 		const target = event.target as Element;
@@ -39,12 +35,11 @@ function App() {
 	}
 
 	return (
-		<div className='flex justify-end items-center'>
-			<FormAnt />
-			<div className='App shadow-lg font-segoe relative mr-10'>
-				<Header name={profile.name} status={profile.status} />
+		<div className='pl-2 pt-2 flex'>
+			<div className='App shadow-lg font-segoe relative mr-2'>
+				<Header />
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col' onScroll={getScrollProcess} ref={commentContainerRef}>
-					{state.data.map((element, index) => {
+					{commentList.data.map((element, index) => {
 						return (
 							<CommentMain
 								key={index}
@@ -69,6 +64,8 @@ function App() {
 					</div>
 				)}
 			</div>
+			<FormAnt />
+			{/* <Form /> */}
 		</div>
 	);
 }

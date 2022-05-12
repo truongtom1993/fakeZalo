@@ -9,7 +9,7 @@ const listComment: Comment[] = [
 			url: 'src/assets/img/test-screenshot.jpg',
 		},
 		time: {
-			value: new Date(),
+			value: new Date().toLocaleString(),
 		},
 		emoji: {
 			show: true,
@@ -27,7 +27,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'right',
-			value: new Date(),
+			value: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
 		},
 	},
 	{
@@ -38,7 +38,7 @@ const listComment: Comment[] = [
 			content: 'Xin cảm ơn rất nhiều',
 		},
 		time: {
-			value: new Date(),
+			value: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
 		},
 	},
 	{
@@ -50,7 +50,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'left',
-			value: new Date(),
+			value: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
 		},
 	},
 	{
@@ -62,7 +62,7 @@ const listComment: Comment[] = [
 			duration: 15,
 		},
 		time: {
-			value: new Date(),
+			value: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
 		},
 	},
 ];

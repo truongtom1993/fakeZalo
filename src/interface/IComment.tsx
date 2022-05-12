@@ -1,23 +1,22 @@
-
 type TypeCommentImage = {
-	type: 'image',
-	url: string,
-}
+	type: 'image';
+	url: string;
+};
 type TypeCommentText = {
-	type: 'text',
-	content: string
-}
+	type: 'text';
+	content: string;
+};
 type TypeCommentCall = {
-	type: 'call',
-	callType: 'incomming' | 'outgoing' | 'missed',
-	duration: number //second
-}
+	type: 'call';
+	callType: 'incomming' | 'outgoing' | 'missed';
+	duration: number; //second
+};
 type TypeCommentRecord = {
-	type: 'record',
-	duration: number
-}
+	type: 'record';
+	duration: number;
+};
 
-type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord
+type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord;
 
 export enum Emoji {
 	Like = '/-strong',
@@ -25,37 +24,37 @@ export enum Emoji {
 	Lol = ':>',
 	Wow = ':o',
 	Cry = ':-((',
-	Angry = ':-h'
+	Angry = ':-h',
 }
 
 export type Author = 'you' | 'me';
 export type TypeOfTime = 'left' | 'center' | 'right';
 
 export interface Comment {
-	id: string,
-	author: Author,
-	comment: CommentType,
+	id: string;
+	author: Author;
+	comment: CommentType;
 	time: {
-		type?: TypeOfTime,
-		value: Date,
-	}
+		type?: TypeOfTime;
+		value: string;
+	};
 	emoji?: {
-		show?: boolean, //Neu false thi hien icon trai tim rong
-		type?: Emoji,
-		number?: number
-	},
+		show?: boolean; //Neu false thi hien icon trai tim rong
+		type?: Emoji;
+		number?: number;
+	};
 	separate?: {
-		show?: boolean,
-		time?: Date
-	},
+		show?: boolean;
+		time?: string;
+	};
 	reply?: {
-		show?: boolean,
-		idComment: string,
-	}
+		show?: boolean;
+		idComment: string;
+	};
 }
 
 export interface Profile {
-	name: string,
-	status: number, //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
-	avatar: string,
+	name: string;
+	status: number; //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
+	avatar: string;
 }
