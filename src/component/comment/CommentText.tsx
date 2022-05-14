@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useC
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
 import TimeComponent from '../time/TimeComponent';
+
 interface Props {
 	data: Comment;
 	isLastComment?: boolean;

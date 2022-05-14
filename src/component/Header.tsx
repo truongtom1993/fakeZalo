@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import { BsListUl } from 'react-icons/bs';
 import { HiOutlineVideoCamera } from 'react-icons/hi';
 import { IoCallOutline } from 'react-icons/io5';
@@ -48,4 +48,4 @@ const Header = () => {
 		</Fragment>
 	);
 };
-export default Header;
+export default memo(Header);

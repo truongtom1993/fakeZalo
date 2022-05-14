@@ -1,8 +1,9 @@
+import { nanoid } from 'nanoid';
 import { Comment, Emoji, Profile } from '../interface/IComment';
 
 const listComment: Comment[] = [
 	{
-		id: 'a',
+		id: nanoid(4),
 		author: 'me',
 		comment: {
 			type: 'image',
@@ -18,7 +19,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: 'b',
+		id: nanoid(4),
 		author: 'me',
 		comment: {
 			type: 'text',
@@ -31,7 +32,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: 'bere',
+		id: nanoid(4),
 		author: 'you',
 		comment: {
 			type: 'text',
@@ -42,7 +43,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: 'c',
+		id: nanoid(4),
 		author: 'you',
 		comment: {
 			type: 'record',
@@ -54,7 +55,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: 'b',
+		id: nanoid(4),
 		author: 'you',
 		comment: {
 			type: 'call',

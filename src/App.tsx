@@ -13,7 +13,6 @@ import './stylesheet/tailwind.css';
 
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
-	const [data, setData] = useState(listComment);
 	const commentList = useAppSelector(state => state.commentList);
 
 	useEffect(() => {

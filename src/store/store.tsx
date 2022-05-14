@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import commentList from '../slice/DataSlice';
 import profileReducer from '../slice/ProfileSlice';
+import currentCommentReducer from '../slice/CurrentCommentSlice';
 
 export const store = configureStore({
 	reducer: {
 		commentList,
 		profileReducer,
+		currentCommentReducer,
 	},
 	// middleware: getDefaultMiddleware =>
 	// 	getDefaultMiddleware({

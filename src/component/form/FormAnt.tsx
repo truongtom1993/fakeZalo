@@ -1,14 +1,33 @@
 import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Comment } from '../../interface/IComment';
 import { changeProfile } from '../../slice/ProfileSlice';
+import { RootState } from '../../store/store';
 
 const { Option } = Select;
 
-const initialValues = { remember: true };
+const formField = {
+	user: '',
+	idComment: '',
+	idReply: '',
+	timeLocation: '',
+	timeValue: '',
+	emoji: '',
+	numberEmoji: '',
+	separateTimeValue: '',
+	commentType: '',
+};
 
 const FormAnt = () => {
 	const [form] = Form.useForm();
+	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
+	const currentComment = useSelector<RootState, Comment | {}>(s => s.currentCommentReducer.currentComment);
+
+	useEffect(() => {
+		setForm(currentComment);
+	}, [currentComment]);
 
 	const onFinish = (values: any) => {
 		console.log('Success:', values);
@@ -37,30 +56,54 @@ const FormAnt = () => {
 		);
 	};
 
+	const resetForm = () => {
+		form.resetFields(Object.keys(formField));
+	};
+	const setForm = (data: any) => {
+		const result = {
+			user: data?.author || '',
+			idComment: data?.id || '',
+			idReply: data?.reply || '',
+			timeLocation: data?.time?.type || '',
+			timeValue: data?.time?.value || '',
+			emoji: data?.emoji?.type || '',
+			numberEmoji: data?.emoji?.number || '',
+			separateTimeValue: data?.separate?.time || '',
+			commentType: data?.comment?.type || '',
+		};
+
+		setFieldsValue(result);
+	};
+
+	const getForm = () => {
+		const result = getFieldsValue(true);
+		console.info(`🎁 src/component/form/FormAnt.tsx	Line:80	ID:f1620c`, result);
+	};
+
 	return (
 		<div className='flex h-auto border-2 rounded p-2 mr-2'>
 			<Form
 				name='basic'
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 16 }}
-				initialValues={initialValues}
-				onFinish={onFinish}
+				// initialValues={{}}
+				// onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				autoComplete='off'
-				className='border-2 rounded'
+				form={form}
 			>
 				<Row>
-					<Form.Item label='Username' name='username' rules={[{ required: true, message: 'Please input your username!' }]}>
-						<Input />
-					</Form.Item>
-				</Row>
-
-				<Row>
-					<Form.Item label='User' name='user'>
+					<Form.Item label='user' name='user'>
 						<Select placeholder='Chọn người gửi'>
 							<Option value='You'>You</Option>
 							<Option value='Me'>Me</Option>
 						</Select>
+					</Form.Item>
+					<Form.Item label='ID Comment' name='idComment'>
+						<Input />
+					</Form.Item>
+					<Form.Item label='ID Reply' name='idReply'>
+						<Input />
 					</Form.Item>
 				</Row>
 
@@ -108,12 +151,6 @@ const FormAnt = () => {
 				</Row>
 
 				<Row>
-					<Form.Item label='ID Comment Reply' name='idReply'>
-						<Input />
-					</Form.Item>
-				</Row>
-
-				<Row>
 					<Form.Item label='Loại comment' name='commentType'>
 						<Select placeholder='Chọn loại comment'>
 							<Option value='text'>Văn bản</Option>
@@ -125,17 +162,19 @@ const FormAnt = () => {
 				</Row>
 
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-					<Button type='primary' htmlType='submit'>
+					<Button type='default' htmlType='submit'>
 						Sửa
 					</Button>
-					<Button type='primary' htmlType='submit'>
+					<Button type='default' htmlType='submit'>
 						Thêm mới
 					</Button>
-					<Button type='primary' onClick={handleChangeProfile}>
+					<Button type='default' onClick={handleChangeProfile}>
 						Thay đổi profile
 					</Button>
 				</Form.Item>
 			</Form>
+			<Button onClick={getForm}>SetField</Button>
+			<Button onClick={resetForm}>ResetField</Button>
 		</div>
 	);
 };
