@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Comment } from '../../interface/IComment';
 import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
+import moment from 'moment';
 
 const { Option } = Select;
 
@@ -25,9 +26,9 @@ const FormAnt = () => {
 	const dispatch = useDispatch();
 	const currentComment = useSelector<RootState, Comment | {}>(s => s.currentCommentReducer.currentComment);
 
-	useEffect(() => {
-		setForm(currentComment);
-	}, [currentComment]);
+	// useEffect(() => {
+	// 	setForm(currentComment);
+	// }, [currentComment]);
 
 	const onFinish = (values: any) => {
 		console.log('Success:', values);
@@ -72,7 +73,11 @@ const FormAnt = () => {
 			commentType: data?.comment?.type || '',
 		};
 
-		setFieldsValue(result);
+		const result2 = {
+			timeValue: moment('2020-01-03', 'YYYY-MM-DD'),
+		};
+
+		setFieldsValue(result2);
 	};
 
 	const getForm = () => {
@@ -173,7 +178,8 @@ const FormAnt = () => {
 					</Button>
 				</Form.Item>
 			</Form>
-			<Button onClick={getForm}>SetField</Button>
+			<Button onClick={getForm}>GetForm</Button>
+			<Button onClick={setForm}>SetForm</Button>
 			<Button onClick={resetForm}>ResetField</Button>
 		</div>
 	);
