@@ -19,20 +19,21 @@ const formField = {
 	numberEmoji: '',
 	separateTimeValue: '',
 	commentType: 'text',
+	callType: 'incomming',
 };
 
 const FormAnt = () => {
 	const [form] = Form.useForm();
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
-	const currentComment = useSelector<RootState, Comment | {}>(s => s.currentCommentReducer.currentComment);
+	const currentComment = useSelector<RootState, any>(s => s.currentCommentReducer.currentComment);
 
 	useEffect(() => {
 		setForm(currentComment);
 	}, [currentComment]);
 
 	const onFinish = (values: any) => {
-		console.log('Success:', values);
+		setForm(values);
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -72,6 +73,7 @@ const FormAnt = () => {
 			numberEmoji: data?.emoji?.number || '',
 			separateTimeValue: data?.separate?.time || '',
 			commentType: data?.comment?.type || '',
+			textContent: data.comment?.content,
 		};
 
 		const result2 = {
@@ -98,39 +100,47 @@ const FormAnt = () => {
 				form={form}
 			>
 				<Row>
-					<Form.Item label='user' name='user'>
-						<Select placeholder='Chọn người gửi'>
-							<Option value='You'>You</Option>
-							<Option value='Me'>Me</Option>
-						</Select>
-					</Form.Item>
-					<Form.Item label='ID Comment' name='idComment'>
-						<Input />
-					</Form.Item>
-					<Form.Item label='ID Reply' name='idReply'>
-						<Input />
-					</Form.Item>
+					<Col span={4}>
+						<Form.Item label='User' name='user'>
+							<Select>
+								<Option value='You'>You</Option>
+								<Option value='Me'>Me</Option>
+							</Select>
+						</Form.Item>
+					</Col>
+
+					<Col span={9} offset={1}>
+						<Form.Item label='ID Comment' name='idComment'>
+							<Input />
+						</Form.Item>
+					</Col>
+
+					<Col span={9} offset={1}>
+						<Form.Item label='ID Reply' name='idReply'>
+							<Input />
+						</Form.Item>
+					</Col>
 				</Row>
 
-				<Row justify='space-between'>
-					<Col span={12}>
-						<Form.Item label='Vị trí time' name='timeLocation' labelCol={{ span: 12, offset: 0 }}>
-							<Select placeholder='Chọn ví trí hiển thị thời gian'>
+				<Row>
+					<Col span={9}>
+						<Form.Item label='Vị trí time' name='timeLocation'>
+							<Select>
 								<Option value='Trái'>Trái</Option>
 								<Option value='Giữa'>Giữa</Option>
 								<Option value='Phải'>Phải</Option>
 							</Select>
 						</Form.Item>
 					</Col>
-					<Col span={12}>
-						<Form.Item label='Chọn thời gian' name='timeValue'>
+					<Col span={9} offset={3}>
+						<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left' labelCol={{ span: 11 }}>
 							<DatePicker showTime onChange={onChange} onOk={onOk} />
 						</Form.Item>
 					</Col>
 				</Row>
 
 				<Row>
-					<Col span={12}>
+					<Col span={6}>
 						<Form.Item name='emoji' label='Emoji'>
 							<Select placeholder='Icon'>
 								<Option value='Strong'>👍 Like</Option>
@@ -142,7 +152,7 @@ const FormAnt = () => {
 							</Select>
 						</Form.Item>
 					</Col>
-					<Col span={12}>
+					<Col flex='auto'>
 						<Form.Item name='numberEmoji' label='Số lượng'>
 							<InputNumber min={1} max={10} onChange={onChange} />
 						</Form.Item>
@@ -150,14 +160,12 @@ const FormAnt = () => {
 				</Row>
 
 				<Row>
-					<Form.Item label='Dấu phân cách thời gian' name='separateTimeValue'>
+					<Form.Item label='Dấu phân cách thời gian' name='separateTimeValue' labelCol={{ span: 12 }} labelAlign='left'>
 						<DatePicker showTime onChange={onChange} onOk={onOk} />
 					</Form.Item>
 				</Row>
 
-				<Row>
-					<FormCommentType />
-				</Row>
+				<FormCommentType commentType={currentComment.comment?.type} />
 
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
 					<Button type='default' htmlType='submit'>
@@ -171,9 +179,6 @@ const FormAnt = () => {
 					</Button>
 				</Form.Item>
 			</Form>
-			<Button onClick={getForm}>GetForm</Button>
-			<Button onClick={setForm}>SetForm</Button>
-			<Button onClick={resetForm}>ResetField</Button>
 		</div>
 	);
 };

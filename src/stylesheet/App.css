@@ -3,9 +3,9 @@ code {
 }
 
 .App {
-	min-width: 480px;
+	width: 480px;
 	height: 960px;
-	border: 0.1px solid #ddd;
+	/* border: 0.1px solid #ddd; */
 	display: flex;
 	position: relative;
 	flex-direction: column;

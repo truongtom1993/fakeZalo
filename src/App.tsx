@@ -35,9 +35,9 @@ function App() {
 
 	return (
 		<div className='pl-2 pt-2 flex'>
-			<div className='App shadow-lg font-segoe relative mr-2'>
+			<div className='App font-segoe relative mr-2'>
 				<Header />
-				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col' onScroll={getScrollProcess} ref={commentContainerRef}>
+				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={getScrollProcess} ref={commentContainerRef}>
 					{commentList.data.map((element, index) => {
 						return (
 							<CommentMain
@@ -54,7 +54,6 @@ function App() {
 				<div className='footer'>
 					<img src={Footer} alt='footer' className='h-[48px]' />
 				</div>
-				<input type='text' pattern='[A-Z]' />
 				{scrollProcess && (
 					<div
 						className='bg-white rounded-full shadow-lg absolute bottom-16 right-4 h-8 w-8 flex justify-center items-center cursor-pointer'
@@ -65,7 +64,6 @@ function App() {
 				)}
 			</div>
 			<FormAnt />
-			{/* <Form /> */}
 		</div>
 	);
 }

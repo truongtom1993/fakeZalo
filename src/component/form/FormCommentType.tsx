@@ -1,29 +1,38 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber } from 'antd';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const FormCommentType = () => {
-	const [commentType, setCommentType] = useState<string>('text');
+interface IProps {
+	commentType: string;
+}
+
+const FormCommentType = ({ commentType = 'text' }: IProps) => {
+	const [commentTypeState, setCommentTypeState] = useState<string>();
 	const [callType, setCallType] = useState('incomming');
+
+	useEffect(() => {
+		setCommentTypeState(commentType);
+	}, [commentType]);
 
 	function renderCommentInput(type: string = 'text') {
 		switch (type) {
 			case 'text':
 				return (
 					<Form.Item name='textContent'>
-						{' '}
 						<TextArea rows={9} className='border rounded-md w-full p-2' placeholder='maxLength is 6' />
 					</Form.Item>
 				);
 			case 'image':
 				return (
 					<Fragment>
-						<Input
-							type='file'
-							className='file:px-3 file:rounded-sm file:font-bold file:bg-white file:border hover:file:bg-gray-100 file:py-1 file:cursor-pointer'
-						/>
+						<Form.Item>
+							<Input
+								type='file'
+								className='file:px-3 file:rounded-sm file:font-bold file:bg-white file:border hover:file:bg-gray-100 file:py-1 file:cursor-pointer'
+							/>
+						</Form.Item>
 						<Form.Item name='imageContent'>
 							<Input type='text' className='border px-2 w-full rounded-md mt-2' placeholder='URL' />
 						</Form.Item>
@@ -32,19 +41,21 @@ const FormCommentType = () => {
 			case 'call':
 				return (
 					<Fragment>
-						<div className='space-x-2'>
-							<span>Call Type:</span>
-							<label htmlFor='Incomming'>Incomming</label>
-							<Input type='radio' name='call_type' id='Incomming' onChange={() => setCallType('incomming')} />
-							<label htmlFor='Outgoing'>Outgoing</label>
-							<Input type='radio' name='call_type' id='Outgoing' onChange={() => setCallType('outgoing')} />
-							<label htmlFor='Missed'>Missed</label>
-							<Input type='radio' name='call_type' id='Missed' onChange={() => setCallType('missed')} />
+						<div className='space-x-2 flex'>
+							<Form.Item name='callType' label='callType'>
+								<Select placeholder='Call Type' onChange={e => setCallType(e)}>
+									<Option value='incomming'>Incomming</Option>
+									<Option value='outgoing'>Outgoing</Option>
+									<Option value='missed'>Missed</Option>
+								</Select>
+							</Form.Item>
 						</div>
 						{callType !== 'missed' && (
-							<div className='space-x-2'>
+							<div className='space-x-2 flex'>
 								<span>Duration: </span>
-								<Input type='text' className='px-2 border rounded-md' name='callDuration' />
+								<Form.Item name='callDuration'>
+									<Input type='text' className='px-2 border rounded-md' name='callDuration' />
+								</Form.Item>
 							</div>
 						)}
 					</Fragment>
@@ -52,9 +63,11 @@ const FormCommentType = () => {
 			case 'record':
 				return (
 					<div>
-						<div className='space-x-2'>
+						<div className='space-x-2 flex'>
 							<span>Duration: </span>
-							<Input type='text' className='px-2 border rounded-md ' name='recordDuration' />
+							<Form.Item name={'recordDuration'}>
+								<Input type='text' className='px-2 border rounded-md' />
+							</Form.Item>
 						</div>
 					</div>
 				);
@@ -62,18 +75,21 @@ const FormCommentType = () => {
 	}
 	return (
 		<Fragment>
-			<div className='flex flex-col'>
-				<Form.Item label='Loại comment' name='commentType'>
-					<Select placeholder='Chọn loại comment' onChange={e => setCommentType(e)}>
-						<Option value='text'>Văn bản</Option>
-						<Option value='image'>Ảnh</Option>
-						<Option value='call'>Cuộc gọi</Option>
-						<Option value='record'>Ghi âm</Option>
-					</Select>
-				</Form.Item>
-
-				<div className='pt-2'>{renderCommentInput(commentType)}</div>
-			</div>
+			<Row>
+				<Col span={14}>
+					<Form.Item label='Loại comment' name='commentType' labelAlign='left' labelCol={{ span: 10, offset: 0 }}>
+						<Select placeholder='Chọn loại comment' onChange={e => setCommentTypeState(e)}>
+							<Option value='text'>Văn bản</Option>
+							<Option value='image'>Ảnh</Option>
+							<Option value='call'>Cuộc gọi</Option>
+							<Option value='record'>Ghi âm</Option>
+						</Select>
+					</Form.Item>
+				</Col>
+			</Row>
+			<Row>
+				<Col flex='auto'>{renderCommentInput(commentTypeState)}</Col>
+			</Row>
 		</Fragment>
 	);
 };

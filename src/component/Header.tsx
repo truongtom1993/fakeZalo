@@ -25,7 +25,7 @@ const Header = () => {
 
 	return (
 		<Fragment>
-			<div className='h-[48px] bg-gradient-to-r from-[#267AFF] to-[#01BAFA] flex border-b'>
+			<div className='h-[48px] w-[480px] bg-gradient-to-r from-[#267AFF] to-[#01BAFA] flex border-b'>
 				<div className='iconBack h-full w-[48px] flex justify-center items-center'>
 					<MdArrowBack className='w-[50%] h-[50%] ml-1 fill-white' />
 				</div>
