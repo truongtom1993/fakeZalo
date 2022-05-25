@@ -27,6 +27,8 @@ const CommentMain = ({ data, isLastCommentText }: Props) => {
 		}
 	}
 	const changeFormData = () => {
+		console.info(`🎁 src/component/comment/index.tsx	Line:30	ID:ed7dc9`, data);
+
 		dispatch(changeCurrentComment(data));
 	};
 
@@ -34,7 +36,7 @@ const CommentMain = ({ data, isLastCommentText }: Props) => {
 		<Fragment>
 			<div className={'comment_container px-2 relative flex items-center ' + (data.author === 'me' ? 'flex-row-reverse' : '')}>
 				{renderComment(data.comment.type)}
-				<BsPlusSquareDotted className='icon_edit_comment cursor-pointer mx-4' onClick={changeFormData} />
+				<BsPlusSquareDotted className='icon_edit_comment cursor-pointer mx-4 w-10 h-10 absolute left-1/2 -translate-x-1/2' onClick={changeFormData} />
 			</div>
 		</Fragment>
 	);

@@ -37,15 +37,7 @@
 		@apply border rounded-sm px-3 font-bold ml-auto  hover:ring-1;
 	}
 }
-/* .icon_edit_comment {
-	right: -2%;
-	display: block;
-	position: absolute;
-	height: 2rem;
-	width: 2rem;
-	top: 50%;
-	transform: translateY(-50%);
-} */
+
 .icon_edit_comment {
 	display: none;
 }

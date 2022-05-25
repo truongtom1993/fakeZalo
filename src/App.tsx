@@ -13,12 +13,12 @@ import './stylesheet/tailwind.css';
 
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
-	const commentList = useAppSelector(state => state.commentList);
+	const commentList = useAppSelector(state => state.commentListReducer);
+	const commentContainerRef = useRef(null);
 
 	useEffect(() => {
 		window.localStorage.setItem('data', JSON.stringify(commentList));
 	}, [commentList]);
-	const commentContainerRef = useRef(null);
 
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
 		const target = event.target as Element;
@@ -54,6 +54,7 @@ function App() {
 				<div className='footer'>
 					<img src={Footer} alt='footer' className='h-[48px]' />
 				</div>
+				<input type='text' pattern='[A-Z]' />
 				{scrollProcess && (
 					<div
 						className='bg-white rounded-full shadow-lg absolute bottom-16 right-4 h-8 w-8 flex justify-center items-center cursor-pointer'

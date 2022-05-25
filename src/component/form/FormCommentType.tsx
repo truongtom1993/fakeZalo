@@ -1,127 +1,78 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
+import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber } from 'antd';
+
+const { Option } = Select;
+const { TextArea } = Input;
 
 const FormCommentType = () => {
-	const [commentType, setCommentType] = useState<string>("text");
-	const [callType, setCallType] = useState("incomming");
-	function renderCommentInput(type: string) {
+	const [commentType, setCommentType] = useState<string>('text');
+	const [callType, setCallType] = useState('incomming');
+
+	function renderCommentInput(type: string = 'text') {
 		switch (type) {
-			case "image":
+			case 'text':
 				return (
-					<div>
-						<input type="file" name="inputFileImage" id="inputFileImage" className="file:px-3 file:rounded-sm file:font-bold file:bg-white file:border hover:file:bg-gray-100 file:py-1 file:cursor-pointer" />
-						<input
-							type="text"
-							className="border px-2 w-full rounded-md mt-2"
-							placeholder="URL"
-							name="imageContent"
-						/>
-					</div>
+					<Form.Item name='textContent'>
+						{' '}
+						<TextArea rows={9} className='border rounded-md w-full p-2' placeholder='maxLength is 6' />
+					</Form.Item>
 				);
-			case "call":
+			case 'image':
 				return (
-					<div>
-						<div className="space-x-2">
+					<Fragment>
+						<Input
+							type='file'
+							className='file:px-3 file:rounded-sm file:font-bold file:bg-white file:border hover:file:bg-gray-100 file:py-1 file:cursor-pointer'
+						/>
+						<Form.Item name='imageContent'>
+							<Input type='text' className='border px-2 w-full rounded-md mt-2' placeholder='URL' />
+						</Form.Item>
+					</Fragment>
+				);
+			case 'call':
+				return (
+					<Fragment>
+						<div className='space-x-2'>
 							<span>Call Type:</span>
-							<label htmlFor="Incomming">Incomming</label>
-							<input
-								type="radio"
-								name="call_type"
-								id="Incomming"
-								onChange={() => setCallType("incomming")}
-							/>
-							<label htmlFor="Outgoing">Outgoing</label>
-							<input
-								type="radio"
-								name="call_type"
-								id="Outgoing"
-								onChange={() => setCallType("outgoing")}
-							/>
-							<label htmlFor="Missed">Missed</label>
-							<input type="radio" name="call_type" id="Missed" onChange={() => setCallType("missed")} />
+							<label htmlFor='Incomming'>Incomming</label>
+							<Input type='radio' name='call_type' id='Incomming' onChange={() => setCallType('incomming')} />
+							<label htmlFor='Outgoing'>Outgoing</label>
+							<Input type='radio' name='call_type' id='Outgoing' onChange={() => setCallType('outgoing')} />
+							<label htmlFor='Missed'>Missed</label>
+							<Input type='radio' name='call_type' id='Missed' onChange={() => setCallType('missed')} />
 						</div>
-						{callType !== "missed" && (
-							<div className="space-x-2">
+						{callType !== 'missed' && (
+							<div className='space-x-2'>
 								<span>Duration: </span>
-								<input type="text" className="px-2 border rounded-md" name="callDuration" />
+								<Input type='text' className='px-2 border rounded-md' name='callDuration' />
 							</div>
 						)}
-					</div>
+					</Fragment>
 				);
-			case "record":
+			case 'record':
 				return (
 					<div>
-						<div className="space-x-2">
+						<div className='space-x-2'>
 							<span>Duration: </span>
-							<input type="text" className="px-2 border rounded-md " name="recordDuration" />
+							<Input type='text' className='px-2 border rounded-md ' name='recordDuration' />
 						</div>
-					</div>
-				);
-
-			case "text":
-				return (
-					<div className="flex">
-						<textarea
-							name="textContent"
-							id="text_comment"
-							rows={9}
-							className="border rounded-md w-full p-2"
-						></textarea>
 					</div>
 				);
 		}
 	}
 	return (
 		<Fragment>
-			<div className="flex flex-col">
-				<div className=" flex">
-					<span className="mr-4 font-bold">Comment type:</span>
-					<div className="divide-x flex space-x-2">
-						<div className="pl-2 space-x-2">
-							<label htmlFor="Image">Image</label>
+			<div className='flex flex-col'>
+				<Form.Item label='Loại comment' name='commentType'>
+					<Select placeholder='Chọn loại comment' onChange={e => setCommentType(e)}>
+						<Option value='text'>Văn bản</Option>
+						<Option value='image'>Ảnh</Option>
+						<Option value='call'>Cuộc gọi</Option>
+						<Option value='record'>Ghi âm</Option>
+					</Select>
+				</Form.Item>
 
-							<input
-								type="radio"
-								name="comment_type"
-								value="image"
-								id="Image"
-								onChange={() => setCommentType("image")}
-							/>
-						</div>
-						<div className="pl-2 space-x-2">
-							<label htmlFor="Call">Call</label>
-							<input
-								type="radio"
-								name="comment_type"
-								value="call"
-								id="Call"
-								onChange={() => setCommentType("call")}
-							/>
-						</div>
-						<div className="pl-2 space-x-2">
-							<label htmlFor="Record">Record</label>
-							<input
-								type="radio"
-								name="comment_type"
-								value="record"
-								id="Record"
-								onChange={() => setCommentType("record")}
-							/>
-						</div>
-						<div className="pl-2 space-x-2">
-							<label htmlFor="Text">Text</label>
-							<input
-								type="radio"
-								name="comment_type"
-								value="text"
-								id="Text"
-								onChange={() => setCommentType("text")}
-								defaultChecked
-							/>
-						</div>
-					</div>
-				</div>
-
-				<div className="pt-2">{renderCommentInput(commentType)}</div>
+				<div className='pt-2'>{renderCommentInput(commentType)}</div>
 			</div>
 		</Fragment>
 	);

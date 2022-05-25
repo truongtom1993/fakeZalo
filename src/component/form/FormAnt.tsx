@@ -5,6 +5,7 @@ import { Comment } from '../../interface/IComment';
 import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
 import moment from 'moment';
+import FormCommentType from './FormCommentType';
 
 const { Option } = Select;
 
@@ -17,7 +18,7 @@ const formField = {
 	emoji: '',
 	numberEmoji: '',
 	separateTimeValue: '',
-	commentType: '',
+	commentType: 'text',
 };
 
 const FormAnt = () => {
@@ -26,9 +27,9 @@ const FormAnt = () => {
 	const dispatch = useDispatch();
 	const currentComment = useSelector<RootState, Comment | {}>(s => s.currentCommentReducer.currentComment);
 
-	// useEffect(() => {
-	// 	setForm(currentComment);
-	// }, [currentComment]);
+	useEffect(() => {
+		setForm(currentComment);
+	}, [currentComment]);
 
 	const onFinish = (values: any) => {
 		console.log('Success:', values);
@@ -58,7 +59,7 @@ const FormAnt = () => {
 	};
 
 	const resetForm = () => {
-		form.resetFields(Object.keys(formField));
+		form.resetFields();
 	};
 	const setForm = (data: any) => {
 		const result = {
@@ -66,7 +67,7 @@ const FormAnt = () => {
 			idComment: data?.id || '',
 			idReply: data?.reply || '',
 			timeLocation: data?.time?.type || '',
-			timeValue: data?.time?.value || '',
+			// timeValue: data?.time?.value || '',
 			emoji: data?.emoji?.type || '',
 			numberEmoji: data?.emoji?.number || '',
 			separateTimeValue: data?.separate?.time || '',
@@ -77,7 +78,7 @@ const FormAnt = () => {
 			timeValue: moment('2020-01-03', 'YYYY-MM-DD'),
 		};
 
-		setFieldsValue(result2);
+		setFieldsValue(result);
 	};
 
 	const getForm = () => {
@@ -91,9 +92,8 @@ const FormAnt = () => {
 				name='basic'
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 16 }}
-				// initialValues={{}}
-				// onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
+				initialValues={formField}
 				autoComplete='off'
 				form={form}
 			>
@@ -156,14 +156,7 @@ const FormAnt = () => {
 				</Row>
 
 				<Row>
-					<Form.Item label='Loại comment' name='commentType'>
-						<Select placeholder='Chọn loại comment'>
-							<Option value='text'>Văn bản</Option>
-							<Option value='image'>Ảnh</Option>
-							<Option value='call'>Cuộc gọi</Option>
-							<Option value='record'>Ghi âm</Option>
-						</Select>
-					</Form.Item>
+					<FormCommentType />
 				</Row>
 
 				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
