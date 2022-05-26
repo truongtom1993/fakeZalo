@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber } from 'antd';
+import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Comment } from '../../interface/IComment';
@@ -10,13 +10,13 @@ import FormCommentType from './FormCommentType';
 const { Option } = Select;
 
 const formField = {
-	user: '',
+	user: 'Me',
 	idComment: '',
 	idReply: '',
 	timeLocation: '',
 	timeValue: '',
 	emoji: '',
-	numberEmoji: '',
+	numberEmoji: 1,
 	separateTimeValue: '',
 	commentType: 'text',
 	callType: 'incomming',
@@ -87,6 +87,19 @@ const FormAnt = () => {
 		const result = getFieldsValue(true);
 		console.info(`🎁 src/component/form/FormAnt.tsx	Line:80	ID:f1620c`, result);
 	};
+	const handleUserChange = (value: string) => {
+		switch (value) {
+			case 'You':
+				form.setFieldsValue({ timeLocation: 'left' });
+				break;
+			case 'Me':
+				form.setFieldsValue({ timeLocation: 'right' });
+				break;
+			default:
+				break;
+		}
+	};
+	const handleSelectEmoji = () => {};
 
 	return (
 		<div className='flex h-auto border-2 rounded p-2 mr-2'>
@@ -99,85 +112,96 @@ const FormAnt = () => {
 				autoComplete='off'
 				form={form}
 			>
-				<Row>
-					<Col span={4}>
-						<Form.Item label='User' name='user'>
-							<Select>
-								<Option value='You'>You</Option>
-								<Option value='Me'>Me</Option>
-							</Select>
-						</Form.Item>
-					</Col>
-
-					<Col span={9} offset={1}>
-						<Form.Item label='ID Comment' name='idComment'>
-							<Input />
-						</Form.Item>
-					</Col>
-
-					<Col span={9} offset={1}>
-						<Form.Item label='ID Reply' name='idReply'>
-							<Input />
-						</Form.Item>
-					</Col>
-				</Row>
-
-				<Row>
-					<Col span={9}>
-						<Form.Item label='Vị trí time' name='timeLocation'>
-							<Select>
-								<Option value='Trái'>Trái</Option>
-								<Option value='Giữa'>Giữa</Option>
-								<Option value='Phải'>Phải</Option>
-							</Select>
-						</Form.Item>
-					</Col>
-					<Col span={9} offset={3}>
-						<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left' labelCol={{ span: 11 }}>
-							<DatePicker showTime onChange={onChange} onOk={onOk} />
-						</Form.Item>
-					</Col>
-				</Row>
-
-				<Row>
-					<Col span={6}>
-						<Form.Item name='emoji' label='Emoji'>
-							<Select placeholder='Icon'>
-								<Option value='Strong'>👍 Like</Option>
-								<Option value='Heart'>❤ Heart</Option>
-								<Option value='Lol'>😁 Lol</Option>
-								<Option value='Wow'>😮 Wow</Option>
-								<Option value='Cry'>😭 Cry</Option>
-								<Option value='Angry'>😡 Angry</Option>
-							</Select>
-						</Form.Item>
-					</Col>
-					<Col flex='auto'>
-						<Form.Item name='numberEmoji' label='Số lượng'>
-							<InputNumber min={1} max={10} onChange={onChange} />
-						</Form.Item>
-					</Col>
-				</Row>
-
-				<Row>
-					<Form.Item label='Dấu phân cách thời gian' name='separateTimeValue' labelCol={{ span: 12 }} labelAlign='left'>
-						<DatePicker showTime onChange={onChange} onOk={onOk} />
+				<div>
+					<Form.Item label='User' name='user' labelAlign='left' required>
+						<Select onSelect={(e: string) => handleUserChange(e)}>
+							<Option value='You'>You</Option>
+							<Option value='Me'>Me</Option>
+						</Select>
 					</Form.Item>
-				</Row>
+				</div>
+
+				<div>
+					<Form.Item label='ID Comment' name='idComment' labelAlign='left' required>
+						<Input />
+					</Form.Item>
+					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
+						<Input />
+					</Form.Item>
+				</div>
+
+				<Divider>
+					<b>Thời gian</b>
+				</Divider>
+
+				<div>
+					<Form.Item label='Vị trí time' name='timeLocation' labelAlign='left'>
+						<Select allowClear>
+							<Option value='left'>Trái</Option>
+							<Option value='center'>Giữa</Option>
+							<Option value='right'>Phải</Option>
+						</Select>
+					</Form.Item>
+				</div>
+				<div>
+					<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left'>
+						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
+					</Form.Item>
+				</div>
+
+				<Divider>
+					<b>Icon</b>
+				</Divider>
+
+				<div>
+					<Form.Item name='emoji' label='Emoji' labelAlign='left'>
+						<Select placeholder='Icon' allowClear>
+							<Option value='/-strong'>👍 Like</Option>
+							<Option value='/-heart'>❤ Heart</Option>
+							<Option value=':>'>😁 Lol</Option>
+							<Option value=':o'>😮 Wow</Option>
+							<Option value=':-(('>😭 Cry</Option>
+							<Option value=':-h'>😡 Angry</Option>
+						</Select>
+					</Form.Item>
+				</div>
+
+				<div>
+					<Col span={24}>
+						<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
+							<InputNumber min={1} max={10} onChange={onChange} className='inputNumber' />
+						</Form.Item>
+					</Col>
+				</div>
+
+				<Divider>
+					<b>Phân cách thời gian</b>
+				</Divider>
+
+				<div>
+					<Form.Item label='Separate Time' name='separateTimeValue' labelAlign='left'>
+						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
+					</Form.Item>
+				</div>
+
+				<Divider>
+					<b>Comment</b>
+				</Divider>
 
 				<FormCommentType commentType={currentComment.comment?.type} />
 
-				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+				<div className='flex gap-2'>
 					<Button type='default' htmlType='submit'>
-						Sửa
+						Edit
 					</Button>
 					<Button type='default' htmlType='submit'>
-						Thêm mới
+						Add
 					</Button>
+					<Button onClick={resetForm}>Reset Form</Button>
 					<Button type='default' onClick={handleChangeProfile}>
-						Thay đổi profile
+						Change profile
 					</Button>
-				</Form.Item>
+				</div>
 			</Form>
 		</div>
 	);

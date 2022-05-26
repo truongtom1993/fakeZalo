@@ -47,3 +47,9 @@
 .comment_form label {
 	cursor: pointer;
 }
+
+.inputTextField,
+.datePicker,
+.inputNumber {
+	width: 100% !important;
+}

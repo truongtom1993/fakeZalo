@@ -1,6 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Comment } from '../interface/IComment';
-const currentComment: Comment | {} = {};
+import { Comment, Emoji } from '../interface/IComment';
+const currentComment: Comment = {
+	id: 'dscxc3ref',
+	author: 'me',
+	comment: {
+		type: 'text',
+		content: 'lorem',
+	},
+	time: {
+		type: 'right',
+		value: '1653535848685',
+	},
+	emoji: {
+		show: true,
+		type: Emoji.Heart,
+		number: 1,
+	},
+	separate: {
+		show: false,
+	},
+	reply: {
+		show: false,
+	},
+};
 
 const currentCommentSlice = createSlice({
 	name: 'currentComment',

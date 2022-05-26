@@ -49,7 +49,7 @@ export interface Comment {
 	};
 	reply?: {
 		show?: boolean;
-		idComment: string;
+		idComment?: string;
 	};
 }
 
