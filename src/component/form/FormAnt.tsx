@@ -10,7 +10,7 @@ import FormCommentType from './FormCommentType';
 const { Option } = Select;
 
 const formField = {
-	user: 'Me',
+	user: 'me',
 	idComment: '',
 	idReply: '',
 	timeLocation: '',
@@ -115,8 +115,8 @@ const FormAnt = () => {
 				<div>
 					<Form.Item label='User' name='user' labelAlign='left' required>
 						<Select onSelect={(e: string) => handleUserChange(e)}>
-							<Option value='You'>You</Option>
-							<Option value='Me'>Me</Option>
+							<Option value='you'>You</Option>
+							<Option value='me'>Me</Option>
 						</Select>
 					</Form.Item>
 				</div>
