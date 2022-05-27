@@ -108,96 +108,94 @@ const FormAnt = () => {
 
 	return (
 		<Fragment>
-			<div className='flex h-auto border-2 rounded p-2 mr-2'>
-				<Form
-					name='basic'
-					labelCol={{ span: 8 }}
-					wrapperCol={{ span: 16 }}
-					onFinishFailed={onFinishFailed}
-					initialValues={formField}
-					autoComplete='off'
-					form={form}
-				>
-					<div>
-						<Form.Item label='User' name='user' labelAlign='left' required>
-							<Select onSelect={(e: string) => handleUserChange(e)}>
-								<Option value='you'>You</Option>
-								<Option value='me'>Me</Option>
-							</Select>
+			<Form
+				name='basic'
+				labelCol={{ span: 8 }}
+				wrapperCol={{ span: 16 }}
+				onFinishFailed={onFinishFailed}
+				initialValues={formField}
+				autoComplete='off'
+				form={form}
+			>
+				<div>
+					<Form.Item label='User' name='user' labelAlign='left' required>
+						<Select onSelect={(e: string) => handleUserChange(e)}>
+							<Option value='you'>You</Option>
+							<Option value='me'>Me</Option>
+						</Select>
+					</Form.Item>
+				</div>
+				<div>
+					<Form.Item label='ID Comment' name='idComment' labelAlign='left' required>
+						<Input />
+					</Form.Item>
+					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
+						<Input />
+					</Form.Item>
+				</div>
+				<Divider>
+					<b>Thời gian</b>
+				</Divider>
+				<div>
+					<Form.Item label='Vị trí time' name='timeLocation' labelAlign='left'>
+						<Select allowClear>
+							<Option value='left'>Trái</Option>
+							<Option value='center'>Giữa</Option>
+							<Option value='right'>Phải</Option>
+						</Select>
+					</Form.Item>
+				</div>
+				<div>
+					<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left'>
+						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
+					</Form.Item>
+				</div>
+				<Divider>
+					<b>Icon</b>
+				</Divider>
+				<div>
+					<Form.Item name='emoji' label='Emoji' labelAlign='left'>
+						<Select placeholder='Icon' allowClear>
+							<Option value='/-strong'>👍 Like</Option>
+							<Option value='/-heart'>❤ Heart</Option>
+							<Option value=':>'>😁 Lol</Option>
+							<Option value=':o'>😮 Wow</Option>
+							<Option value=':-(('>😭 Cry</Option>
+							<Option value=':-h'>😡 Angry</Option>
+						</Select>
+					</Form.Item>
+				</div>
+				<div>
+					<Col span={24}>
+						<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
+							<InputNumber min={1} max={10} onChange={onChange} className='inputNumber' />
 						</Form.Item>
-					</div>
-					<div>
-						<Form.Item label='ID Comment' name='idComment' labelAlign='left' required>
-							<Input />
-						</Form.Item>
-						<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
-							<Input />
-						</Form.Item>
-					</div>
-					<Divider>
-						<b>Thời gian</b>
-					</Divider>
-					<div>
-						<Form.Item label='Vị trí time' name='timeLocation' labelAlign='left'>
-							<Select allowClear>
-								<Option value='left'>Trái</Option>
-								<Option value='center'>Giữa</Option>
-								<Option value='right'>Phải</Option>
-							</Select>
-						</Form.Item>
-					</div>
-					<div>
-						<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left'>
-							<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
-						</Form.Item>
-					</div>
-					<Divider>
-						<b>Icon</b>
-					</Divider>
-					<div>
-						<Form.Item name='emoji' label='Emoji' labelAlign='left'>
-							<Select placeholder='Icon' allowClear>
-								<Option value='/-strong'>👍 Like</Option>
-								<Option value='/-heart'>❤ Heart</Option>
-								<Option value=':>'>😁 Lol</Option>
-								<Option value=':o'>😮 Wow</Option>
-								<Option value=':-(('>😭 Cry</Option>
-								<Option value=':-h'>😡 Angry</Option>
-							</Select>
-						</Form.Item>
-					</div>
-					<div>
-						<Col span={24}>
-							<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
-								<InputNumber min={1} max={10} onChange={onChange} className='inputNumber' />
-							</Form.Item>
-						</Col>
-					</div>
-					<Divider>
-						<b>Phân cách thời gian</b>
-					</Divider>
-					<div>
-						<Form.Item label='Separate Time' name='separateTimeValue' labelAlign='left'>
-							<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
-						</Form.Item>
-					</div>
-					<Divider>
-						<b>Comment</b>
-					</Divider>
+					</Col>
+				</div>
+				<Divider>
+					<b>Phân cách thời gian</b>
+				</Divider>
+				<div>
+					<Form.Item label='Separate Time' name='separateTimeValue' labelAlign='left'>
+						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
+					</Form.Item>
+				</div>
+				<Divider>
+					<b>Comment</b>
+				</Divider>
 
-					<FormCommentType commentType={currentComment.comment?.type} />
+				<FormCommentType commentType={currentComment.comment?.type} />
 
-					<div className='flex gap-2'>
-						<Button type='default' htmlType='submit'>
-							Edit
-						</Button>
-						<Button type='default' htmlType='submit'>
-							Add
-						</Button>
-						<Button onClick={resetForm}>Reset Form</Button>
-					</div>
-				</Form>
-			</div>
+				<div className='flex gap-2'>
+					<Button type='default' htmlType='submit'>
+						Edit
+					</Button>
+					<Button type='default' htmlType='submit'>
+						Add
+					</Button>
+					<Button onClick={resetForm}>Reset Form</Button>
+				</div>
+			</Form>
 		</Fragment>
 	);
 };

@@ -63,8 +63,14 @@ function App() {
 					</div>
 				)}
 			</div>
-			<FormAnt />
-			<FormProfile />
+
+			<div className='flex h-auto border-2 rounded p-2 mr-2'>
+				<FormAnt />
+			</div>
+
+			<div className='flex h-auto border-2 rounded p-2 mr-2'>
+				<FormProfile />
+			</div>
 		</div>
 	);
 }

@@ -7,7 +7,10 @@ const Avatar = () => {
 	const avatarURL = useSelector<RootState, any>(s => s.profileReducer.profile.avatarURL);
 	return (
 		<Fragment>
-			<div className='rounded-full w-7 h-7 border box-content bg-contain bg-no-repeat flex-shrink-0' style={{ backgroundImage: `url(${avatarURL})` }}></div>
+			<div
+				className='rounded-full w-7 h-7 border bg-center bg-cover bg-no-repeat box-content  flex-shrink-0'
+				style={{ backgroundImage: `url(${avatarURL})` }}
+			></div>
 		</Fragment>
 	);
 };
