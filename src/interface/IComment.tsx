@@ -1,19 +1,19 @@
 type TypeCommentImage = {
 	type: 'image';
-	url: string;
+	imageUrl: string;
 };
 type TypeCommentText = {
 	type: 'text';
-	content: string;
+	textContent: string;
 };
 type TypeCommentCall = {
 	type: 'call';
 	callType: 'incomming' | 'outgoing' | 'missed';
-	duration: number; //second
+	callDuration: number; //second
 };
 type TypeCommentRecord = {
 	type: 'record';
-	duration: number;
+	recordDuration: number;
 };
 
 type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord;
@@ -32,6 +32,7 @@ export type TypeOfTime = 'left' | 'center' | 'right';
 
 export interface Comment {
 	id: string;
+	idReply?: string;
 	author: Author;
 	comment: CommentType;
 	time: {
@@ -54,7 +55,7 @@ export interface Comment {
 }
 
 export interface Profile {
-	name: string;
+	userName: string;
 	status: number; //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
-	avatar: string;
+	avatarURL: string;
 }

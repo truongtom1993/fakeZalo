@@ -9,7 +9,7 @@ import { RootState } from '../store/store';
 
 const Header = () => {
 	const profile = useSelector<RootState, Profile>(s => s.profileReducer.profile);
-	const { name, status, avatar } = profile;
+	const { userName, status } = profile;
 
 	function convertTime(time: number) {
 		const checkTime = Math.floor(time / 60);
@@ -31,7 +31,7 @@ const Header = () => {
 				</div>
 
 				<div className='header-content flex flex-col h-full flex-grow font-segoe tracking-[-0.015rem]'>
-					<div className='text-white ml-[0.4rem] mt-[2px]'>{name}</div>
+					<div className='text-white ml-[0.4rem] mt-[2px]'>{userName}</div>
 					<div className='text-xs ml-2 mt-[-2px] text-white text-opacity-70'>{convertTime(status)}</div>
 				</div>
 

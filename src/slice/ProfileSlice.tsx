@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { profile } from '../data/data';
 import { Profile } from '../interface/IComment';
+
+const profile: Profile = {
+	userName: 'Người lạ',
+	status: 6 * 60,
+	avatarURL: 'https://i.postimg.cc/J0Yq1kR6/avatar.png',
+};
 
 const profileSlice = createSlice({
 	name: 'profile',

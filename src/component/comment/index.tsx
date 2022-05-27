@@ -27,8 +27,6 @@ const CommentMain = ({ data, isLastCommentText }: Props) => {
 		}
 	}
 	const changeFormData = () => {
-		console.info(`🎁 src/component/comment/index.tsx	Line:30	ID:ed7dc9`, data);
-
 		dispatch(changeCurrentComment(data));
 	};
 

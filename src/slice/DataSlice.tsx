@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { listComment as data } from '../data/data';
 import { Comment } from '../interface/IComment';
 interface IChangeComment {
-	id: string | number;
+	id: string;
 	data: Comment;
 }
 

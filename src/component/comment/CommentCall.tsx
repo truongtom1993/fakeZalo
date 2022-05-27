@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import { IoMdCall } from "react-icons/io";
-import { MdCallEnd, MdCallMade, MdCallMissed, MdCallReceived } from "react-icons/md";
-import { Comment } from "../../interface/IComment";
-import Avatar from "../Avatar";
+import React, { Fragment } from 'react';
+import { IoMdCall } from 'react-icons/io';
+import { MdCallEnd, MdCallMade, MdCallMissed, MdCallReceived } from 'react-icons/md';
+import { Comment } from '../../interface/IComment';
+import Avatar from '../Avatar';
 interface Props {
 	data: Comment;
 }
@@ -21,60 +21,60 @@ const CommentCall = ({ data }: Props) => {
 		}
 	}
 	function callFooter() {
-		return <div className="h-[32px] text-sm text-center leading-[32px] font-semibold text-blue-500">GỌI LẠI</div>;
+		return <div className='h-[32px] text-sm text-center leading-[32px] font-semibold text-blue-500'>GỌI LẠI</div>;
 	}
 	function render() {
-		if (type === "call") {
+		if (type === 'call') {
 			switch (comment.callType) {
-				case "incomming":
+				case 'incomming':
 					return (
-						<div className="call_container">
-							<div className="flex-grow border-b border-gray-200 flex flex-col text-xs ">
-								<div className="flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem]">
-									<span className="tracking-wide">Cuộc gọi thoại đến</span>
+						<div className='call_container'>
+							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem]'>
+									<span className='tracking-wide'>Cuộc gọi thoại đến</span>
 								</div>
-								<div className="flex items-center ml-2 ">
-									<div className="relative">
-										<IoMdCall className="fill-gray-500" />
-										<MdCallReceived className="fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]" />
+								<div className='flex items-center ml-2 '>
+									<div className='relative'>
+										<IoMdCall className='fill-gray-500' />
+										<MdCallReceived className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
 									</div>
-									<div className="call_duration ml-1 text-gray-700">{secondsToMinutes(comment.duration)}</div>
+									<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
 								</div>
 							</div>
 							{callFooter()}
 						</div>
 					);
-				case "outgoing":
+				case 'outgoing':
 					return (
-						<div className="call_container">
-							<div className="flex-grow border-b border-gray-200 flex flex-col text-xs ">
-								<div className="flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] ">
-									<span className="tracking-wide">Cuộc gọi thoại đi</span>
+						<div className='call_container'>
+							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
+									<span className='tracking-wide'>Cuộc gọi thoại đi</span>
 								</div>
-								<div className="flex items-center ml-2 ">
-									<div className="relative">
-										<IoMdCall className="fill-gray-500" />
-										<MdCallMade className="fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]" />
+								<div className='flex items-center ml-2 '>
+									<div className='relative'>
+										<IoMdCall className='fill-gray-500' />
+										<MdCallMade className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
 									</div>
-									<div className="call_duration ml-1 text-gray-700">{secondsToMinutes(comment.duration)}</div>
+									<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
 								</div>
 							</div>
 							{callFooter()}
 						</div>
 					);
-				case "missed":
+				case 'missed':
 					return (
-						<div className="call_container">
-							<div className="flex-grow border-b border-gray-200 flex flex-col text-xs ">
-								<div className="flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] ">
-									<span className="text-red-500 tracking-wide">Bạn bị nhỡ</span>
+						<div className='call_container'>
+							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
+									<span className='text-red-500 tracking-wide'>Bạn bị nhỡ</span>
 								</div>
-								<div className="flex items-center ml-2 ">
-									<div className="relative h-full w-3">
-										<MdCallEnd className="fill-red-500 absolute top-1" />
-										<MdCallMissed className="fill-red-500 scale-[.6] absolute bottom-[5px]" />
+								<div className='flex items-center ml-2 '>
+									<div className='relative h-full w-3'>
+										<MdCallEnd className='fill-red-500 absolute top-1' />
+										<MdCallMissed className='fill-red-500 scale-[.6] absolute bottom-[5px]' />
 									</div>
-									<div className="call_duration ml-1 text-gray-700">Cuộc gọi thoại</div>
+									<div className='call_duration ml-1 text-gray-700'>Cuộc gọi thoại</div>
 								</div>
 							</div>
 							{callFooter()}
@@ -83,18 +83,18 @@ const CommentCall = ({ data }: Props) => {
 			}
 		}
 	}
-	if (author === "you") {
+	if (author === 'you') {
 		return (
-			<div className="flex ">
+			<div className='flex '>
 				<Avatar />
-				<div className="ml-2">{render()}</div>
+				<div className='ml-2'>{render()}</div>
 			</div>
 		);
 	}
-	if (author === "me") {
+	if (author === 'me') {
 		return (
-			<div className="flex">
-				<div className="ml-auto">{render()}</div>
+			<div className='flex'>
+				<div className='ml-auto'>{render()}</div>
 			</div>
 		);
 	}

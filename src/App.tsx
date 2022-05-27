@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
 import CommentMain from './component/comment';
-import Form from './component/form';
 import FormAnt from './component/form/FormAnt';
+import FormProfile from './component/form/FormProfile';
 import Header from './component/Header';
 import { listComment } from './data/data';
 import { useAppSelector } from './hooks';
@@ -64,6 +64,7 @@ function App() {
 				)}
 			</div>
 			<FormAnt />
+			<FormProfile />
 		</div>
 	);
 }
