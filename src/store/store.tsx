@@ -11,5 +11,11 @@ export const store = configureStore({
 	},
 });
 
+function setReducerToStorage(reducer: 'commentListReducer' | 'profileReducer' | 'currentCommentReducer') {
+	localStorage.setItem(reducer, JSON.stringify(store.getState()[reducer]));
+}
+
+window.addEventListener('beforeunload', function () {});
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

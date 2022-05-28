@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Profile } from '../interface/IComment';
 
-const profile: Profile = {
+const profile: Profile = JSON.parse(localStorage.getItem('profileReducer')) || {
 	userName: 'Người lạ',
 	status: 6 * 60,
 	avatarURL: 'https://i.postimg.cc/J0Yq1kR6/avatar.png',
