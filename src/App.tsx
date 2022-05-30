@@ -16,10 +16,6 @@ function App() {
 	const commentList = useAppSelector(state => state.commentListReducer);
 	const commentContainerRef = useRef(null);
 
-	useEffect(() => {
-		window.localStorage.setItem('data', JSON.stringify(commentList));
-	}, [commentList]);
-
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
 		const target = event.target as Element;
 		const containerScrollHeight = target.scrollHeight;

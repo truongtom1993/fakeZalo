@@ -6,9 +6,11 @@ interface IChangeComment {
 	data: Comment;
 }
 
+const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : data;
+
 const commentListSlice = createSlice({
 	name: 'listComment',
-	initialState: { data },
+	initialState: { data: initData },
 	reducers: {
 		pushData(state, action: PayloadAction<Comment>) {
 			state.data.push(action.payload);

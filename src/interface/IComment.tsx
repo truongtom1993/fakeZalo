@@ -48,10 +48,6 @@ export interface Comment {
 		show?: boolean;
 		time?: string;
 	};
-	reply?: {
-		show?: boolean;
-		idComment?: string;
-	};
 }
 
 export interface Profile {

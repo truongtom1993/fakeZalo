@@ -54,10 +54,11 @@ const FormAnt = () => {
 		form.resetFields();
 	};
 	const setForm = (data: any) => {
+		const timeValue = data.time.value;
 		const result: any = {
 			user: data?.author || '',
 			idComment: data?.id || '',
-			idReply: data?.reply || '',
+			idReply: data?.idReply || '',
 			timeLocation: data?.time?.type || '',
 			// timeValue: data?.time?.value || '',
 			emoji: data?.emoji?.type || '',
@@ -67,7 +68,7 @@ const FormAnt = () => {
 		};
 		switch (result.commentType) {
 			case 'text':
-				result.textContent = data.comment?.textContent || '';
+				result.textContent = data.comment.textContent || '';
 				break;
 			case 'image':
 				result.imageURL = data.comment?.imageURL || '';
