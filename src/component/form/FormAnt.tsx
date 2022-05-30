@@ -7,6 +7,23 @@ import moment from 'moment';
 import FormCommentType from './FormCommentType';
 import FormProfile from './FormProfile';
 
+export interface IData {
+	user: 'me' | 'you';
+	commentType: 'text' | 'call' | 'image' | 'record';
+	emoji: string;
+	idComment: string;
+	idReply: string;
+	numberEmoji: string;
+	separateTimeValue: string;
+	textContent?: string;
+	imageURL?: string;
+	callType?: string;
+	callDuration?: string;
+	recordDuration?: string;
+	timeLocation: string;
+	timeValue: moment.MomentInput;
+}
+
 const { Option } = Select;
 
 const formField = {
@@ -29,11 +46,13 @@ const FormAnt = () => {
 	const currentComment = useSelector<RootState, any>(s => s.currentCommentReducer.currentComment);
 
 	useEffect(() => {
-		setForm(currentComment);
+		setForm(currentComment, 'load');
 	}, [currentComment]);
 
 	const onFinish = (values: any) => {
-		setForm(values);
+		console.info(`🎁 src/component/form/FormAnt.tsx	Line:36	ID:c67693`, values);
+
+		setForm(values, 'edit');
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -53,14 +72,15 @@ const FormAnt = () => {
 	const resetForm = () => {
 		form.resetFields();
 	};
-	const setForm = (data: any) => {
-		const timeValue = data.time.value;
-		const result: any = {
+	const setForm = (data: any, type: 'load' | 'edit') => {
+		const timeValue = data.time?.value;
+
+		const result: IData = {
 			user: data?.author || '',
 			idComment: data?.id || '',
 			idReply: data?.idReply || '',
 			timeLocation: data?.time?.type || '',
-			// timeValue: data?.time?.value || '',
+			timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
 			emoji: data?.emoji?.type || '',
 			numberEmoji: data?.emoji?.number || '',
 			separateTimeValue: data?.separate?.time || '',
@@ -113,6 +133,7 @@ const FormAnt = () => {
 				name='basic'
 				labelCol={{ span: 8 }}
 				wrapperCol={{ span: 16 }}
+				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				initialValues={formField}
 				autoComplete='off'
@@ -148,7 +169,7 @@ const FormAnt = () => {
 				</div>
 				<div>
 					<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left'>
-						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
+						<DatePicker showTime className='datePicker' />
 					</Form.Item>
 				</div>
 				<Divider>

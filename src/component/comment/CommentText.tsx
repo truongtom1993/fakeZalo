@@ -9,6 +9,7 @@ interface Props {
 }
 const CommentText = ({ data, isLastComment }: Props) => {
 	const { author, comment, time } = data;
+
 	function render() {
 		if (author === 'you') {
 			return (
@@ -33,11 +34,11 @@ const CommentText = ({ data, isLastComment }: Props) => {
 						</div>
 					</div>
 
-					{time.type && <TimeComponent time={time} />}
+					{!isLastComment && time.type && <TimeComponent time={time} />}
 				</Fragment>
 			);
 		}
 	}
 	return <div className='my-2 flex flex-col'>{render()}</div>;
 };
-export default CommentText;
+export default memo(CommentText);

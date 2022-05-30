@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
 import { TypeOfTime } from '../../interface/IComment';
-type tTime = { type?: TypeOfTime; value: string };
+type ITime = { type?: TypeOfTime; value: string };
 interface Props {
-	time: tTime;
+	time: ITime;
 }
 
 const TimeComponent = ({ time }: Props) => {
-	function render(time: tTime) {
+	function render(time: ITime) {
 		if (time.type === 'left') {
 			return <p className='text-[10px] px-2 mr-2 mt-2 ml-9 text-white bg-gray-400 bg-opacity-80 rounded-xl self-start font-robo'>{time.value}</p>;
 		}

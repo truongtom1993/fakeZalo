@@ -16,7 +16,7 @@ type TypeCommentRecord = {
 	recordDuration: number;
 };
 
-type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord;
+export type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord;
 
 export enum Emoji {
 	Like = '/-strong',
@@ -28,7 +28,7 @@ export enum Emoji {
 }
 
 export type Author = 'you' | 'me';
-export type TypeOfTime = 'left' | 'center' | 'right';
+export type TypeOfTime = 'left' | 'center' | 'right' | null;
 
 export interface Comment {
 	id: string;
@@ -36,8 +36,8 @@ export interface Comment {
 	author: Author;
 	comment: CommentType;
 	time: {
-		type?: TypeOfTime;
-		value: string;
+		type: TypeOfTime;
+		value: string; // dinh dang YYYY-MM-DD hh:mm:ss
 	};
 	emoji?: {
 		show?: boolean; //Neu false thi hien icon trai tim rong

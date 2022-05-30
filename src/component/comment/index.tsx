@@ -39,4 +39,4 @@ const CommentMain = ({ data, isLastCommentText }: Props) => {
 		</Fragment>
 	);
 };
-export default CommentMain;
+export default memo(CommentMain);

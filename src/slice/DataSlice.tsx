@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { listComment as data } from '../data/data';
+import { listComment } from '../data/data';
 import { Comment } from '../interface/IComment';
 interface IChangeComment {
 	id: string;
 	data: Comment;
 }
 
-const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : data;
+const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : listComment;
 
 const commentListSlice = createSlice({
-	name: 'listComment',
+	name: 'commentList',
 	initialState: { data: initData },
 	reducers: {
 		pushData(state, action: PayloadAction<Comment>) {

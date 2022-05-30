@@ -10,7 +10,8 @@ const listComment: Comment[] = [
 			imageUrl: 'https://i.postimg.cc/BvbVH4V1/test-screenshot.jpg',
 		},
 		time: {
-			value: '14:05:28, 25/5/2022',
+			type: null,
+			value: '1993-01-03 01:31:59',
 		},
 		emoji: {
 			show: true,
@@ -28,7 +29,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'right',
-			value: '14:05:28, 25/5/2022',
+			value: '1993-01-03 03:31:59',
 		},
 	},
 	{
@@ -39,7 +40,8 @@ const listComment: Comment[] = [
 			textContent: 'Xin cảm ơn rất nhiều',
 		},
 		time: {
-			value: '14:05:28, 25/5/2022',
+			type: null,
+			value: '1993-01-03 05:31:59',
 		},
 	},
 	{
@@ -51,7 +53,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'left',
-			value: '14:05:28, 25/5/2022',
+			value: '1993-01-03 07:31:59',
 		},
 	},
 	{
@@ -63,7 +65,8 @@ const listComment: Comment[] = [
 			callDuration: 15,
 		},
 		time: {
-			value: '14:05:28, 25/5/2022',
+			type: null,
+			value: '1993-01-03 09:31:59',
 		},
 	},
 ];
