@@ -1,8 +1,8 @@
 import { IData } from '../component/form/FormAnt';
 import { Comment, CommentType } from '../interface/IComment';
 
-const converDataFormToComment: Comment = (data: IData) => {
-	const comment: CommentType = { type: data.commentType };
+const converDataFormToComment = (data: IData) => {
+	const comment: CommentType | object = { type: data.commentType };
 	switch (data.commentType) {
 		case 'text':
 			Object.assign(comment, { textContent: data.textContent });
@@ -24,6 +24,19 @@ const converDataFormToComment: Comment = (data: IData) => {
 		idReply: data.idReply,
 		author: data.user,
 		comment,
+		time: {
+			type: data.timeLocation,
+			value: data.timeValue,
+		},
+		emoji: {
+			show: data.emoji ? true : false,
+			type: data.emoji,
+			number: data.numberEmoji,
+		},
+		separate: {
+			time: data.separateTimeValue,
+			show: data.separateTimeValue ? true : false,
+		},
 	};
 };
 
