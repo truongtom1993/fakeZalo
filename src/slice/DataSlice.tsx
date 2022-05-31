@@ -3,7 +3,7 @@ import { listComment } from '../data/data';
 import { Comment } from '../interface/IComment';
 interface IChangeComment {
 	id: string;
-	data: Comment;
+	data: any;
 }
 
 const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : listComment;

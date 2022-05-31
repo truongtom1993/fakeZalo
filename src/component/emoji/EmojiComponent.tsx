@@ -21,7 +21,7 @@ const EmojiComponent = ({ type }: Props) => {
 				);
 			case Emoji.Lol:
 				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 7.5% / 5100%` }}>
+					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 82% 7.5% / 5100%` }}>
 						{type}
 					</span>
 				);
