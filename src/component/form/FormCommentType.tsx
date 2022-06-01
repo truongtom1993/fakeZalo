@@ -28,7 +28,7 @@ const FormCommentType = ({ commentType = 'text' }: IProps) => {
 				return (
 					<Col span={24}>
 						<Form.Item name='imageURL' wrapperCol={{ span: 24 }}>
-							<Input type='text' placeholder='URL' />
+							<Input type='text' placeholder='URL' allowClear />
 						</Form.Item>
 					</Col>
 				);
