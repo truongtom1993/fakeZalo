@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 import { listComment } from '../data/data';
 import { Comment } from '../interface/IComment';
 interface IChangeComment {
@@ -17,11 +18,14 @@ const commentListSlice = createSlice({
 	initialState: { data: initData },
 	reducers: {
 		addComment(state, action: PayloadAction<IAddComment>) {
-			if (action.payload.index) {
-				state.data.splice(action.payload.index, 0, action.payload.data);
+			if (action.payload.index !== void 0 || action.payload.index !== null) {
+				state.data.splice(action.payload.index, 0, { ...action.payload.data, id: nanoid(5) });
 			} else {
-				state.data.push(action.payload.data);
+				state.data.push({ ...action.payload.data, id: nanoid(5) });
 			}
+		},
+		removeCommentByIndex(state, action: PayloadAction<number>) {
+			state.data.splice(action.payload, 1);
 		},
 		changeCommentById(state, action: PayloadAction<IChangeComment>) {
 			const { payload } = action;
@@ -30,5 +34,5 @@ const commentListSlice = createSlice({
 		},
 	},
 });
-export const { addComment, changeCommentById } = commentListSlice.actions;
+export const { addComment, removeCommentByIndex, changeCommentById } = commentListSlice.actions;
 export default commentListSlice.reducer;

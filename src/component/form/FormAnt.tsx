@@ -118,7 +118,6 @@ const FormAnt = () => {
 		}
 		if (type === 'add') {
 			const newData = converDataFormToComment(getForm());
-			newData.id = nanoid(4);
 			dispatch(addComment({ data: newData }));
 			return;
 		}

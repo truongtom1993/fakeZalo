@@ -3,7 +3,7 @@ import { Comment, Emoji, Profile } from '../interface/IComment';
 
 const listComment: Comment[] = [
 	{
-		id: nanoid(4),
+		id: nanoid(5),
 		author: 'me',
 		comment: {
 			type: 'image',
@@ -20,7 +20,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: nanoid(4),
+		id: nanoid(5),
 		author: 'me',
 		comment: {
 			type: 'text',
@@ -33,7 +33,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: nanoid(4),
+		id: nanoid(5),
 		author: 'you',
 		comment: {
 			type: 'text',
@@ -45,7 +45,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: nanoid(4),
+		id: nanoid(5),
 		author: 'you',
 		comment: {
 			type: 'record',
@@ -57,7 +57,7 @@ const listComment: Comment[] = [
 		},
 	},
 	{
-		id: nanoid(4),
+		id: nanoid(5),
 		author: 'you',
 		comment: {
 			type: 'call',

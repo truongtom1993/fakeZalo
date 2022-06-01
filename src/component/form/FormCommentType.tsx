@@ -21,7 +21,7 @@ const FormCommentType = ({ commentType = 'text' }: IProps) => {
 			case 'text':
 				return (
 					<Form.Item name='textContent' wrapperCol={{ span: 24 }}>
-						<TextArea rows={9} className='' />
+						<TextArea rows={4} />
 					</Form.Item>
 				);
 			case 'image':

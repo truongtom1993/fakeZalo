@@ -38,6 +38,7 @@ function App() {
 						return (
 							<CommentMain
 								key={index}
+								index={index}
 								data={element}
 								isLastCommentText={
 									element.author === listComment[index - 1]?.author && element.comment.type !== listComment[index + 1]?.comment?.type ? true : false
