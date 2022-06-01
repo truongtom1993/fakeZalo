@@ -10,6 +10,7 @@ import { GoDiffRemoved } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
 import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
 import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
+import moment from 'moment';
 
 interface Props {
 	index: number;
@@ -22,7 +23,7 @@ function createExampleComment(): Comment {
 		author: 'me',
 		comment: { type: 'text', textContent: `Example Textcontent ${Math.random()}` },
 		id: '',
-		time: { type: 'right', value: new Date().toLocaleString('en-GB') },
+		time: { type: 'right', value: moment().format('YYYY-MM-DD hh:mm:ss') },
 		emoji: {
 			show: false,
 		},

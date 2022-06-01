@@ -31,10 +31,10 @@
 		@apply relative ml-1 max-w-[380px] min-w-[254px];
 	}
 	.time-stamp {
-		@apply text-[0.7rem] font-robo text-gray-500;
+		@apply text-[0.7rem] font-apple text-gray-500;
 	}
 	.call_container {
-		@apply w-[176px] h-[81px] rounded-lg border border-gray-200 bg-white flex flex-col relative;
+		@apply w-[176px] h-[81px] -ml-1 rounded-lg border border-gray-200 bg-white flex flex-col relative;
 	}
 	.button_primary {
 		@apply border rounded-sm px-3 font-bold ml-auto  hover:ring-1;
