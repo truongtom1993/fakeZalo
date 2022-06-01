@@ -26,7 +26,7 @@ export interface IData {
 	callDuration?: string;
 	recordDuration?: string;
 	timeLocation: string;
-	timeValue: moment.MomentInput;
+	timeValue: moment.Moment;
 }
 
 const { Option } = Select;

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { nanoid } from 'nanoid';
 import { Comment, Emoji, Profile } from '../interface/IComment';
 
@@ -11,7 +12,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: '1993-01-03 01:31:59',
+			value: moment().format('YYYY-MM-DD hh:mm:ss'),
 		},
 		emoji: {
 			show: true,
@@ -29,7 +30,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'right',
-			value: '1993-01-03 03:31:59',
+			value: moment().format('YYYY-MM-DD hh:mm:ss'),
 		},
 	},
 	{
@@ -41,7 +42,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: '1993-01-03 05:31:59',
+			value: moment().format('YYYY-MM-DD hh:mm:ss'),
 		},
 	},
 	{
@@ -53,7 +54,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'left',
-			value: '1993-01-03 07:31:59',
+			value: moment().format('YYYY-MM-DD hh:mm:ss'),
 		},
 	},
 	{
@@ -66,7 +67,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: '1993-01-03 09:31:59',
+			value: moment().format('YYYY-MM-DD hh:mm:ss'),
 		},
 	},
 ];

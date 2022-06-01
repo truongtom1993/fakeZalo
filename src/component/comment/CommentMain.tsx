@@ -10,26 +10,13 @@ import { GoDiffRemoved } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
 import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
 import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
-import moment from 'moment';
-
+import { createExampleComment } from '../../utils';
 interface Props {
 	index: number;
 	data: Comment;
 	isLastCommentText?: boolean;
 }
 
-function createExampleComment(): Comment {
-	const exampleComment: Comment = {
-		author: 'me',
-		comment: { type: 'text', textContent: `Example Textcontent ${Math.random()}` },
-		id: '',
-		time: { type: 'right', value: moment().format('YYYY-MM-DD hh:mm:ss') },
-		emoji: {
-			show: false,
-		},
-	};
-	return exampleComment;
-}
 const CommentMain = ({ index, data, isLastCommentText }: Props) => {
 	const dispatch = useDispatch();
 	function renderComment(type: string) {

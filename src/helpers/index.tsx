@@ -27,7 +27,7 @@ export const converDataFormToComment = (data: IData): any => {
 		comment,
 		time: {
 			type: data.timeLocation,
-			value: data.timeValue ? data.timeValue.format('YYYY-MM-DD hh:mm:ss') : '',
+			value: data.timeValue ? data.timeValue?.format('YYYY-MM-DD hh:mm:ss') : '',
 		},
 		emoji: {
 			show: data.emoji ? true : false,

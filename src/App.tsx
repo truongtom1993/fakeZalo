@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
-import CommentMain from './component/comment';
+import CommentMain from './component/comment/CommentMain';
 import FormAnt from './component/form/FormAnt';
 import FormProfile from './component/form/FormProfile';
 import Header from './component/Header';
