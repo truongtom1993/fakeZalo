@@ -3,13 +3,14 @@ import { FaPlay } from 'react-icons/fa';
 import { IoVolumeMedium } from 'react-icons/io5';
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
+import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
 	data: Comment;
 }
 const CommentRecord = ({ data }: Props) => {
-	const { author, comment, time } = data;
+	const { author, comment, time, emoji } = data;
 
 	function secondsToMinutes(second: number) {
 		const minute = Math.floor(second / 60);
@@ -26,9 +27,9 @@ const CommentRecord = ({ data }: Props) => {
 		if (author === 'you') {
 			return (
 				<Fragment>
-					<div className='flex '>
+					<div className='flex'>
 						<Avatar />
-						<div className='bg-white ml-1 rounded-xl border border-gray-300 border-opacity-80 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center'>
+						<div className='bg-white ml-1 rounded-xl border border-gray-300 border-opacity-80 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center relative'>
 							<div className='icon-play w-7 h-7 bg-blue-500 rounded-full flex justify-center items-center'>
 								<FaPlay className='fill-white ml-1' />
 							</div>
@@ -40,6 +41,7 @@ const CommentRecord = ({ data }: Props) => {
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
@@ -52,7 +54,7 @@ const CommentRecord = ({ data }: Props) => {
 			return (
 				<Fragment>
 					<div className='flex'>
-						<div className='bg-[#D5F1FF] ml-auto mr-2 rounded-xl border border-gray-300 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center'>
+						<div className='bg-[#D5F1FF] ml-auto mr-2 rounded-xl border border-gray-300 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center relative'>
 							<div className='icon-play w-7 h-7 bg-blue-500 rounded-full flex justify-center items-center'>
 								<FaPlay className='fill-white ml-1' />
 							</div>
@@ -64,6 +66,7 @@ const CommentRecord = ({ data }: Props) => {
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					</div>
 				</Fragment>

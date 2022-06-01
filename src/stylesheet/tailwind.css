@@ -12,14 +12,17 @@
 	.icon-share-image {
 		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border cursor-pointer;
 	}
-	.icon-count-heart {
-		@apply bg-white px-[0.3rem] absolute bottom-[-0.6rem] right-8 h-4 rounded-xl flex items-center text-xs shadow-sm font-robo cursor-pointer border box-content;
+	.icon_count_emoji {
+		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm cursor-pointer border box-content;
 	}
 	.hd-label {
 		@apply bg-white rounded-[4px] absolute top-2 left-2 px-1 font-medium text-xs font-robo;
 	}
+	.flex_emoji {
+		@apply absolute bottom-[-0.7rem] right-1 flex items-center;
+	}
 	.icon-emoji {
-		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center absolute bottom-[-0.7rem] right-1 shadow-sm cursor-pointer;
+		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center  shadow-sm cursor-pointer;
 	}
 	.comment-image {
 		@apply bg-contain rounded-xl border border-gray-300;
@@ -31,7 +34,7 @@
 		@apply text-[0.7rem] font-robo text-gray-500;
 	}
 	.call_container {
-		@apply w-[176px] h-[81px] rounded-lg border border-gray-200 bg-white overflow-hidden flex flex-col;
+		@apply w-[176px] h-[81px] rounded-lg border border-gray-200 bg-white flex flex-col relative;
 	}
 	.button_primary {
 		@apply border rounded-sm px-3 font-bold ml-auto  hover:ring-1;
@@ -42,7 +45,7 @@
 	display: none;
 }
 .comment_container:hover .icon_edit_comment {
-	display: block;
+	display: flex;
 }
 .comment_form label {
 	cursor: pointer;

@@ -4,7 +4,8 @@ import CommentCall from './CommentCall';
 import CommentImage from './CommentImage';
 import CommentRecord from './CommentRecord';
 import CommentText from './CommentText';
-import { BsPlusSquareDotted } from 'react-icons/bs';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { GoDiffRemoved } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
 import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
 
@@ -30,11 +31,18 @@ const CommentMain = ({ data, isLastCommentText }: Props) => {
 		dispatch(changeCurrentComment(data));
 	};
 
+	const removeComment = () => {
+		console.info(`🎁 src/component/comment/index.tsx	Line:35	ID:0d2b65`, 'test');
+	};
+
 	return (
 		<Fragment>
 			<div className={'comment_container px-2 relative flex items-center ' + (data.author === 'me' ? 'flex-row-reverse' : '')}>
 				{renderComment(data.comment.type)}
-				<BsPlusSquareDotted className='icon_edit_comment cursor-pointer mx-4 w-10 h-10 absolute left-1/2 -translate-x-1/2' onClick={changeFormData} />
+				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 w-auto flex items-center'>
+					<AiOutlineEdit className='cursor-pointer mx-2 w-10 h-10' onClick={changeFormData} />
+					<GoDiffRemoved className='cursor-pointer mx-2 w-9 h-9 stroke-[0.3]' onClick={removeComment} />
+				</div>
 			</div>
 		</Fragment>
 	);

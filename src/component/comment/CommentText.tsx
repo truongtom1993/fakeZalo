@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
+import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 	isLastComment?: boolean;
 }
 const CommentText = ({ data, isLastComment }: Props) => {
-	const { author, comment, time } = data;
+	const { author, comment, time, emoji } = data;
 
 	function render() {
 		if (author === 'you') {
@@ -16,8 +17,9 @@ const CommentText = ({ data, isLastComment }: Props) => {
 				<Fragment>
 					<div className='flex'>
 						<Avatar />
-						<div className={'comment-text-main ml-1 bg-white'}>
+						<div className={'comment-text-main relative ml-1 bg-white'}>
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							<span className='time-stamp'>{time.value}</span>
 						</div>
 					</div>
@@ -28,8 +30,9 @@ const CommentText = ({ data, isLastComment }: Props) => {
 			return (
 				<Fragment>
 					<div className='flex'>
-						<div className={'comment-text-main ml-auto mr-2 bg-[#D5F1FF]'}>
+						<div className={'comment-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <span className='time-stamp'>{time.value}</span>}
 						</div>
 					</div>

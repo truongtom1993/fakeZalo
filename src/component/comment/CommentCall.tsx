@@ -3,11 +3,12 @@ import { IoMdCall } from 'react-icons/io';
 import { MdCallEnd, MdCallMade, MdCallMissed, MdCallReceived } from 'react-icons/md';
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
+import EmojiComponent from '../emoji/EmojiComponent';
 interface Props {
 	data: Comment;
 }
 const CommentCall = ({ data }: Props) => {
-	const { author, comment, time } = data;
+	const { author, comment, time, emoji } = data;
 	const { type } = comment;
 
 	function secondsToMinutes(second: number) {
@@ -41,7 +42,9 @@ const CommentCall = ({ data }: Props) => {
 									<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
 								</div>
 							</div>
+
 							{callFooter()}
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					);
 				case 'outgoing':
@@ -60,6 +63,7 @@ const CommentCall = ({ data }: Props) => {
 								</div>
 							</div>
 							{callFooter()}
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					);
 				case 'missed':
@@ -78,6 +82,7 @@ const CommentCall = ({ data }: Props) => {
 								</div>
 							</div>
 							{callFooter()}
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					);
 			}
@@ -85,7 +90,7 @@ const CommentCall = ({ data }: Props) => {
 	}
 	if (author === 'you') {
 		return (
-			<div className='flex '>
+			<div className='flex my-2'>
 				<Avatar />
 				<div className='ml-2'>{render()}</div>
 			</div>
@@ -93,7 +98,7 @@ const CommentCall = ({ data }: Props) => {
 	}
 	if (author === 'me') {
 		return (
-			<div className='flex'>
+			<div className='flex my-2'>
 				<div className='ml-auto'>{render()}</div>
 			</div>
 		);

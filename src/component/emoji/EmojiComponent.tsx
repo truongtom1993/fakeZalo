@@ -1,51 +1,23 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
-import { Emoji } from '../../interface/IComment';
+import React, { Fragment } from 'react';
+import EmojiIcon from './EmojiIcon';
 interface Props {
 	type?: string;
+	number?: number;
 }
 
-const EmojiComponent = ({ type }: Props) => {
-	function renderEmoji(type: string | undefined) {
-		switch (type) {
-			case Emoji.Like:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 82.5% / 5100%` }}>
-						{type}
-					</span>
-				);
-			case Emoji.Heart:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 72.5% / 5100%` }}>
-						{type}
-					</span>
-				);
-			case Emoji.Lol:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 82% 7.5% / 5100%` }}>
-						{type}
-					</span>
-				);
-			case Emoji.Wow:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 20% / 5100%` }}>
-						{type}
-					</span>
-				);
-			case Emoji.Cry:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 2.5% / 5100%` }}>
-						{type}
-					</span>
-				);
-			case Emoji.Angry:
-				return (
-					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 5% / 5100%` }}>
-						{type}
-					</span>
-				);
-		}
-	}
-
-	return <Fragment>{renderEmoji(type)}</Fragment>;
+const EmojiComponent = ({ type, number }: Props) => {
+	return (
+		<Fragment>
+			<div className='flex_emoji'>
+				<div className='icon_count_emoji mr-1'>
+					<EmojiIcon type={type} />
+					<span className='ml-[0.15rem] text-gray-600 font-segoe'>{number}</span>
+				</div>
+				<div className='icon-emoji'>
+					<EmojiIcon type={type} />
+				</div>
+			</div>
+		</Fragment>
+	);
 };
 export default EmojiComponent;

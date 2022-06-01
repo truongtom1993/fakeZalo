@@ -3,6 +3,7 @@ import Avatar from '../Avatar';
 import { IoMdShareAlt } from 'react-icons/io';
 import Emoji from '../emoji/EmojiComponent';
 import { Comment } from '../../interface/IComment';
+import EmojiComponent from '../emoji/EmojiComponent';
 
 interface Props {
 	data: Comment;
@@ -19,17 +20,8 @@ const CommentImage = ({ data }: Props) => {
 						<Avatar />
 						<div className='comment-image-flx'>
 							<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
-
 							<span className='hd-label'>HD</span>
-
-							<div className='icon-emoji'>
-								<Emoji type={emoji?.type} />
-							</div>
-
-							<div className='icon-count-heart'>
-								<Emoji type={emoji?.type} />
-								<span className='ml-[0.15rem] text-gray-600'>{emoji?.number}</span>
-							</div>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 						<div className='icon-share-image'>
 							<IoMdShareAlt />
@@ -46,15 +38,7 @@ const CommentImage = ({ data }: Props) => {
 							<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
 
 							<span className='hd-label'>HD</span>
-
-							<div className='icon-count-heart'>
-								<Emoji type={emoji?.type} />
-								<span className='ml-[0.15rem] text-gray-600'>{emoji?.number}</span>
-							</div>
-
-							<div className='icon-emoji'>
-								<Emoji type={emoji?.type} />
-							</div>
+							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 						<div className='icon-share-image'>
 							<IoMdShareAlt />

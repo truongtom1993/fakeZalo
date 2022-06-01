@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider } from 'antd';
+import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider, Modal, Space } from 'antd';
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Comment } from '../../interface/IComment';
@@ -7,7 +7,10 @@ import moment from 'moment';
 import FormCommentType from './FormCommentType';
 import FormProfile from './FormProfile';
 import { converDataFormToComment } from '../../helpers';
-import { changeCommentById } from '../../slice/DataSlice';
+import { addComment, changeCommentById } from '../../slice/DataSlice';
+import React, { useState } from 'react';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { nanoid } from 'nanoid';
 
 export interface IData {
 	user: 'me' | 'you';
@@ -52,8 +55,6 @@ const FormAnt = () => {
 	}, [currentComment]);
 
 	const onFinish = (values: any) => {
-		console.info(`🎁 src/component/form/FormAnt.tsx	Line:36	ID:c67693`, values);
-
 		setForm(values, 'edit');
 	};
 
@@ -74,7 +75,7 @@ const FormAnt = () => {
 	const resetForm = () => {
 		form.resetFields();
 	};
-	const setForm = (data: any, type: 'load' | 'edit') => {
+	const setForm = (data: any, type: 'load' | 'edit' | 'add') => {
 		if (type === 'load') {
 			const timeValue = data.time?.value;
 
@@ -115,28 +116,39 @@ const FormAnt = () => {
 			dispatch(changeCommentById({ id: newData.id, data: newData }));
 			return;
 		}
+		if (type === 'add') {
+			const newData = converDataFormToComment(getForm());
+			newData.id = nanoid(4);
+			dispatch(addComment({ data: newData }));
+			return;
+		}
 	};
 
 	const getForm = () => {
 		const result = getFieldsValue(true);
-		console.info(`🎁 src/component/form/FormAnt.tsx	Line:80	ID:f1620c`, result);
+		return result;
 	};
 	const handleUserChange = (value: string) => {
-		console.info(`🎁 src/component/form/FormAnt.tsx	Line:91	ID:2c4a01`, value);
-
-		switch (value) {
-			case 'you':
-				form.setFieldsValue({ timeLocation: 'left' });
-				break;
-			case 'me':
-				form.setFieldsValue({ timeLocation: 'right' });
-				break;
-			default:
-				break;
-		}
+		if (value === 'you') return form.setFieldsValue({ timeLocation: 'left' });
+		else form.setFieldsValue({ timeLocation: 'right' });
 	};
-	const handleSelectEmoji = () => {};
+	const createComment = () => {
+		setForm(currentComment, 'add');
+	};
 
+	const confirm = () => {
+		Modal.confirm({
+			title: 'Confirm',
+			icon: <ExclamationCircleOutlined />,
+			content: 'Xác nhận xóa toàn bộ dữ liệu',
+			okText: <span className='text-white hover:outline-2'>Đồng ý</span>,
+			cancelText: 'Hủy bỏ',
+			onOk: confirmClearAllData,
+		});
+	};
+	const confirmClearAllData = () => {
+		console.info(`🎁 src/component/form/FormAnt.tsx	Line:128	ID:9aeeab`, 'clear all data');
+	};
 	return (
 		<Fragment>
 			<Form
@@ -222,10 +234,9 @@ const FormAnt = () => {
 					<Button type='default' htmlType='submit'>
 						Edit
 					</Button>
-					<Button type='default' htmlType='submit'>
-						Add
-					</Button>
+					<Button onClick={createComment}>Add</Button>
 					<Button onClick={resetForm}>Reset Form</Button>
+					<Button onClick={confirm}>ClearAllData</Button>
 				</div>
 			</Form>
 		</Fragment>
