@@ -43,7 +43,7 @@
 		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe;
 	}
 	.timeStamp_text_you_inner {
-		@apply text-[10px] -mt-3 mb-1 text-gray-400 self-start font-segoe;
+		@apply text-[10px] -mt-2 -mb-1 text-gray-400 self-start font-segoe;
 	}
 	.lastComment {
 		@apply flex flex-row-reverse px-4 mb-2;

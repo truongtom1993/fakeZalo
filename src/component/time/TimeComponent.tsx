@@ -11,9 +11,9 @@ interface Props {
 
 const TimeComponent = ({ time, author, comment }: Props) => {
 	function render(time: ITime) {
-		if (time.type === 'left') {
-			return <p className='text-[10px] px-2 mr-2 mt-2 ml-9 text-white bg-gray-400 bg-opacity-80 rounded-xl self-start font-robo'>da nhan</p>;
-		}
+		// if (time.type === 'left') {
+		// 	return <p className='text-[10px] px-2 mr-2 mt-2 ml-9 text-white bg-gray-400 bg-opacity-80 rounded-xl self-start font-robo'>da nhan</p>;
+		// }
 		if (author === 'me' && comment.type === 'text') {
 			return <p className='timeStamp_text_me_inner '>{convertToShortenTime(time.value)}</p>;
 		}
