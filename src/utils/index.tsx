@@ -6,7 +6,7 @@ function createExampleComment(): Comment {
 		author: 'me',
 		comment: { type: 'text', textContent: `Example Textcontent ${Math.random()}` },
 		id: '',
-		time: { type: 'right', value: moment().format('YYYY-MM-DD hh:mm:ss') },
+		time: { type: 'right', value: moment().format('YYYY-MM-DD HH:mm:ss') },
 		emoji: {
 			show: false,
 		},

@@ -27,7 +27,7 @@ export const converDataFormToComment = (data: IData): any => {
 		comment,
 		time: {
 			type: data.timeLocation,
-			value: data.timeValue ? data.timeValue?.format('YYYY-MM-DD hh:mm:ss') : '',
+			value: data.timeValue ? data.timeValue?.format('YYYY-MM-DD HH:mm:ss') : '',
 		},
 		emoji: {
 			show: data.emoji ? true : false,
@@ -39,6 +39,14 @@ export const converDataFormToComment = (data: IData): any => {
 			show: data.separateTimeValue ? true : false,
 		},
 	};
+};
+
+export const convertToShortenTime = (value: string) => {
+	const timeSplit = value.split(':');
+	const minute = timeSplit[1];
+	const hour = timeSplit[0].split(' ').at(-1);
+	let result = `${Number.parseInt(hour)}:${minute}`;
+	return result;
 };
 
 export const converCommentToDataForm = (comment: Comment) => {};

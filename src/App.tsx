@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
+import Avatar from './component/Avatar';
 import CommentMain from './component/comment/CommentMain';
 import FormAnt from './component/form/FormAnt';
 import FormProfile from './component/form/FormProfile';
@@ -14,6 +15,7 @@ import './stylesheet/tailwind.css';
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const commentList = useAppSelector(state => state.commentListReducer);
+	const commentListLength = commentList.data.length;
 	const commentContainerRef = useRef(null);
 
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
@@ -35,15 +37,24 @@ function App() {
 				<Header />
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={getScrollProcess} ref={commentContainerRef}>
 					{commentList.data.map((element, index) => {
+						let isLastCommentText: boolean = false;
+						// Khac tac gia
+						if (element.author !== commentList.data[index + 1]?.author) {
+							isLastCommentText = true;
+						} else {
+							// Cung tac gia nhung khac type
+							if (element.comment.type !== commentList.data[index + 1]?.comment.type) isLastCommentText = true;
+						}
+
 						return (
-							<CommentMain
-								key={index}
-								index={index}
-								data={element}
-								isLastCommentText={
-									element.author === listComment[index - 1]?.author && element.comment.type !== listComment[index + 1]?.comment?.type ? true : false
-								}
-							/>
+							<Fragment key={index}>
+								<CommentMain index={index} data={element} isLastCommentText={isLastCommentText} />
+								{index === commentListLength - 1 && (
+									<div className='lastComment'>
+										<Avatar width='20px' height='20px' />
+									</div>
+								)}
+							</Fragment>
 						);
 					})}
 				</div>

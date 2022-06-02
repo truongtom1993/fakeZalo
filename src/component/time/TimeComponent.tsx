@@ -1,17 +1,24 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
-import { TypeOfTime } from '../../interface/IComment';
+import React, { Fragment } from 'react';
+import { Author, CommentType, TypeOfTime } from '../../interface/IComment';
+import { convertToShortenTime } from '../../helpers';
+
 type ITime = { type?: TypeOfTime; value: string };
 interface Props {
 	time: ITime;
+	author: Author;
+	comment: CommentType;
 }
 
-const TimeComponent = ({ time }: Props) => {
+const TimeComponent = ({ time, author, comment }: Props) => {
 	function render(time: ITime) {
 		if (time.type === 'left') {
-			return <p className='text-[10px] px-2 mr-2 mt-2 ml-9 text-white bg-gray-400 bg-opacity-80 rounded-xl self-start font-robo'>{time.value}</p>;
+			return <p className='text-[10px] px-2 mr-2 mt-2 ml-9 text-white bg-gray-400 bg-opacity-80 rounded-xl self-start font-robo'>da nhan</p>;
 		}
-		if (time.type === 'right') {
-			return <p className='text-[10px] px-2 mr-2 mt-2 text-white bg-gray-400 bg-opacity-80 rounded-xl self-end font-robo'>{time.value}</p>;
+		if (author === 'me' && comment.type === 'text') {
+			return <p className='timeStamp_text_me_inner '>{convertToShortenTime(time.value)}</p>;
+		}
+		if (author === 'you' && comment.type === 'text') {
+			return <p className='timeStamp_text_you_inner'>{convertToShortenTime(time.value)}</p>;
 		}
 		if (time.type === 'center') {
 			return (

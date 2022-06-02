@@ -12,7 +12,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: moment().format('YYYY-MM-DD hh:mm:ss'),
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 		emoji: {
 			show: true,
@@ -30,7 +30,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'right',
-			value: moment().format('YYYY-MM-DD hh:mm:ss'),
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
 	{
@@ -42,7 +42,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: moment().format('YYYY-MM-DD hh:mm:ss'),
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
 	{
@@ -54,7 +54,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: 'left',
-			value: moment().format('YYYY-MM-DD hh:mm:ss'),
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
 	{
@@ -67,7 +67,7 @@ const listComment: Comment[] = [
 		},
 		time: {
 			type: null,
-			value: moment().format('YYYY-MM-DD hh:mm:ss'),
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
 ];

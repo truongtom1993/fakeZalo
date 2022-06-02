@@ -37,7 +37,7 @@ export interface Comment {
 	comment: CommentType;
 	time: {
 		type: TypeOfTime;
-		value: string; // dinh dang YYYY-MM-DD hh:mm:ss
+		value: string; // dinh dang YYYY-MM-DD HH:mm:ss
 	};
 	emoji?: {
 		show?: boolean; //Neu false thi hien icon trai tim rong
