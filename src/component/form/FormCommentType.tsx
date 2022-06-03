@@ -1,20 +1,21 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber } from 'antd';
+import { Col, Form, Input, Select } from 'antd';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import { Comment } from '../../interface/IComment';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 interface IProps {
-	commentType: string;
+	currentComment: Comment;
 }
 
-const FormCommentType = ({ commentType = 'text' }: IProps) => {
-	const [commentTypeState, setCommentTypeState] = useState<string>('text');
+const FormCommentType = ({ currentComment }: IProps) => {
+	const [commentTypeState, setCommentTypeState] = useState<string>();
 	const [callType, setCallType] = useState('incomming');
 
 	useEffect(() => {
-		setCommentTypeState(commentType);
-	});
+		setCommentTypeState(currentComment.comment.type);
+	}, [currentComment]);
 
 	function renderCommentInput(type: string = 'text') {
 		switch (type) {

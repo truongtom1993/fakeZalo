@@ -41,7 +41,7 @@ const FormProfile = () => {
 					</Form.Item>
 				</div>
 				<div>
-					<Form.Item label='Status (phút)' name='status' labelAlign='left'>
+					<Form.Item label='Status' name='status' labelAlign='left' tooltip='Phút'>
 						<Input />
 					</Form.Item>
 				</div>

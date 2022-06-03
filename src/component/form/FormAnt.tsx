@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { converDataFormToComment } from '../../helpers';
-import { TypeOfTime } from '../../interface/IComment';
+import { Comment, TypeOfTime } from '../../interface/IComment';
 import { addComment, changeCommentById } from '../../slice/DataSlice';
 import { RootState } from '../../store/store';
 import FormCommentType from './FormCommentType';
@@ -43,7 +43,7 @@ const FormAnt = () => {
 	const [form] = Form.useForm();
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
-	const currentComment = useSelector<RootState, any>(s => s.currentCommentReducer.currentComment);
+	const currentComment = useSelector<RootState, Comment>(s => s.currentCommentReducer.currentComment);
 
 	useEffect(() => {
 		setForm(currentComment, 'load');
@@ -228,7 +228,7 @@ const FormAnt = () => {
 					<b>Comment</b>
 				</Divider>
 
-				<FormCommentType commentType={currentComment.comment?.type} />
+				<FormCommentType currentComment={currentComment} />
 
 				<div className='flex gap-2'>
 					<Button type='default' htmlType='submit'>
