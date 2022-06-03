@@ -16,16 +16,13 @@ const initCurrentComment: Comment = currentComment
 				textContent: '',
 			},
 			time: {
-				type: 'right',
+				type: null,
 				value: moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			emoji: {
 				show: false,
 				type: null,
 				number: 0,
-			},
-			separate: {
-				show: false,
 			},
 	  };
 

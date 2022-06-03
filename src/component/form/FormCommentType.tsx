@@ -43,7 +43,7 @@ const FormCommentType = ({ commentType = 'text' }: IProps) => {
 							</Select>
 						</Form.Item>
 						{callType !== 'missed' && (
-							<Form.Item name='callDuration' label='Duration' labelAlign='left'>
+							<Form.Item name='callDuration' label='Duration' labelAlign='left' tooltip='Thời lượng cuộc gọi (giây)'>
 								<Input type='text' className='' name='callDuration' />
 							</Form.Item>
 						)}
@@ -51,7 +51,7 @@ const FormCommentType = ({ commentType = 'text' }: IProps) => {
 				);
 			case 'record':
 				return (
-					<Form.Item name={'recordDuration'} label='Duration' labelAlign='left'>
+					<Form.Item name={'recordDuration'} label='Duration' labelAlign='left' tooltip='Thời lượng đoạn ghi âm (giây)'>
 						<Input type='text' className='' />
 					</Form.Item>
 				);

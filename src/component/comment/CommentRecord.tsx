@@ -40,13 +40,13 @@ const CommentRecord = ({ data }: Props) => {
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
 					</div>
-					{time.type && <TimeComponent time={time} />}
+					{time.type && <TimeComponent time={time} author={author} comment={comment} />}
 				</Fragment>
 			);
 		}
@@ -65,7 +65,7 @@ const CommentRecord = ({ data }: Props) => {
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					</div>

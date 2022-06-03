@@ -1,7 +1,7 @@
 import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider, Modal, Space } from 'antd';
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Comment } from '../../interface/IComment';
+import { Comment, TypeOfTime } from '../../interface/IComment';
 import { RootState } from '../../store/store';
 import moment from 'moment';
 import FormCommentType from './FormCommentType';
@@ -18,28 +18,26 @@ export interface IData {
 	emoji: string;
 	idComment: string;
 	idReply: string;
-	numberEmoji: string;
-	separateTimeValue: string;
+	numberEmoji: number;
 	textContent?: string;
 	imageURL?: string;
 	callType?: string;
 	callDuration?: string;
 	recordDuration?: string;
-	timeLocation: string;
+	timeType: TypeOfTime;
 	timeValue: moment.Moment;
 }
 
 const { Option } = Select;
 
-const formField = {
+const formField: IData = {
 	user: 'me',
 	idComment: '',
 	idReply: '',
-	timeLocation: '',
-	timeValue: '',
+	timeType: 'auto',
+	timeValue: moment(),
 	emoji: '',
 	numberEmoji: 0,
-	separateTimeValue: '',
 	commentType: 'text',
 	callType: 'incomming',
 };
@@ -83,11 +81,10 @@ const FormAnt = () => {
 					user: data?.author || '',
 					idComment: data?.id || '',
 					idReply: data?.idReply || '',
-					timeLocation: data?.time?.type || '',
+					timeType: data?.time?.type || null,
 					timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
 					emoji: data?.emoji?.type || '',
 					numberEmoji: data?.emoji?.number || '',
-					separateTimeValue: data?.separate?.time || '',
 					commentType: data?.comment?.type || '',
 					textContent: '',
 					imageURL: '',
@@ -138,10 +135,7 @@ const FormAnt = () => {
 		const result = getFieldsValue(true);
 		return result;
 	};
-	const handleUserChange = (value: string) => {
-		if (value === 'you') return form.setFieldsValue({ timeLocation: 'left' });
-		else form.setFieldsValue({ timeLocation: 'right' });
-	};
+	const handleUserChange = (value: string) => {};
 	const createComment = () => {
 		setForm(currentComment, 'add');
 	};
@@ -158,6 +152,9 @@ const FormAnt = () => {
 	};
 	const confirmClearAllData = () => {
 		console.info(`🎁 src/component/form/FormAnt.tsx	Line:128	ID:9aeeab`, 'clear all data');
+	};
+	const handleChangeEmoji = (e: string) => {
+		if (!e) setFieldsValue({ numberEmoji: void 0 });
 	};
 	return (
 		<Fragment>
@@ -191,11 +188,10 @@ const FormAnt = () => {
 					<b>Thời gian</b>
 				</Divider>
 				<div>
-					<Form.Item label='Vị trí time' name='timeLocation' labelAlign='left'>
-						<Select allowClear>
-							<Option value='left'>Trái</Option>
-							<Option value='center'>Giữa</Option>
-							<Option value='right'>Phải</Option>
+					<Form.Item label='Vị trí time' name='timeType' labelAlign='left'>
+						<Select>
+							<Option value='auto'>Auto</Option>
+							<Option value='separate'>Giữa</Option>
 						</Select>
 					</Form.Item>
 				</div>
@@ -209,7 +205,7 @@ const FormAnt = () => {
 				</Divider>
 				<div>
 					<Form.Item name='emoji' label='Emoji' labelAlign='left'>
-						<Select placeholder='Icon' allowClear>
+						<Select placeholder='Icon' allowClear onChange={e => handleChangeEmoji(e)}>
 							<Option value='/-strong'>👍 Like</Option>
 							<Option value='/-heart'>❤ Heart</Option>
 							<Option value=':>'>😁 Lol</Option>
@@ -226,14 +222,11 @@ const FormAnt = () => {
 						</Form.Item>
 					</Col>
 				</div>
+
 				<Divider>
 					<b>Phân cách thời gian</b>
 				</Divider>
-				<div>
-					<Form.Item label='Separate Time' name='separateTimeValue' labelAlign='left'>
-						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
-					</Form.Item>
-				</div>
+
 				<Divider>
 					<b>Comment</b>
 				</Divider>
