@@ -8,8 +8,9 @@ import TimeComponent from '../time/TimeComponent';
 
 interface Props {
 	data: Comment;
+	isFirstComment?: boolean;
 }
-const CommentRecord = ({ data }: Props) => {
+const CommentRecord = ({ data, isFirstComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function secondsToMinutes(second: number) {
@@ -28,7 +29,7 @@ const CommentRecord = ({ data }: Props) => {
 			return (
 				<Fragment>
 					<div className='flex'>
-						<Avatar />
+						<Avatar isFirstComment={isFirstComment} />
 						<div className='bg-white ml-1 rounded-xl border border-gray-300 border-opacity-80 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center relative'>
 							<div className='icon-play w-7 h-7 bg-blue-500 rounded-full flex justify-center items-center'>
 								<FaPlay className='fill-white ml-1' />

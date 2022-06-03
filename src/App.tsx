@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
 import Avatar from './component/Avatar';
@@ -6,7 +6,6 @@ import CommentMain from './component/comment/CommentMain';
 import FormAnt from './component/form/FormAnt';
 import FormProfile from './component/form/FormProfile';
 import Header from './component/Header';
-import { listComment } from './data/data';
 import { useAppSelector } from './hooks';
 import './stylesheet/App.css';
 import './stylesheet/reset.css';
@@ -37,18 +36,20 @@ function App() {
 				<Header />
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={getScrollProcess} ref={commentContainerRef}>
 					{commentList.data.map((element, index) => {
+						let isFirstComment: boolean = false;
 						let isLastCommentText: boolean = false;
-						// Khac tac gia
+						if (element.author !== commentList.data[index - 1]?.author) {
+							isFirstComment = true;
+						}
 						if (element.author !== commentList.data[index + 1]?.author) {
 							isLastCommentText = true;
 						} else {
-							// Cung tac gia nhung khac type
 							if (element.comment.type !== commentList.data[index + 1]?.comment.type) isLastCommentText = true;
 						}
 
 						return (
 							<Fragment key={index}>
-								<CommentMain index={index} data={element} isLastCommentText={isLastCommentText} />
+								<CommentMain index={index} data={element} isLastCommentText={isLastCommentText} isFirstComment={isFirstComment} />
 								{index === commentListLength - 1 && (
 									<div className='lastComment'>
 										<Avatar width='20px' height='20px' />

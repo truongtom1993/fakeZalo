@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
-import Avatar from '../Avatar';
+import React, { Fragment } from 'react';
 import { IoMdShareAlt } from 'react-icons/io';
-import Emoji from '../emoji/EmojiComponent';
 import { Comment } from '../../interface/IComment';
+import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 
 interface Props {
 	data: Comment;
+	isFirstComment: boolean;
 }
 
-const CommentImage = ({ data }: Props) => {
+const CommentImage = ({ data, isFirstComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function render() {
@@ -17,7 +17,7 @@ const CommentImage = ({ data }: Props) => {
 			return (
 				<Fragment>
 					<div className={`comment-container flex ` + (emoji?.number ? 'mb-4 mt-2' : 'my-4')}>
-						<Avatar />
+						<Avatar isFirstComment={isFirstComment} />
 						<div className='comment-image-flx'>
 							<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
 							<span className='hd-label'>HD</span>

@@ -6,8 +6,9 @@ import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 interface Props {
 	data: Comment;
+	isFirstComment?: boolean;
 }
-const CommentCall = ({ data }: Props) => {
+const CommentCall = ({ data, isFirstComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 	const { type } = comment;
 
@@ -91,7 +92,7 @@ const CommentCall = ({ data }: Props) => {
 	if (author === 'you') {
 		return (
 			<div className='flex my-2'>
-				<Avatar />
+				<Avatar isFirstComment={isFirstComment} />
 				<div className='ml-2'>{render()}</div>
 			</div>
 		);

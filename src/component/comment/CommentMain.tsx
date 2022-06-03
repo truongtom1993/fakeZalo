@@ -16,9 +16,10 @@ interface Props {
 	index: number;
 	data: Comment;
 	isLastCommentText?: boolean;
+	isFirstComment?: boolean;
 }
 
-const CommentMain = ({ index, data, isLastCommentText }: Props) => {
+const CommentMain = ({ index, data, isLastCommentText, isFirstComment }: Props) => {
 	const dispatch = useDispatch();
 	function renderComment(type: string) {
 		if (data.time.type === 'separate') {
@@ -26,13 +27,13 @@ const CommentMain = ({ index, data, isLastCommentText }: Props) => {
 		}
 		switch (type) {
 			case 'image':
-				return <CommentImage data={data} />;
+				return <CommentImage data={data} isFirstComment={isFirstComment} />;
 			case 'text':
-				return <CommentText data={data} isLastComment={isLastCommentText} />;
+				return <CommentText data={data} isLastComment={isLastCommentText} isFirstComment={isFirstComment} />;
 			case 'call':
-				return <CommentCall data={data} />;
+				return <CommentCall data={data} isFirstComment={isFirstComment} />;
 			case 'record':
-				return <CommentRecord data={data} />;
+				return <CommentRecord data={data} isFirstComment={isFirstComment} />;
 		}
 	}
 	const changeFormData = () => {
