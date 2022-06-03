@@ -4,16 +4,19 @@
 
 @layer components {
 	.emoji-sizer {
-		@apply h-3 w-3 overflow-hidden text-transparent cursor-pointer select-none;
+		@apply h-3 w-3 overflow-hidden text-transparent select-none;
 	}
 	.comment-text-main {
 		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] border border-gray-300 border-opacity-80 box-border;
 	}
 	.icon-share-image {
-		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border cursor-pointer;
+		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border;
 	}
 	.icon_count_emoji {
-		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm cursor-pointer border box-content;
+		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm border box-content;
+	}
+	.icon-emoji {
+		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center   shadow-sm border box-content;
 	}
 	.hd-label {
 		@apply bg-white rounded-[4px] absolute top-2 left-2 px-1 font-medium text-xs font-robo;
@@ -21,9 +24,7 @@
 	.flex_emoji {
 		@apply absolute bottom-[-0.7rem] right-1 flex items-center;
 	}
-	.icon-emoji {
-		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center  shadow-sm cursor-pointer;
-	}
+
 	.comment-image {
 		@apply bg-contain rounded-xl border border-gray-300;
 	}

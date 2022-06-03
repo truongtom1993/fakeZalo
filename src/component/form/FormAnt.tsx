@@ -151,7 +151,8 @@ const FormAnt = () => {
 		console.info(`🎁 src/component/form/FormAnt.tsx	Line:128	ID:9aeeab`, 'clear all data');
 	};
 	const handleChangeEmoji = (e: string) => {
-		if (!e) setFieldsValue({ numberEmoji: void 0 });
+		const numberEmoji = form.getFieldValue('numberEmoji');
+		if (!numberEmoji) setFieldsValue({ numberEmoji: 1 });
 	};
 	return (
 		<Fragment>
@@ -219,10 +220,6 @@ const FormAnt = () => {
 						</Form.Item>
 					</Col>
 				</div>
-
-				<Divider>
-					<b>Phân cách thời gian</b>
-				</Divider>
 
 				<Divider>
 					<b>Comment</b>
