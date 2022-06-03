@@ -8,8 +8,9 @@ import TimeComponent from '../time/TimeComponent';
 
 interface Props {
 	data: Comment;
+	isFirstComment?: boolean;
 }
-const CommentRecord = ({ data }: Props) => {
+const CommentRecord = ({ data, isFirstComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function secondsToMinutes(second: number) {
@@ -28,7 +29,7 @@ const CommentRecord = ({ data }: Props) => {
 			return (
 				<Fragment>
 					<div className='flex'>
-						<Avatar />
+						<Avatar isFirstComment={isFirstComment} />
 						<div className='bg-white ml-1 rounded-xl border border-gray-300 border-opacity-80 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center relative'>
 							<div className='icon-play w-7 h-7 bg-blue-500 rounded-full flex justify-center items-center'>
 								<FaPlay className='fill-white ml-1' />
@@ -40,13 +41,13 @@ const CommentRecord = ({ data }: Props) => {
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
 					</div>
-					{time.type && <TimeComponent time={time} />}
+					{time.type && <TimeComponent time={time} author={author} comment={comment} />}
 				</Fragment>
 			);
 		}
@@ -65,7 +66,7 @@ const CommentRecord = ({ data }: Props) => {
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center mb-1'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
 					</div>

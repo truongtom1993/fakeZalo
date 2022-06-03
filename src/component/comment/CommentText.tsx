@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
@@ -7,8 +7,9 @@ import TimeComponent from '../time/TimeComponent';
 interface Props {
 	data: Comment;
 	isLastComment?: boolean;
+	isFirstComment?: boolean;
 }
-const CommentText = ({ data, isLastComment }: Props) => {
+const CommentText = ({ data, isLastComment, isFirstComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function render() {
@@ -16,7 +17,7 @@ const CommentText = ({ data, isLastComment }: Props) => {
 			return (
 				<Fragment>
 					<div className='flex'>
-						<Avatar />
+						<Avatar isFirstComment={isFirstComment} />
 						<div className={'comment-text-main relative ml-1 bg-white'}>
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />

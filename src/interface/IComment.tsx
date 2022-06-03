@@ -28,7 +28,7 @@ export enum Emoji {
 }
 
 export type Author = 'you' | 'me';
-export type TypeOfTime = 'left' | 'center' | 'right' | null;
+export type TypeOfTime = 'separate' | 'auto';
 
 export interface Comment {
 	id: string;
@@ -43,10 +43,6 @@ export interface Comment {
 		show?: boolean; //Neu false thi hien icon trai tim rong
 		type?: Emoji;
 		number?: number;
-	};
-	separate?: {
-		show?: boolean;
-		time?: string;
 	};
 }
 

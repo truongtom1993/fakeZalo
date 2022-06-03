@@ -1,34 +1,39 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
+import { GoDiffRemoved } from 'react-icons/go';
+import { useDispatch } from 'react-redux';
 import { Comment } from '../../interface/IComment';
+import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
+import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
+import { createExampleComment } from '../../utils';
 import CommentCall from './CommentCall';
 import CommentImage from './CommentImage';
 import CommentRecord from './CommentRecord';
 import CommentText from './CommentText';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
-import { GoDiffRemoved } from 'react-icons/go';
-import { useDispatch } from 'react-redux';
-import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
-import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
-import { createExampleComment } from '../../utils';
+import SeparateTime from './SeparateTime';
 interface Props {
 	index: number;
 	data: Comment;
 	isLastCommentText?: boolean;
+	isFirstComment?: boolean;
 }
 
-const CommentMain = ({ index, data, isLastCommentText }: Props) => {
+const CommentMain = ({ index, data, isLastCommentText, isFirstComment }: Props) => {
 	const dispatch = useDispatch();
 	function renderComment(type: string) {
+		if (data.time.type === 'separate') {
+			return <SeparateTime separateTime={data.time.value} />;
+		}
 		switch (type) {
 			case 'image':
-				return <CommentImage data={data} />;
+				return <CommentImage data={data} isFirstComment={isFirstComment} />;
 			case 'text':
-				return <CommentText data={data} isLastComment={isLastCommentText} />;
+				return <CommentText data={data} isLastComment={isLastCommentText} isFirstComment={isFirstComment} />;
 			case 'call':
-				return <CommentCall data={data} />;
+				return <CommentCall data={data} isFirstComment={isFirstComment} />;
 			case 'record':
-				return <CommentRecord data={data} />;
+				return <CommentRecord data={data} isFirstComment={isFirstComment} />;
 		}
 	}
 	const changeFormData = () => {
@@ -39,10 +44,18 @@ const CommentMain = ({ index, data, isLastCommentText }: Props) => {
 		dispatch(removeCommentByIndex(index));
 	};
 	const addPrev = () => {
-		dispatch(addComment({ index, data: createExampleComment() }));
+		// tao comment moi
+		const newData = createExampleComment();
+
+		dispatch(addComment({ index, data: newData }));
+		dispatch(changeCurrentComment(newData));
 	};
 	const addNext = () => {
-		dispatch(addComment({ index: index + 1, data: createExampleComment() }));
+		// tao comment moi
+		const newData = createExampleComment();
+
+		dispatch(addComment({ index: index + 1, data: newData }));
+		dispatch(changeCurrentComment(newData));
 	};
 
 	return (

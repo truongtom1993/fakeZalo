@@ -1,9 +1,10 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
 import moment from 'moment';
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { converDataFormToComment } from '../../helpers';
+import { Comment, TypeOfTime } from '../../interface/IComment';
 import { addComment, changeCommentById } from '../../slice/DataSlice';
 import { RootState } from '../../store/store';
 import FormCommentType from './FormCommentType';
@@ -14,28 +15,26 @@ export interface IData {
 	emoji: string;
 	idComment: string;
 	idReply: string;
-	numberEmoji: string;
-	separateTimeValue: string;
+	numberEmoji: number;
 	textContent?: string;
 	imageURL?: string;
 	callType?: string;
 	callDuration?: string;
 	recordDuration?: string;
-	timeLocation: string;
+	timeType: TypeOfTime;
 	timeValue: moment.Moment;
 }
 
 const { Option } = Select;
 
-const formField = {
+const formField: IData = {
 	user: 'me',
 	idComment: '',
 	idReply: '',
-	timeLocation: '',
-	timeValue: '',
+	timeType: 'auto',
+	timeValue: moment(),
 	emoji: '',
-	numberEmoji: 1,
-	separateTimeValue: '',
+	numberEmoji: 0,
 	commentType: 'text',
 	callType: 'incomming',
 };
@@ -44,7 +43,7 @@ const FormAnt = () => {
 	const [form] = Form.useForm();
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
-	const currentComment = useSelector<RootState, any>(s => s.currentCommentReducer.currentComment);
+	const currentComment = useSelector<RootState, Comment>(s => s.currentCommentReducer.currentComment);
 
 	useEffect(() => {
 		setForm(currentComment, 'load');
@@ -72,50 +71,60 @@ const FormAnt = () => {
 		form.resetFields();
 	};
 	const setForm = (data: any, type: 'load' | 'edit' | 'add') => {
-		if (type === 'load') {
-			const timeValue = data.time?.value;
+		{
+			if (type === 'load') {
+				const timeValue = data.time?.value;
+				const result: IData = {
+					user: data?.author || '',
+					idComment: data?.id || '',
+					idReply: data?.idReply || '',
+					timeType: data?.time?.type || null,
+					timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
+					emoji: data?.emoji?.type || '',
+					numberEmoji: data?.emoji?.number || '',
+					commentType: data?.comment?.type || '',
+					textContent: '',
+					imageURL: '',
+					callType: '',
+					callDuration: '',
+					recordDuration: '',
+				};
+				switch (result.commentType) {
+					case 'text':
+						result.textContent = data.comment.textContent || '';
+						break;
+					case 'image':
+						result.imageURL = data.comment?.imageUrl || '';
+						break;
+					case 'call':
+						result.callType = data.comment.callType || '';
+						result.callDuration = data.comment.callDuration || '';
+						break;
+					case 'record':
+						result.recordDuration = data.comment.recordDuration || '';
+						break;
+					default:
+						break;
+				}
 
-			const result: IData = {
-				user: data?.author || '',
-				idComment: data?.id || '',
-				idReply: data?.idReply || '',
-				timeLocation: data?.time?.type || '',
-				timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
-				emoji: data?.emoji?.type || '',
-				numberEmoji: data?.emoji?.number || '',
-				separateTimeValue: data?.separate?.time || '',
-				commentType: data?.comment?.type || '',
-			};
-			switch (result.commentType) {
-				case 'text':
-					result.textContent = data.comment.textContent || '';
-					break;
-				case 'image':
-					result.imageURL = data.comment?.imageUrl || '';
-					break;
-				case 'call':
-					result.callType = data.comment.callType || '';
-					result.callDuration = data.comment.callDuration || '';
-					break;
-				case 'record':
-					result.recordDuration = data.comment.recordDuration || '';
-					break;
-				default:
-					break;
+				setFieldsValue(result);
+				return;
 			}
+		}
 
-			setFieldsValue(result);
-			return;
+		{
+			if (type === 'edit') {
+				const newData = converDataFormToComment(data);
+				dispatch(changeCommentById({ id: newData.id, data: newData }));
+				return;
+			}
 		}
-		if (type === 'edit') {
-			const newData = converDataFormToComment(data);
-			dispatch(changeCommentById({ id: newData.id, data: newData }));
-			return;
-		}
-		if (type === 'add') {
-			const newData = converDataFormToComment(getForm());
-			dispatch(addComment({ data: newData }));
-			return;
+		{
+			if (type === 'add') {
+				const newData = converDataFormToComment(getForm());
+				dispatch(addComment({ data: newData }));
+				return;
+			}
 		}
 	};
 
@@ -123,10 +132,7 @@ const FormAnt = () => {
 		const result = getFieldsValue(true);
 		return result;
 	};
-	const handleUserChange = (value: string) => {
-		if (value === 'you') return form.setFieldsValue({ timeLocation: 'left' });
-		else form.setFieldsValue({ timeLocation: 'right' });
-	};
+	const handleUserChange = (value: string) => {};
 	const createComment = () => {
 		setForm(currentComment, 'add');
 	};
@@ -143,6 +149,10 @@ const FormAnt = () => {
 	};
 	const confirmClearAllData = () => {
 		console.info(`🎁 src/component/form/FormAnt.tsx	Line:128	ID:9aeeab`, 'clear all data');
+	};
+	const handleChangeEmoji = (e: string) => {
+		const numberEmoji = form.getFieldValue('numberEmoji');
+		if (!numberEmoji) setFieldsValue({ numberEmoji: 1 });
 	};
 	return (
 		<Fragment>
@@ -165,8 +175,8 @@ const FormAnt = () => {
 					</Form.Item>
 				</div>
 				<div>
-					<Form.Item label='ID Comment' name='idComment' labelAlign='left' required>
-						<Input />
+					<Form.Item label='ID Comment' name='idComment' labelAlign='left'>
+						<Input disabled />
 					</Form.Item>
 					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
 						<Input />
@@ -176,11 +186,10 @@ const FormAnt = () => {
 					<b>Thời gian</b>
 				</Divider>
 				<div>
-					<Form.Item label='Vị trí time' name='timeLocation' labelAlign='left'>
-						<Select allowClear>
-							<Option value='left'>Trái</Option>
-							<Option value='center'>Giữa</Option>
-							<Option value='right'>Phải</Option>
+					<Form.Item label='Vị trí time' name='timeType' labelAlign='left'>
+						<Select>
+							<Option value='auto'>Auto</Option>
+							<Option value='separate'>Giữa</Option>
 						</Select>
 					</Form.Item>
 				</div>
@@ -194,7 +203,7 @@ const FormAnt = () => {
 				</Divider>
 				<div>
 					<Form.Item name='emoji' label='Emoji' labelAlign='left'>
-						<Select placeholder='Icon' allowClear>
+						<Select placeholder='Icon' allowClear onChange={e => handleChangeEmoji(e)}>
 							<Option value='/-strong'>👍 Like</Option>
 							<Option value='/-heart'>❤ Heart</Option>
 							<Option value=':>'>😁 Lol</Option>
@@ -211,19 +220,12 @@ const FormAnt = () => {
 						</Form.Item>
 					</Col>
 				</div>
-				<Divider>
-					<b>Phân cách thời gian</b>
-				</Divider>
-				<div>
-					<Form.Item label='Separate Time' name='separateTimeValue' labelAlign='left'>
-						<DatePicker showTime onChange={onChange} onOk={onOk} className='datePicker' />
-					</Form.Item>
-				</div>
+
 				<Divider>
 					<b>Comment</b>
 				</Divider>
 
-				<FormCommentType commentType={currentComment.comment?.type} />
+				<FormCommentType currentComment={currentComment} />
 
 				<div className='flex gap-2'>
 					<Button type='default' htmlType='submit'>

@@ -1,7 +1,7 @@
 import { IData } from '../component/form/FormAnt';
-import { Comment, CommentType } from '../interface/IComment';
+import { Comment, CommentType, Emoji } from '../interface/IComment';
 
-export const converDataFormToComment = (data: IData): any => {
+export const converDataFormToComment = (data: IData): Comment => {
 	const comment: CommentType | object = { type: data.commentType };
 	switch (data.commentType) {
 		case 'text':
@@ -24,19 +24,15 @@ export const converDataFormToComment = (data: IData): any => {
 		id: data.idComment,
 		idReply: data.idReply,
 		author: data.user,
-		comment,
+		comment: comment as CommentType,
 		time: {
-			type: data.timeLocation,
+			type: data.timeType,
 			value: data.timeValue ? data.timeValue?.format('YYYY-MM-DD HH:mm:ss') : '',
 		},
 		emoji: {
 			show: data.emoji ? true : false,
-			type: data.emoji,
+			type: data.emoji as Emoji,
 			number: data.numberEmoji,
-		},
-		separate: {
-			time: data.separateTimeValue,
-			show: data.separateTimeValue ? true : false,
 		},
 	};
 };

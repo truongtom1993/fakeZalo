@@ -11,7 +11,7 @@ const listComment: Comment[] = [
 			imageUrl: 'https://i.postimg.cc/BvbVH4V1/test-screenshot.jpg',
 		},
 		time: {
-			type: null,
+			type: 'auto',
 			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 		emoji: {
@@ -29,7 +29,7 @@ const listComment: Comment[] = [
 				'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste voluptates illum officiis dignissimos iure dolor sit, quo ipsum! Dolorem quam consectetur aut. Ex quo optio corrupti eius? Tempore debitis ut ipsum ullam nemo eum, eaque sed et culpa adipisci fuga modi fugiat eveniet magni deleniti quam dolor iure dignissimos eius vel vero cum, deserunt earum ducimus! Aperiam vero adipisci aut voluptatum at quisquam, culpa veritatis vel ratione autem iste, nihil laudantium fugit magnam? Quas veritatis maiores, veniam voluptates doloribus corporis aspernatur nisi eos aut dolorum animi, voluptatibus dolores obcaecati ea voluptas iusto eius omnis voluptatem. Sint reiciendis ea perspiciatis vel!',
 		},
 		time: {
-			type: 'right',
+			type: 'auto',
 			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
@@ -41,7 +41,7 @@ const listComment: Comment[] = [
 			textContent: 'Xin cảm ơn rất nhiều',
 		},
 		time: {
-			type: null,
+			type: 'auto',
 			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
@@ -53,7 +53,7 @@ const listComment: Comment[] = [
 			recordDuration: 20,
 		},
 		time: {
-			type: 'left',
+			type: 'auto',
 			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
@@ -66,7 +66,7 @@ const listComment: Comment[] = [
 			callDuration: 15,
 		},
 		time: {
-			type: null,
+			type: 'auto',
 			value: moment().format('YYYY-MM-DD HH:mm:ss'),
 		},
 	},
