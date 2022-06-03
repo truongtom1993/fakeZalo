@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Profile } from '../interface/IComment';
 import { RootState } from '../store/store';
 
 interface IProps {

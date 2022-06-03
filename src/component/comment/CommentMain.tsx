@@ -47,7 +47,11 @@ const CommentMain = ({ index, data, isLastCommentText }: Props) => {
 
 	return (
 		<Fragment>
-			<div className={'comment_container px-2 relative flex items-center ' + (data.author === 'me' ? 'flex-row-reverse' : '')}>
+			<div
+				className={
+					'comment_container px-2 relative flex items-center ' + `type_${data.comment.type}_${data.author} ` + (data.author === 'me' ? 'flex-row-reverse' : '')
+				}
+			>
 				{renderComment(data.comment.type)}
 				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 w-auto flex items-center'>
 					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addPrev} />

@@ -39,12 +39,11 @@
 	.button_primary {
 		@apply border rounded-sm px-3 font-bold ml-auto  hover:ring-1;
 	}
-	.timeStamp_text_me_inner {
+	.timeStamp_text_me_inner,
+	.timeStamp_text_you_inner {
 		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe;
 	}
-	.timeStamp_text_you_inner {
-		@apply text-[10px] -mt-2 -mb-1 text-gray-400 self-start font-segoe;
-	}
+
 	.lastComment {
 		@apply flex flex-row-reverse px-4 mb-2;
 	}
@@ -64,4 +63,11 @@
 .datePicker,
 .inputNumber {
 	width: 100% !important;
+}
+
+.type_text_me + .type_text_me {
+	margin-top: -0.75rem;
+}
+.type_text_you + .type_text_you {
+	margin-top: -0.75rem;
 }

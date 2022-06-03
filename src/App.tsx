@@ -49,7 +49,7 @@ function App() {
 						return (
 							<Fragment key={index}>
 								<CommentMain index={index} data={element} isLastCommentText={isLastCommentText} />
-								{index === commentListLength - 1 && (
+								{index === commentListLength - 1 && element.author === 'me' && (
 									<div className='lastComment'>
 										<Avatar width='20px' height='20px' />
 									</div>
