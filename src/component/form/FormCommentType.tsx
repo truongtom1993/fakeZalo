@@ -9,12 +9,12 @@ interface IProps {
 }
 
 const FormCommentType = ({ commentType = 'text' }: IProps) => {
-	const [commentTypeState, setCommentTypeState] = useState<string>();
+	const [commentTypeState, setCommentTypeState] = useState<string>('text');
 	const [callType, setCallType] = useState('incomming');
 
 	useEffect(() => {
 		setCommentTypeState(commentType);
-	}, [commentType]);
+	});
 
 	function renderCommentInput(type: string = 'text') {
 		switch (type) {

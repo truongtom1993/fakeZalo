@@ -33,7 +33,7 @@ function App() {
 
 	return (
 		<div className='pl-2 pt-2 flex'>
-			<div className='App font-segoe relative mr-2'>
+			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={getScrollProcess} ref={commentContainerRef}>
 					{commentList.data.map((element, index) => {
