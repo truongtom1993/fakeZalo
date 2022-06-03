@@ -1,16 +1,13 @@
-import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider, Modal, Space } from 'antd';
-import { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Comment, TypeOfTime } from '../../interface/IComment';
-import { RootState } from '../../store/store';
-import moment from 'moment';
-import FormCommentType from './FormCommentType';
-import FormProfile from './FormProfile';
-import { converDataFormToComment } from '../../helpers';
-import { addComment, changeCommentById } from '../../slice/DataSlice';
-import React, { useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { nanoid } from 'nanoid';
+import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
+import moment from 'moment';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { converDataFormToComment } from '../../helpers';
+import { TypeOfTime } from '../../interface/IComment';
+import { addComment, changeCommentById } from '../../slice/DataSlice';
+import { RootState } from '../../store/store';
+import FormCommentType from './FormCommentType';
 
 export interface IData {
 	user: 'me' | 'you';

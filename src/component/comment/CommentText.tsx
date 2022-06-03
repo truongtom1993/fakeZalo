@@ -10,7 +10,6 @@ interface Props {
 }
 const CommentText = ({ data, isLastComment }: Props) => {
 	const { author, comment, time, emoji } = data;
-	console.info(`🎁 src/component/comment/CommentText.tsx	Line:13	ID:a4d5a7`, time);
 
 	function render() {
 		if (author === 'you') {

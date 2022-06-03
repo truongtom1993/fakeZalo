@@ -44,17 +44,17 @@ const CommentMain = ({ index, data, isLastCommentText }: Props) => {
 	};
 	const addPrev = () => {
 		// tao comment moi
-		dispatch(addComment({ index, data: createExampleComment() }));
+		const newData = createExampleComment();
+
+		dispatch(addComment({ index, data: newData }));
+		dispatch(changeCurrentComment(newData));
 	};
 	const addNext = () => {
 		// tao comment moi
-
 		const newData = createExampleComment();
 
 		dispatch(addComment({ index: index + 1, data: newData }));
 		dispatch(changeCurrentComment(newData));
-
-		// thay doi curent comment la comment moi
 	};
 
 	return (
