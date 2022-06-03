@@ -175,8 +175,8 @@ const FormAnt = () => {
 					</Form.Item>
 				</div>
 				<div>
-					<Form.Item label='ID Comment' name='idComment' labelAlign='left' required>
-						<Input />
+					<Form.Item label='ID Comment' name='idComment' labelAlign='left'>
+						<Input disabled />
 					</Form.Item>
 					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
 						<Input />
