@@ -52,7 +52,7 @@ function App() {
 								<CommentMain index={index} data={element} isLastCommentText={isLastCommentText} isFirstComment={isFirstComment} />
 								{index === commentListLength - 1 && (
 									<div className='lastComment'>
-										<Avatar width='20px' height='20px' />
+										<Avatar width='20px' height='20px' isLastOfCommentList />
 									</div>
 								)}
 							</Fragment>
