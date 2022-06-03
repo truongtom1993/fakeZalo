@@ -19,7 +19,7 @@ const CommentText = ({ data, isLastComment, isFirstComment }: Props) => {
 					<div className='flex'>
 						<Avatar isFirstComment={isFirstComment} />
 						<div className={'comment-text-main relative ml-1 bg-white'}>
-							<span className='text-base text-gray-800 pb-1 mb-2'>{comment.type === 'text' && comment.textContent}</span>
+							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
 						</div>
