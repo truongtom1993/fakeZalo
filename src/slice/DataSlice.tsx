@@ -18,7 +18,7 @@ const commentListSlice = createSlice({
 	initialState: { data: initData },
 	reducers: {
 		addComment(state, action: PayloadAction<IAddComment>) {
-			if (action.payload.index !== void 0 || action.payload.index !== null) {
+			if (action.payload.index >= 0) {
 				state.data.splice(action.payload.index, 0, { ...action.payload.data, id: nanoid(5) });
 			} else {
 				state.data.push({ ...action.payload.data, id: nanoid(5) });

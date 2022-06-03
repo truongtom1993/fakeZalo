@@ -38,7 +38,7 @@ const formField = {
 	timeLocation: '',
 	timeValue: '',
 	emoji: '',
-	numberEmoji: 1,
+	numberEmoji: 0,
 	separateTimeValue: '',
 	commentType: 'text',
 	callType: 'incomming',
@@ -76,50 +76,61 @@ const FormAnt = () => {
 		form.resetFields();
 	};
 	const setForm = (data: any, type: 'load' | 'edit' | 'add') => {
-		if (type === 'load') {
-			const timeValue = data.time?.value;
+		{
+			if (type === 'load') {
+				const timeValue = data.time?.value;
+				const result: IData = {
+					user: data?.author || '',
+					idComment: data?.id || '',
+					idReply: data?.idReply || '',
+					timeLocation: data?.time?.type || '',
+					timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
+					emoji: data?.emoji?.type || '',
+					numberEmoji: data?.emoji?.number || '',
+					separateTimeValue: data?.separate?.time || '',
+					commentType: data?.comment?.type || '',
+					textContent: '',
+					imageURL: '',
+					callType: '',
+					callDuration: '',
+					recordDuration: '',
+				};
+				switch (result.commentType) {
+					case 'text':
+						result.textContent = data.comment.textContent || '';
+						break;
+					case 'image':
+						result.imageURL = data.comment?.imageUrl || '';
+						break;
+					case 'call':
+						result.callType = data.comment.callType || '';
+						result.callDuration = data.comment.callDuration || '';
+						break;
+					case 'record':
+						result.recordDuration = data.comment.recordDuration || '';
+						break;
+					default:
+						break;
+				}
 
-			const result: IData = {
-				user: data?.author || '',
-				idComment: data?.id || '',
-				idReply: data?.idReply || '',
-				timeLocation: data?.time?.type || '',
-				timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
-				emoji: data?.emoji?.type || '',
-				numberEmoji: data?.emoji?.number || '',
-				separateTimeValue: data?.separate?.time || '',
-				commentType: data?.comment?.type || '',
-			};
-			switch (result.commentType) {
-				case 'text':
-					result.textContent = data.comment.textContent || '';
-					break;
-				case 'image':
-					result.imageURL = data.comment?.imageUrl || '';
-					break;
-				case 'call':
-					result.callType = data.comment.callType || '';
-					result.callDuration = data.comment.callDuration || '';
-					break;
-				case 'record':
-					result.recordDuration = data.comment.recordDuration || '';
-					break;
-				default:
-					break;
+				setFieldsValue(result);
+				return;
 			}
+		}
 
-			setFieldsValue(result);
-			return;
+		{
+			if (type === 'edit') {
+				const newData = converDataFormToComment(data);
+				dispatch(changeCommentById({ id: newData.id, data: newData }));
+				return;
+			}
 		}
-		if (type === 'edit') {
-			const newData = converDataFormToComment(data);
-			dispatch(changeCommentById({ id: newData.id, data: newData }));
-			return;
-		}
-		if (type === 'add') {
-			const newData = converDataFormToComment(getForm());
-			dispatch(addComment({ data: newData }));
-			return;
+		{
+			if (type === 'add') {
+				const newData = converDataFormToComment(getForm());
+				dispatch(addComment({ data: newData }));
+				return;
+			}
 		}
 	};
 

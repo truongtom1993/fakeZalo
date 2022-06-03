@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from 'moment';
+import { nanoid } from 'nanoid';
 import { Comment, Emoji } from '../interface/IComment';
 
 const currentComment = localStorage.getItem('currentComment');
@@ -6,21 +8,21 @@ const currentComment = localStorage.getItem('currentComment');
 const initCurrentComment: Comment = currentComment
 	? JSON.parse(currentComment)
 	: {
-			id: 'dscxc3ref',
+			id: nanoid(5),
 			idReply: '',
 			author: 'me',
 			comment: {
 				type: 'text',
-				textContent: 'lorem',
+				textContent: '',
 			},
 			time: {
 				type: 'right',
-				value: '1993-01-03 15:31:59',
+				value: moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			emoji: {
-				show: true,
-				type: Emoji.Heart,
-				number: 1,
+				show: false,
+				type: null,
+				number: 0,
 			},
 			separate: {
 				show: false,
