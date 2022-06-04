@@ -13,7 +13,8 @@ const listComment: Comment[] = [
 		author: 'me',
 		comment: {
 			type: 'image',
-			imageUrl: 'https://i.postimg.cc/BvbVH4V1/test-screenshot.jpg',
+			imageUrl:
+				'https://images.unsplash.com/photo-1654293998081-9deefc0b27b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
 		},
 		time: {
 			type: 'auto',
