@@ -1,8 +1,9 @@
-import { IData } from '../component/form/FormAnt';
+import moment from 'moment';
+import { IDataForm } from '../component/form/FormAnt';
 import { Comment, CommentType, Emoji } from '../interface/IComment';
 import { ICommentReply, ICurrentCommentReply } from '../slice/CurrentCommentSlice';
 
-export const converDataFormToComment = (data: IData): Comment => {
+export const converDataFormToComment = (data: IDataForm, currentCommentReply: ICurrentCommentReply): Comment => {
 	const comment: CommentType | object = { type: data.commentType };
 	switch (data.commentType) {
 		case 'text':
@@ -17,22 +18,17 @@ export const converDataFormToComment = (data: IData): Comment => {
 		case 'record':
 			Object.assign(comment, { recordDuration: data.recordDuration });
 			break;
-		default:
-			break;
 	}
 
 	return {
+		index: data.index,
 		id: data.idComment,
-		commentReply: {
-			idReply: data.idReply,
-			index: data.index,
-			data: data.dataCommentReply,
-		},
+		commentReply: currentCommentReply,
 		author: data.user,
 		comment: comment as CommentType,
 		time: {
 			type: data.timeType,
-			value: data.timeValue ? data.timeValue?.format('YYYY-MM-DD HH:mm:ss') : '',
+			value: typeof data.timeValue === 'object' ? data.timeValue?.format('YYYY-MM-DD HH:mm:ss') : '',
 		},
 		emoji: {
 			show: data.emoji ? true : false,
@@ -40,6 +36,44 @@ export const converDataFormToComment = (data: IData): Comment => {
 			number: data.numberEmoji,
 		},
 	};
+};
+
+export const converCommentToDataForm = (data: Comment): IDataForm => {
+	const timeValue = data.time?.value;
+	const result = {
+		index: data.index,
+		user: data?.author,
+		idComment: data?.id || '',
+		idReply: data?.commentReply.idReply,
+		timeType: data?.time?.type || null,
+		timeValue: moment(new Date(timeValue)),
+		emoji: data?.emoji?.type || '',
+		numberEmoji: data?.emoji?.number,
+		commentType: data?.comment?.type,
+		textContent: '',
+		imageURL: '',
+		callType: '',
+		callDuration: '',
+		recordDuration: '',
+	};
+	switch (data.comment.type) {
+		case 'text':
+			result.textContent = data.comment.textContent || '';
+			break;
+		case 'image':
+			result.imageURL = data.comment?.imageUrl || '';
+			break;
+		case 'call':
+			result.callType = data.comment.callType || '';
+			result.callDuration = data.comment.callDuration.toString() || '';
+			break;
+		case 'record':
+			result.recordDuration = data.comment.recordDuration.toString() || '';
+			break;
+		default:
+			break;
+	}
+	return result;
 };
 
 export const convertToShortenTime = (value: string) => {
@@ -60,5 +94,3 @@ export const convertCommentToCommentReply = (data: Comment, index: number): ICur
 		},
 	};
 };
-
-export const converCommentToDataForm = (comment: Comment) => {};

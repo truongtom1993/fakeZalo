@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { Author, Comment, CommentType, Emoji } from '../interface/IComment';
 
 export interface ICurrentCommentReply {
-	idReply: string;
+	idReply: string | undefined;
 	index: number;
 	data?: ICommentReply;
 }
@@ -12,6 +12,11 @@ export interface ICommentReply {
 	author: Author;
 	comment: CommentType;
 }
+
+export const exampleCurrentCommentReply: ICurrentCommentReply = {
+	idReply: void 0,
+	index: -1,
+};
 
 const currentComment = localStorage.getItem('currentComment');
 

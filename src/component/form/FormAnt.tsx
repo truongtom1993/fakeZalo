@@ -2,34 +2,35 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { converDataFormToComment } from '../../helpers';
+import { useDispatch } from 'react-redux';
+import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
 import { useAppSelector } from '../../hooks';
 import { Comment, TypeOfTime } from '../../interface/IComment';
+import { exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
 import { addComment, changeCommentById } from '../../slice/DataSlice';
 import FormCommentType from './FormCommentType';
 
-export interface IData {
-	index?: number;
+export interface IDataForm {
+	index: number;
 	user: 'me' | 'you';
-	dataCommentReply?: Comment;
-	commentType: 'text' | 'call' | 'image' | 'record';
-	emoji: string;
 	idComment: string;
 	idReply: string;
+	timeType: TypeOfTime;
+	timeValue: moment.Moment | string;
+	emoji: string;
 	numberEmoji: number;
+	commentType: 'text' | 'call' | 'image' | 'record';
 	textContent?: string;
 	imageURL?: string;
 	callType?: string;
 	callDuration?: string;
 	recordDuration?: string;
-	timeType: TypeOfTime;
-	timeValue: moment.Moment;
+	dataCommentReply?: Comment;
 }
 
 const { Option } = Select;
 
-const formField: IData = {
+const formField = {
 	user: 'me',
 	idComment: '',
 	idReply: '',
@@ -46,7 +47,7 @@ const FormAnt = () => {
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
 	const currentComment = useAppSelector<Comment>(s => s.currentCommentReducer.currentComment);
-	const currentCommentReply = useAppSelector<{ idReply: string; index: number }>(s => s.currentCommentReducer.currentCommentReply);
+	const currentCommentReply = useAppSelector<ICurrentCommentReply>(s => s.currentCommentReducer.currentCommentReply);
 
 	useEffect(() => {
 		setForm(currentComment, 'load');
@@ -55,7 +56,7 @@ const FormAnt = () => {
 			setFieldsValue({ idReply: currentCommentReply.idReply });
 	}, [currentComment, currentCommentReply]);
 
-	const onFinish = (values: any) => {
+	const onFinish = (values: IDataForm) => {
 		setForm(values, 'edit');
 	};
 
@@ -77,67 +78,28 @@ const FormAnt = () => {
 		form.resetFields();
 	};
 	const setForm = (data: any, type: 'load' | 'edit' | 'add') => {
-		{
-			if (type === 'load') {
-				const timeValue = data.time?.value;
-				const result: IData = {
-					index: data.index,
-					user: data?.author || '',
-					idComment: data?.id || '',
-					idReply: data?.idReply || '',
-					timeType: data?.time?.type || null,
-					timeValue: type === 'load' ? moment(new Date(timeValue)) : data.timeValue,
-					emoji: data?.emoji?.type || '',
-					numberEmoji: data?.emoji?.number || '',
-					commentType: data?.comment?.type || '',
-					textContent: '',
-					imageURL: '',
-					callType: '',
-					callDuration: '',
-					recordDuration: '',
-				};
-				switch (result.commentType) {
-					case 'text':
-						result.textContent = data.comment.textContent || '';
-						break;
-					case 'image':
-						result.imageURL = data.comment?.imageUrl || '';
-						break;
-					case 'call':
-						result.callType = data.comment.callType || '';
-						result.callDuration = data.comment.callDuration || '';
-						break;
-					case 'record':
-						result.recordDuration = data.comment.recordDuration || '';
-						break;
-					default:
-						break;
-				}
-
-				setFieldsValue(result);
-				return;
-			}
+		if (type === 'load') {
+			const result = converCommentToDataForm(data);
+			setFieldsValue(result);
+			return;
 		}
 
-		{
-			if (type === 'edit') {
-				const newData = converDataFormToComment(data);
-				dispatch(changeCommentById({ id: newData.id, data: newData }));
-				return;
-			}
+		if (type === 'edit') {
+			const index = data.index;
+			const newData = converDataFormToComment({ ...data, index }, currentCommentReply);
+			dispatch(changeCommentById({ id: newData.id, data: newData }));
+			return;
 		}
-		{
-			if (type === 'add') {
-				const newData = converDataFormToComment(getForm());
-				dispatch(addComment({ data: newData }));
-				return;
-			}
+
+		if (type === 'add') {
+			const newData = converDataFormToComment(getForm(), exampleCurrentCommentReply);
+			dispatch(addComment({ data: newData }));
+			return;
 		}
 	};
 
 	const getForm = () => {
-		const result = getFieldsValue(true);
-		return result;
+		return { ...getFieldsValue(true), index: currentComment.index };
 	};
 	const handleUserChange = (value: string) => {};
 	const createComment = () => {
