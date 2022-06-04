@@ -5,10 +5,12 @@ import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 interface Props {
+	index: number;
 	data: Comment;
-	isFirstComment?: boolean;
+	isLastComment: boolean;
+	isFirstComment: boolean;
 }
-const CommentCall = ({ data, isFirstComment }: Props) => {
+const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 	const { type } = comment;
 

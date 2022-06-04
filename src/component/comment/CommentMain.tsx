@@ -1,10 +1,12 @@
-import React, { Fragment, memo } from 'react';
-import { AiOutlineEdit } from 'react-icons/ai';
+import React, { Fragment, memo, useRef } from 'react';
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
+import { BsReplyAll } from 'react-icons/bs';
+import { FiEdit } from 'react-icons/fi';
 import { GoDiffRemoved } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
+import { convertCommentToCommentReply } from '../../helpers';
 import { Comment } from '../../interface/IComment';
-import { changeCurrentComment } from '../../slice/CurrentCommentSlice';
+import { changeCurrentComment, changeCurrentCommentReply, ICommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
 import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
 import { createExampleComment } from '../../utils';
 import CommentCall from './CommentCall';
@@ -12,28 +14,31 @@ import CommentImage from './CommentImage';
 import CommentRecord from './CommentRecord';
 import CommentText from './CommentText';
 import SeparateTime from './SeparateTime';
-interface Props {
+
+interface IProps {
 	index: number;
 	data: Comment;
-	isLastCommentText?: boolean;
-	isFirstComment?: boolean;
+	isLastComment: boolean;
+	isFirstComment: boolean;
 }
 
-const CommentMain = ({ index, data, isLastCommentText, isFirstComment }: Props) => {
+const CommentMain = (props: IProps) => {
+	const { index, data } = props;
 	const dispatch = useDispatch();
+
 	function renderComment(type: string) {
 		if (data.time.type === 'separate') {
 			return <SeparateTime separateTime={data.time.value} />;
 		}
 		switch (type) {
 			case 'image':
-				return <CommentImage data={data} isFirstComment={isFirstComment} />;
+				return <CommentImage {...props} />;
 			case 'text':
-				return <CommentText data={data} isLastComment={isLastCommentText} isFirstComment={isFirstComment} />;
+				return <CommentText {...props} />;
 			case 'call':
-				return <CommentCall data={data} isFirstComment={isFirstComment} />;
+				return <CommentCall {...props} />;
 			case 'record':
-				return <CommentRecord data={data} isFirstComment={isFirstComment} />;
+				return <CommentRecord {...props} />;
 		}
 	}
 	const changeFormData = () => {
@@ -57,20 +62,26 @@ const CommentMain = ({ index, data, isLastCommentText, isFirstComment }: Props) 
 		dispatch(addComment({ index: index + 1, data: newData }));
 		dispatch(changeCurrentComment(newData));
 	};
+	const getIdreply = (commentReply: ICurrentCommentReply) => {
+		dispatch(changeCurrentCommentReply(commentReply));
+	};
 
 	return (
 		<Fragment>
 			<div
 				className={
-					'comment_container px-2 relative flex items-center ' + `type_${data.comment.type}_${data.author} ` + (data.author === 'me' ? 'flex-row-reverse' : '')
+					'comment_container px-2 relative flex items-center ' +
+					(`type_${data.comment.type}_${data.author} ` + (data.author === 'me' ? 'flex-row-reverse' : ''))
 				}
 			>
-				{renderComment(data.comment.type)}
+				<Fragment>{renderComment(data.comment.type)}</Fragment>
+
 				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 w-auto flex items-center'>
 					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addPrev} />
 					<BiDownArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addNext} />
 					<GoDiffRemoved className='cursor-pointer mx-2 w-9 h-9 stroke-[0.3]' onClick={removeComment} />
-					<AiOutlineEdit className='cursor-pointer mx-2 w-10 h-10' onClick={changeFormData} />
+					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10' onClick={() => getIdreply(convertCommentToCommentReply(data, index))} />
+					<FiEdit className='cursor-pointer mx-2 w-9 h-9' onClick={changeFormData} />
 				</div>
 			</div>
 		</Fragment>

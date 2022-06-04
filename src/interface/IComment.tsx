@@ -1,3 +1,5 @@
+import { ICurrentCommentReply } from '../slice/CurrentCommentSlice';
+
 type TypeCommentImage = {
 	type: 'image';
 	imageUrl: string;
@@ -31,8 +33,9 @@ export type Author = 'you' | 'me';
 export type TypeOfTime = 'separate' | 'auto';
 
 export interface Comment {
+	index: number;
 	id: string;
-	idReply?: string;
+	commentReply: ICurrentCommentReply;
 	author: Author;
 	comment: CommentType;
 	time: {

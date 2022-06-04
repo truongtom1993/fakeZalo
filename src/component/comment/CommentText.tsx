@@ -3,14 +3,16 @@ import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
+import CommentReply from './CommentReply';
 
 interface Props {
+	index: number;
 	data: Comment;
-	isLastComment?: boolean;
-	isFirstComment?: boolean;
+	isLastComment: boolean;
+	isFirstComment: boolean;
 }
-const CommentText = ({ data, isLastComment, isFirstComment }: Props) => {
-	const { author, comment, time, emoji } = data;
+const CommentText = ({ data, isLastComment, isFirstComment, index }: Props) => {
+	const { author, comment, time, emoji, commentReply } = data;
 
 	function render() {
 		if (author === 'you') {
@@ -19,6 +21,7 @@ const CommentText = ({ data, isLastComment, isFirstComment }: Props) => {
 					<div className='flex'>
 						<Avatar isFirstComment={isFirstComment} />
 						<div className={'comment-text-main relative ml-1 bg-white'}>
+							<CommentReply commentReply={commentReply} />
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
@@ -32,6 +35,8 @@ const CommentText = ({ data, isLastComment, isFirstComment }: Props) => {
 				<Fragment>
 					<div className='flex'>
 						<div className={'comment-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
+							<CommentReply commentReply={commentReply} />
+
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}

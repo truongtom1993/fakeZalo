@@ -1,15 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { nanoid } from 'nanoid';
-import { Comment, Emoji } from '../interface/IComment';
+import { Author, Comment, CommentType, Emoji } from '../interface/IComment';
+
+export interface ICurrentCommentReply {
+	idReply: string;
+	index: number;
+	data?: ICommentReply;
+}
+export interface ICommentReply {
+	author: Author;
+	comment: CommentType;
+}
 
 const currentComment = localStorage.getItem('currentComment');
 
 const initCurrentComment: Comment = currentComment
 	? JSON.parse(currentComment)
 	: {
+			index: -1,
 			id: nanoid(5),
-			idReply: '',
+			commentReply: {
+				idReply: '',
+				index: -1,
+			},
 			author: 'me',
 			comment: {
 				type: 'text',
@@ -26,14 +40,25 @@ const initCurrentComment: Comment = currentComment
 			},
 	  };
 
+const initCurrentCommentReply: ICurrentCommentReply = {
+	idReply: '',
+	index: -1,
+};
+
 const currentCommentSlice = createSlice({
 	name: 'currentComment',
-	initialState: { currentComment: initCurrentComment },
+	initialState: {
+		currentComment: initCurrentComment,
+		currentCommentReply: initCurrentCommentReply,
+	},
 	reducers: {
 		changeCurrentComment(state, action: PayloadAction<Comment>) {
 			state.currentComment = action.payload;
 		},
+		changeCurrentCommentReply(state, action: PayloadAction<ICurrentCommentReply>) {
+			state.currentCommentReply = action.payload;
+		},
 	},
 });
-export const { changeCurrentComment } = currentCommentSlice.actions;
+export const { changeCurrentComment, changeCurrentCommentReply } = currentCommentSlice.actions;
 export default currentCommentSlice.reducer;

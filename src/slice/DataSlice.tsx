@@ -4,7 +4,7 @@ import { listComment } from '../data/data';
 import { Comment } from '../interface/IComment';
 interface IChangeComment {
 	id: string;
-	data: any;
+	data: Comment;
 }
 interface IAddComment {
 	index?: number;

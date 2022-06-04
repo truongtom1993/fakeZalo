@@ -7,10 +7,12 @@ import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
+	index: number;
 	data: Comment;
-	isFirstComment?: boolean;
+	isLastComment: boolean;
+	isFirstComment: boolean;
 }
-const CommentRecord = ({ data, isFirstComment }: Props) => {
+const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function secondsToMinutes(second: number) {
@@ -42,7 +44,7 @@ const CommentRecord = ({ data, isFirstComment }: Props) => {
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
+							{/* <EmojiComponent type={emoji?.type} number={emoji?.number} /> */}
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
@@ -67,7 +69,7 @@ const CommentRecord = ({ data, isFirstComment }: Props) => {
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
+							{/* <EmojiComponent type={emoji?.type} number={emoji?.number} /> */}
 						</div>
 					</div>
 				</Fragment>

@@ -7,7 +7,7 @@
 		@apply h-3 w-3 overflow-hidden text-transparent select-none;
 	}
 	.comment-text-main {
-		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border;
+		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border tracking-tight;
 	}
 	.icon-share-image {
 		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border;

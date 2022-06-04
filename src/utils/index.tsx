@@ -5,6 +5,10 @@ import { Comment } from '../interface/IComment';
 function createExampleComment(): Comment {
 	const exampleComment: Comment = {
 		author: 'me',
+		commentReply: {
+			index: -1,
+			idReply: '',
+		},
 		comment: { type: 'text', textContent: `Example Textcontent ${Math.random()}` },
 		id: nanoid(5),
 		time: { type: 'auto', value: moment().format('YYYY-MM-DD HH:mm:ss') },

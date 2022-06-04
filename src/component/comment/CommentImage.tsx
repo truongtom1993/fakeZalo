@@ -5,11 +5,13 @@ import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 
 interface Props {
+	index: number;
 	data: Comment;
+	isLastComment: boolean;
 	isFirstComment: boolean;
 }
 
-const CommentImage = ({ data, isFirstComment }: Props) => {
+const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	const { author, comment, time, emoji } = data;
 
 	function render() {

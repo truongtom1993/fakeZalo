@@ -1,5 +1,6 @@
 import { IData } from '../component/form/FormAnt';
 import { Comment, CommentType, Emoji } from '../interface/IComment';
+import { ICommentReply, ICurrentCommentReply } from '../slice/CurrentCommentSlice';
 
 export const converDataFormToComment = (data: IData): Comment => {
 	const comment: CommentType | object = { type: data.commentType };
@@ -22,7 +23,11 @@ export const converDataFormToComment = (data: IData): Comment => {
 
 	return {
 		id: data.idComment,
-		idReply: data.idReply,
+		commentReply: {
+			idReply: data.idReply,
+			index: data.index,
+			data: data.dataCommentReply,
+		},
 		author: data.user,
 		comment: comment as CommentType,
 		time: {
@@ -43,6 +48,17 @@ export const convertToShortenTime = (value: string) => {
 	const hour = timeSplit[0].split(' ').at(-1);
 	let result = `${Number.parseInt(hour)}:${minute}`;
 	return result;
+};
+
+export const convertCommentToCommentReply = (data: Comment, index: number): ICurrentCommentReply => {
+	return {
+		idReply: data.id,
+		index,
+		data: {
+			author: data.author,
+			comment: data.comment,
+		},
+	};
 };
 
 export const converCommentToDataForm = (comment: Comment) => {};

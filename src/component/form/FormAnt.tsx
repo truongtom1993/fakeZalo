@@ -4,13 +4,15 @@ import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { converDataFormToComment } from '../../helpers';
+import { useAppSelector } from '../../hooks';
 import { Comment, TypeOfTime } from '../../interface/IComment';
 import { addComment, changeCommentById } from '../../slice/DataSlice';
-import { RootState } from '../../store/store';
 import FormCommentType from './FormCommentType';
 
 export interface IData {
+	index?: number;
 	user: 'me' | 'you';
+	dataCommentReply?: Comment;
 	commentType: 'text' | 'call' | 'image' | 'record';
 	emoji: string;
 	idComment: string;
@@ -43,11 +45,15 @@ const FormAnt = () => {
 	const [form] = Form.useForm();
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
-	const currentComment = useSelector<RootState, Comment>(s => s.currentCommentReducer.currentComment);
+	const currentComment = useAppSelector<Comment>(s => s.currentCommentReducer.currentComment);
+	const currentCommentReply = useAppSelector<{ idReply: string; index: number }>(s => s.currentCommentReducer.currentCommentReply);
 
 	useEffect(() => {
 		setForm(currentComment, 'load');
-	}, [currentComment]);
+		currentCommentReply.idReply !== currentComment.id &&
+			currentComment.index > currentCommentReply.index &&
+			setFieldsValue({ idReply: currentCommentReply.idReply });
+	}, [currentComment, currentCommentReply]);
 
 	const onFinish = (values: any) => {
 		setForm(values, 'edit');
@@ -75,6 +81,7 @@ const FormAnt = () => {
 			if (type === 'load') {
 				const timeValue = data.time?.value;
 				const result: IData = {
+					index: data.index,
 					user: data?.author || '',
 					idComment: data?.id || '',
 					idReply: data?.idReply || '',
@@ -153,6 +160,7 @@ const FormAnt = () => {
 	const handleChangeEmoji = (e: string) => {
 		const numberEmoji = form.getFieldValue('numberEmoji');
 		if (!numberEmoji) setFieldsValue({ numberEmoji: 1 });
+		if (!e) setFieldsValue({ numberEmoji: void 0 });
 	};
 	return (
 		<Fragment>
@@ -179,7 +187,7 @@ const FormAnt = () => {
 						<Input disabled />
 					</Form.Item>
 					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
-						<Input />
+						<Input allowClear />
 					</Form.Item>
 				</div>
 				<Divider>

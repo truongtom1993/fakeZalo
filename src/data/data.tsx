@@ -4,7 +4,12 @@ import { Comment, Emoji, Profile } from '../interface/IComment';
 
 const listComment: Comment[] = [
 	{
+		index: 0,
 		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
 		author: 'me',
 		comment: {
 			type: 'image',
@@ -21,7 +26,12 @@ const listComment: Comment[] = [
 		},
 	},
 	{
+		index: 1,
 		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
 		author: 'me',
 		comment: {
 			type: 'text',
@@ -34,7 +44,12 @@ const listComment: Comment[] = [
 		},
 	},
 	{
+		index: 2,
 		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
 		author: 'you',
 		comment: {
 			type: 'text',
@@ -46,7 +61,12 @@ const listComment: Comment[] = [
 		},
 	},
 	{
+		index: 3,
 		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
 		author: 'you',
 		comment: {
 			type: 'record',
@@ -58,7 +78,12 @@ const listComment: Comment[] = [
 		},
 	},
 	{
+		index: 4,
 		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
 		author: 'you',
 		comment: {
 			type: 'call',

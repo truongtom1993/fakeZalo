@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { useAppSelector } from '../hooks';
 
 interface IProps {
 	width?: string;
@@ -10,7 +9,7 @@ interface IProps {
 }
 
 const Avatar = ({ width, height, isFirstComment, isLastOfCommentList }: IProps) => {
-	const avatarURL = useSelector<RootState, any>(s => s.profileReducer.profile.avatarURL);
+	const avatarURL = useAppSelector<any>(s => s.profileReducer.profile.avatarURL);
 	return (
 		<Fragment>
 			{isFirstComment || isLastOfCommentList ? (
