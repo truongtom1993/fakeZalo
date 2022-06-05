@@ -10,7 +10,7 @@ export const converDataFormToComment = (data: IDataForm, currentCommentReply: IC
 			Object.assign(comment, { textContent: data.textContent });
 			break;
 		case 'call':
-			Object.assign(comment, { callDuration: data.callDuration, callType: data.callType });
+			Object.assign(comment, { callType: data.callType, callDuration: data.callDuration });
 			break;
 		case 'image':
 			Object.assign(comment, { imageUrl: data.imageURL });
@@ -47,8 +47,8 @@ export const converCommentToDataForm = (data: Comment): IDataForm => {
 		idReply: data?.commentReply.idReply,
 		timeType: data?.time?.type || null,
 		timeValue: moment(new Date(timeValue)),
-		emoji: data?.emoji?.type || '',
-		numberEmoji: data?.emoji?.number,
+		emoji: data?.emoji?.type || void 0,
+		numberEmoji: data?.emoji?.number || void 0,
 		commentType: data?.comment?.type,
 		textContent: '',
 		imageURL: '',

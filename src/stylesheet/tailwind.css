@@ -47,6 +47,9 @@
 	.lastComment {
 		@apply flex flex-row-reverse px-4 mb-2;
 	}
+	.separate_reply {
+		@apply min-w-[0.25rem] w-1 h-9 self-center bg-blue-500 rounded-lg mr-3;
+	}
 }
 
 .icon_edit_comment {

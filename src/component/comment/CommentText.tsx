@@ -21,7 +21,7 @@ const CommentText = ({ data, isLastComment, isFirstComment, index }: Props) => {
 					<div className='flex'>
 						<Avatar isFirstComment={isFirstComment} />
 						<div className={'comment-text-main relative ml-1 bg-white'}>
-							<CommentReply commentReply={commentReply} />
+							{commentReply.idReply && <CommentReply commentReply={commentReply} />}
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
@@ -35,8 +35,7 @@ const CommentText = ({ data, isLastComment, isFirstComment, index }: Props) => {
 				<Fragment>
 					<div className='flex'>
 						<div className={'comment-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
-							<CommentReply commentReply={commentReply} />
-
+							{commentReply.idReply && <CommentReply commentReply={commentReply} />}
 							<span className='text-base text-gray-800 pb-1'>{comment.type === 'text' && comment.textContent}</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}

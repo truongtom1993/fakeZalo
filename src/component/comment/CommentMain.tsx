@@ -5,6 +5,7 @@ import { FiEdit } from 'react-icons/fi';
 import { GoDiffRemoved } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
 import { convertCommentToCommentReply } from '../../helpers';
+import { useAppSelector } from '../../hooks';
 import { Comment } from '../../interface/IComment';
 import { changeCurrentComment, changeCurrentCommentReply, ICommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
 import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
@@ -25,6 +26,7 @@ interface IProps {
 const CommentMain = (props: IProps) => {
 	const { index, data } = props;
 	const dispatch = useDispatch();
+	const currentComment = useAppSelector<Comment>(s => s.currentCommentReducer.currentComment);
 
 	function renderComment(type: string) {
 		if (data.time.type === 'separate') {
@@ -41,8 +43,9 @@ const CommentMain = (props: IProps) => {
 				return <CommentRecord {...props} />;
 		}
 	}
+
 	const changeFormData = () => {
-		dispatch(changeCurrentComment(data));
+		dispatch(changeCurrentComment({ ...data, index }));
 	};
 
 	const removeComment = () => {
@@ -50,20 +53,22 @@ const CommentMain = (props: IProps) => {
 	};
 	const addPrev = () => {
 		// tao comment moi
-		const newData = createExampleComment();
+		const newData = createExampleComment(index);
 
 		dispatch(addComment({ index, data: newData }));
 		dispatch(changeCurrentComment(newData));
 	};
 	const addNext = () => {
 		// tao comment moi
-		const newData = createExampleComment();
+		const newData = createExampleComment(index + 1);
 
 		dispatch(addComment({ index: index + 1, data: newData }));
 		dispatch(changeCurrentComment(newData));
 	};
-	const getIdreply = (commentReply: ICurrentCommentReply) => {
-		dispatch(changeCurrentCommentReply(commentReply));
+	const getCommentReply = (commentReply: ICurrentCommentReply) => {
+		if (currentComment.index > commentReply.index) {
+			dispatch(changeCurrentCommentReply(commentReply));
+		}
 	};
 
 	return (
@@ -80,7 +85,7 @@ const CommentMain = (props: IProps) => {
 					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addPrev} />
 					<BiDownArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addNext} />
 					<GoDiffRemoved className='cursor-pointer mx-2 w-9 h-9 stroke-[0.3]' onClick={removeComment} />
-					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10' onClick={() => getIdreply(convertCommentToCommentReply(data, index))} />
+					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10' onClick={() => getCommentReply(convertCommentToCommentReply(data, index))} />
 					<FiEdit className='cursor-pointer mx-2 w-9 h-9' onClick={changeFormData} />
 				</div>
 			</div>

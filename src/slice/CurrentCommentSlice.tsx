@@ -14,7 +14,7 @@ export interface ICommentReply {
 }
 
 export const exampleCurrentCommentReply: ICurrentCommentReply = {
-	idReply: void 0,
+	idReply: '',
 	index: -1,
 };
 
@@ -24,7 +24,7 @@ const initCurrentComment: Comment = currentComment
 	? JSON.parse(currentComment)
 	: {
 			index: -1,
-			id: nanoid(5),
+			id: 'abcde',
 			commentReply: {
 				idReply: '',
 				index: -1,

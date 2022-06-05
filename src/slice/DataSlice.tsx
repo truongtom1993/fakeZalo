@@ -21,7 +21,7 @@ const commentListSlice = createSlice({
 			if (action.payload.index >= 0) {
 				state.data.splice(action.payload.index, 0, { ...action.payload.data });
 			} else {
-				state.data.push({ ...action.payload.data, id: nanoid(5) });
+				state.data.push({ ...action.payload.data, id: nanoid(5), index: state.data.length + 1 });
 			}
 		},
 		removeCommentByIndex(state, action: PayloadAction<number>) {
@@ -30,7 +30,7 @@ const commentListSlice = createSlice({
 		changeCommentById(state, action: PayloadAction<IChangeComment>) {
 			const { payload } = action;
 			const index = state.data.findIndex(e => e.id === payload.id);
-			state.data.splice(index, 1, payload.data);
+			state.data[index] = payload.data;
 		},
 	},
 });

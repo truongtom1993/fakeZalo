@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
-import { Form, Input, Button, Checkbox, Select, DatePicker, Row, Col, InputNumber, Radio, Divider } from 'antd';
-import { changeProfile } from '../../slice/ProfileSlice';
+import { Button, Form, Input } from 'antd';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Profile } from '../../interface/IComment';
+import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
-import html2canvas from 'html2canvas';
 
 const FormProfile = () => {
 	const [form] = Form.useForm();
@@ -17,20 +16,6 @@ const FormProfile = () => {
 	};
 	const getProfile = () => {
 		form.setFieldsValue(profile);
-	};
-	const captureZalo = () => {
-		// html2canvas(document.getElementById('zalo_main')).then(canvas => {
-		// 	document.body.appendChild(canvas);
-		// });
-		// const findEl = document.getElementById('zalo_main');
-		// html2canvas(findEl).then(canvas => {
-		// 	const link = document.createElement('a');
-		// 	document.body.appendChild(link);
-		// 	link.download = 'cmp-image.jpg';
-		// 	link.href = canvas.toDataURL();
-		// 	link.click();
-		// 	link.remove();
-		// });
 	};
 	return (
 		<Fragment>
@@ -57,12 +42,6 @@ const FormProfile = () => {
 					</Button>
 					<Button type='default' onClick={getProfile}>
 						Get profile
-					</Button>
-				</div>
-
-				<div className='flex gap-2'>
-					<Button type='default' onClick={captureZalo}>
-						Capture
 					</Button>
 				</div>
 			</Form>

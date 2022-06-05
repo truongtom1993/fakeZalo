@@ -25,12 +25,11 @@ export interface IDataForm {
 	callType?: string;
 	callDuration?: string;
 	recordDuration?: string;
-	dataCommentReply?: Comment;
 }
 
 const { Option } = Select;
 
-const formField = {
+const initFormValues = {
 	user: 'me',
 	idComment: '',
 	idReply: '',
@@ -101,7 +100,6 @@ const FormAnt = () => {
 	const getForm = () => {
 		return { ...getFieldsValue(true), index: currentComment.index };
 	};
-	const handleUserChange = (value: string) => {};
 	const createComment = () => {
 		setForm(currentComment, 'add');
 	};
@@ -132,22 +130,26 @@ const FormAnt = () => {
 				wrapperCol={{ span: 16 }}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
-				initialValues={formField}
+				initialValues={initFormValues}
 				autoComplete='off'
 				form={form}
 			>
 				<div>
 					<Form.Item label='User' name='user' labelAlign='left' required>
-						<Select onSelect={(e: string) => handleUserChange(e)}>
+						<Select>
 							<Option value='you'>You</Option>
 							<Option value='me'>Me</Option>
 						</Select>
 					</Form.Item>
-				</div>
-				<div>
+
 					<Form.Item label='ID Comment' name='idComment' labelAlign='left'>
 						<Input disabled />
 					</Form.Item>
+
+					<Form.Item label='Index' name='index' labelAlign='left'>
+						<Input disabled />
+					</Form.Item>
+
 					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
 						<Input allowClear />
 					</Form.Item>
