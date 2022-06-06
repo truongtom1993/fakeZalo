@@ -2,12 +2,13 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
+import { MdCommentBank } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
 import { useAppSelector } from '../../hooks';
 import { Comment, Emoji, TypeOfTime } from '../../interface/IComment';
 import { exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
-import { addComment, changeCommentById } from '../../slice/DataSlice';
+import { addComment, changeCommentById, setRandomTime } from '../../slice/DataSlice';
 import FormCommentType from './FormCommentType';
 
 export interface IDataForm {
@@ -118,6 +119,13 @@ const FormAnt = () => {
 		if (!numberEmoji) setFieldsValue({ numberEmoji: 1 });
 		if (!e) setFieldsValue({ numberEmoji: void 0 });
 	};
+
+	const randomTime = () => {
+		const randomTime = form.getFieldValue('randomTime') || moment();
+		const startTime = randomTime && randomTime.format('YYYY-MM-DD HH:mm:ss');
+		dispatch(setRandomTime({ startTime, stepTime: 600 }));
+	};
+	// ('YYYY-MM-DD HH:mm:ss')
 	return (
 		<Fragment>
 			<Form
@@ -202,6 +210,20 @@ const FormAnt = () => {
 					<Button onClick={createComment}>Add</Button>
 					<Button onClick={resetForm}>Reset Form</Button>
 					<Button onClick={confirm}>ClearAllData</Button>
+				</div>
+
+				<Divider>
+					<b>Icon</b>
+				</Divider>
+
+				<div>
+					<Form.Item label='Start Time' name='randomTime' labelAlign='left'>
+						<DatePicker showTime className='datePicker' />
+					</Form.Item>
+				</div>
+
+				<div className='mt-2'>
+					<Button onClick={randomTime}>Random Time</Button>
 				</div>
 			</Form>
 		</Fragment>

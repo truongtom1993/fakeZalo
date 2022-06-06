@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from 'moment';
 import { nanoid } from 'nanoid';
 import { listComment } from '../data/data';
 import { Comment } from '../interface/IComment';
@@ -9,6 +10,10 @@ interface IChangeComment {
 interface IAddComment {
 	index?: number;
 	data: Comment;
+}
+interface IRandomTime {
+	startTime: string;
+	stepTime: number;
 }
 
 const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : listComment;
@@ -32,7 +37,20 @@ const commentListSlice = createSlice({
 			const index = state.data.findIndex(e => e.id === payload.id);
 			state.data[index] = payload.data;
 		},
+		setRandomTime(state, action: PayloadAction<IRandomTime>) {
+			const startTime = moment(action.payload.startTime);
+			let randomTime = action.payload.stepTime;
+			state.data.forEach(element => {
+				const newTime = startTime.add(randomTime, 's').format('YYYY-MM-DD HH:mm:ss');
+				element.time.value = newTime;
+				randomTime += randomNumber(100, action.payload.stepTime);
+			});
+		},
 	},
 });
-export const { addComment, removeCommentByIndex, changeCommentById } = commentListSlice.actions;
+
+function randomNumber(min: number, max: number) {
+	return Math.round(Math.random() * (max - min)) + min;
+}
+export const { addComment, removeCommentByIndex, changeCommentById, setRandomTime } = commentListSlice.actions;
 export default commentListSlice.reducer;
