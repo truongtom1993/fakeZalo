@@ -40,6 +40,7 @@ const initFormValues = {
 	numberEmoji: 0,
 	commentType: 'text',
 	callType: 'incomming',
+	stepRandomTime: 600,
 };
 
 const FormAnt = () => {
@@ -122,8 +123,9 @@ const FormAnt = () => {
 
 	const randomTime = () => {
 		const randomTime = form.getFieldValue('randomTime') || moment();
+		const stepRandomTime = form.getFieldValue('stepRandomTime') || 600;
 		const startTime = randomTime && randomTime.format('YYYY-MM-DD HH:mm:ss');
-		dispatch(setRandomTime({ startTime, stepTime: 600 }));
+		dispatch(setRandomTime({ startTime, stepTime: stepRandomTime }));
 	};
 	// ('YYYY-MM-DD HH:mm:ss')
 	return (
@@ -219,6 +221,11 @@ const FormAnt = () => {
 				<div>
 					<Form.Item label='Start Time' name='randomTime' labelAlign='left'>
 						<DatePicker showTime className='datePicker' />
+					</Form.Item>
+				</div>
+				<div>
+					<Form.Item label='Step Time' name='stepRandomTime' labelAlign='left'>
+						<InputNumber step={100} min={100} className='inputNumber' />
 					</Form.Item>
 				</div>
 
