@@ -79,7 +79,7 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 
 	return (
 		<Fragment>
-			<div className='my-2 flex flex-col'>{render()}</div>
+			<div className='mb-2 flex flex-col'>{render()}</div>
 		</Fragment>
 	);
 };

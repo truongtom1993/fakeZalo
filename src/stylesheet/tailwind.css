@@ -10,7 +10,7 @@
 		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border tracking-tight;
 	}
 	.icon-share-image {
-		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border;
+		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border border-gray-200 shadow-sm;
 	}
 	.icon_count_emoji {
 		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm border box-content;
@@ -42,7 +42,7 @@
 	}
 	.timeStamp_text_me_inner,
 	.timeStamp_text_you_inner {
-		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe tracking-widest;
+		@apply text-[10px] text-gray-400 self-start font-segoe tracking-widest;
 	}
 	.lastComment {
 		@apply flex flex-row-reverse px-4 mb-2;
@@ -69,8 +69,8 @@
 }
 
 .type_text_me + .type_text_me {
-	margin-top: -0.75rem;
+	/* margin-top: -0.75rem; */
 }
 .type_text_you + .type_text_you {
-	margin-top: -0.75rem;
+	/* margin-top: -0.75rem; */
 }

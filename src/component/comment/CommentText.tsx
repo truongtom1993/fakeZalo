@@ -45,6 +45,6 @@ const CommentText = ({ data, isLastComment, isFirstComment, index }: Props) => {
 			);
 		}
 	}
-	return <div className='my-2 flex flex-col'>{render()}</div>;
+	return <div className='mb-2 flex flex-col'>{render()}</div>;
 };
 export default memo(CommentText);

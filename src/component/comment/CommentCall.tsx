@@ -99,7 +99,7 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	}
 	if (author === 'you') {
 		return (
-			<div className='flex my-2'>
+			<div className='flex mb-2'>
 				<Avatar isFirstComment={isFirstComment} />
 				<div className='ml-2'>{render()}</div>
 			</div>
@@ -107,7 +107,7 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	}
 	if (author === 'me') {
 		return (
-			<div className='flex my-2'>
+			<div className='flex mb-2'>
 				<div className='ml-auto'>{render()}</div>
 			</div>
 		);

@@ -77,7 +77,7 @@ const CommentMain = (props: IProps) => {
 			<div
 				className={
 					'comment_container px-2 relative flex items-center ' +
-					(`type_${data.comment.type}_${data.author} ` + (data.author === 'me' ? 'flex-row-reverse' : ''))
+					(`type_${data.comment.type}_${data.author} author_${data.author} ` + (data.author === 'me' ? 'flex-row-reverse' : ''))
 				}
 			>
 				<Fragment>{renderComment(data.comment.type)}</Fragment>
