@@ -35,14 +35,14 @@
 		@apply text-[0.7rem] font-apple text-gray-500;
 	}
 	.call_container {
-		@apply w-[176px] h-[81px] -ml-1 rounded-lg border border-gray-200 bg-white flex flex-col relative;
+		@apply w-[176px] h-[81px] rounded-lg border border-gray-300 flex flex-col relative;
 	}
 	.button_primary {
 		@apply border rounded-sm px-3 font-bold ml-auto  hover:ring-1;
 	}
 	.timeStamp_text_me_inner,
 	.timeStamp_text_you_inner {
-		@apply text-[10px] text-gray-400 self-start font-segoe tracking-widest;
+		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe tracking-widest;
 	}
 	.lastComment {
 		@apply flex flex-row-reverse px-4 mb-2;

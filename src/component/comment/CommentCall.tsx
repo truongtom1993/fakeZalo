@@ -26,7 +26,12 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 		}
 	}
 	function callFooter() {
-		return <div className='h-[32px] text-sm text-center leading-[32px] font-semibold text-blue-500'>GỌI LẠI</div>;
+		return (
+			<Fragment>
+				<div className='border-b border-b-gray-500 opacity-20'></div>
+				<div className='h-[32px] text-sm text-center leading-[32px] font-semibold text-blue-500'>GỌI LẠI</div>
+			</Fragment>
+		);
 	}
 	function render() {
 		if (type === 'call') {
@@ -34,8 +39,8 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 				case 'incomming':
 					return (
 						<Fragment>
-							<div className='call_container'>
-								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+							<div className={`call_container ${author === 'me' ? 'bg-[#D5F1FF]' : 'bg-white'}`}>
+								<div className='flex-grow flex flex-col text-xs '>
 									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem]'>
 										<span className='tracking-wide'>Cuộc gọi thoại đến</span>
 									</div>
@@ -55,8 +60,8 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 				case 'outgoing':
 					return (
 						<Fragment>
-							<div className='call_container'>
-								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+							<div className={`call_container ${author === 'me' ? 'bg-[#D5F1FF]' : 'bg-white'}`}>
+								<div className='flex-grow flex flex-col text-xs '>
 									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
 										<span className='tracking-wide'>Cuộc gọi thoại đi</span>
 									</div>
@@ -76,8 +81,8 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 				case 'missed':
 					return (
 						<Fragment>
-							<div className='call_container'>
-								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+							<div className={`call_container ${author === 'me' ? 'bg-[#D5F1FF]' : 'bg-white'}`}>
+								<div className='flex-grow flex flex-col text-xs '>
 									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
 										<span className='text-red-500 tracking-wide'>Bạn bị nhỡ</span>
 									</div>
@@ -101,13 +106,13 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 		return (
 			<div className='flex mb-2'>
 				<Avatar isFirstComment={isFirstComment} />
-				<div className='ml-2'>{render()}</div>
+				<div className='ml-1 '>{render()}</div>
 			</div>
 		);
 	}
 	if (author === 'me') {
 		return (
-			<div className='flex mb-2'>
+			<div className='flex mb-2 mr-2 '>
 				<div className='ml-auto'>{render()}</div>
 			</div>
 		);
