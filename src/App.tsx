@@ -42,7 +42,7 @@ function App() {
 						if (data.author !== commentList[index - 1]?.author || commentList[index - 1].time.type === 'separate') {
 							isFirstComment = true;
 						}
-						if (data.author !== commentList[index + 1]?.author) {
+						if (data.author !== commentList[index + 1]?.author || commentList[index + 1].time.type === 'separate') {
 							isLastCommentAuthor = true;
 						}
 

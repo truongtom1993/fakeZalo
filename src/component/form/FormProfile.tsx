@@ -21,7 +21,7 @@ const FormProfile = () => {
 		<Fragment>
 			<Form name='basic' labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} autoComplete='off' form={form} initialValues={profile}>
 				<Divider>
-					<b>Thông tin của You</b>
+					<b>Your Profile</b>
 				</Divider>
 				<div>
 					<Form.Item label='User Name' name='userName' labelAlign='left'>
@@ -39,17 +39,17 @@ const FormProfile = () => {
 				</div>
 
 				<div>
-					<Form.Item label='Avatar URL' name='avatarURL' labelAlign='left'>
+					<Form.Item label='Your Avatar' name='avatarURL' labelAlign='left'>
 						<Input allowClear />
 					</Form.Item>
 				</div>
 
 				<Divider>
-					<b>Thông tin của Me</b>
+					<b>My Profile</b>
 				</Divider>
 
 				<div>
-					<Form.Item label='User Name' name='myName' labelAlign='left'>
+					<Form.Item label='My Name' name='myName' labelAlign='left'>
 						<Input />
 					</Form.Item>
 				</div>
@@ -59,7 +59,7 @@ const FormProfile = () => {
 				</div>
 
 				<div>
-					<Form.Item label='Avatar Me URL' name='myAvatarUrl' labelAlign='left'>
+					<Form.Item label='My Avatar' name='myAvatarUrl' labelAlign='left'>
 						<Input allowClear />
 					</Form.Item>
 				</div>

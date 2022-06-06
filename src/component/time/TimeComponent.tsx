@@ -25,6 +25,13 @@ const TimeComponent = ({ time, author, comment }: Props) => {
 		if (author === 'you') {
 			if (comment.type === 'text') {
 				return <p className='timeStamp_text_you_inner'>{convertToShortenTime(time.value)}</p>;
+			}
+			if (comment.type === 'call') {
+				return (
+					<span className='text-[10px] text-gray-100 font-segoe tracking-widest bg-gray-400 self-start rounded-xl px-1 mt-2'>
+						{convertToShortenTime(time.value)}
+					</span>
+				);
 			} else {
 				return (
 					<span className='text-[10px] text-gray-100 font-segoe tracking-widest bg-gray-400 self-start rounded-xl px-1 ml-9 mt-2'>
