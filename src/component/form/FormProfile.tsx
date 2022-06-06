@@ -49,8 +49,9 @@ const FormProfile = () => {
 					</Form.Item>
 				</div>
 
-				<div className='my-6 h-32 aspect-square mx-auto rounded-md'>
-					<img src={profile.avatarURL} alt='You avatar' />
+				<div className='flex mb-4 space-x'>
+					<img src={profile.avatarURL} alt='You avatar' className='object-cover h-28 aspect-square mx-auto rounded-lg shadow' />
+					<img src={profile.myAvatarUrl} alt='My Avatar' className='object-cover h-28 aspect-square mx-auto rounded-lg shadow' />
 				</div>
 
 				<div>
@@ -67,10 +68,6 @@ const FormProfile = () => {
 					<Form.Item label='My Name' name='myName' labelAlign='left'>
 						<Input />
 					</Form.Item>
-				</div>
-
-				<div className='my-6 h-32 aspect-square mx-auto border flex justify-center items-center rounded-md'>
-					<img src={profile.myAvatarUrl} alt='My Avatar' />
 				</div>
 
 				<div>
