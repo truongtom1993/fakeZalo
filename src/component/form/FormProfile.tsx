@@ -1,9 +1,11 @@
 import { Button, Divider, Form, Input, InputNumber } from 'antd';
+import moment from 'moment';
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Profile } from '../../interface/IComment';
 import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
+import { store } from '../../store/store';
 
 const FormProfile = () => {
 	const [form] = Form.useForm();
@@ -16,6 +18,19 @@ const FormProfile = () => {
 	};
 	const getProfile = () => {
 		form.setFieldsValue(profile);
+	};
+	const handleImportData = () => {
+		console.info(`🎁 src/component/form/FormProfile.tsx	Line:21	ID:d2b70d`);
+	};
+	const handleExportData = () => {
+		const reduxStore = store.getState();
+		const blob = new Blob([JSON.stringify(reduxStore)], { type: 'text/json;charset=utf-8' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = `Export FakeZalo Data ${moment().format('YYYY-MM-DD HH:mm:ss')}.json`;
+		a.click();
+		URL.revokeObjectURL(url);
 	};
 	return (
 		<Fragment>
@@ -64,12 +79,24 @@ const FormProfile = () => {
 					</Form.Item>
 				</div>
 
-				<div className='flex gap-2'>
+				<div className='flex gap-2 justify-center'>
 					<Button type='default' onClick={handleChangeProfile}>
 						Change profile
 					</Button>
 					<Button type='default' onClick={getProfile}>
 						Get profile
+					</Button>
+				</div>
+
+				<Divider>
+					<b>Import/Export</b>
+				</Divider>
+				<div className='flex gap-2 justify-center'>
+					<Button type='default' onClick={handleImportData}>
+						Import
+					</Button>
+					<Button type='default' onClick={handleExportData}>
+						Export
 					</Button>
 				</div>
 			</Form>

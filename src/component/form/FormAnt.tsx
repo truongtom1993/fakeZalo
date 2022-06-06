@@ -2,7 +2,6 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
-import { MdCommentBank } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
 import { useAppSelector } from '../../hooks';
@@ -161,7 +160,7 @@ const FormAnt = () => {
 					</Form.Item>
 				</div>
 				<Divider>
-					<b>Thời gian</b>
+					<b>Time</b>
 				</Divider>
 				<div>
 					<Form.Item label='Vị trí time' name='timeType' labelAlign='left'>
@@ -215,7 +214,7 @@ const FormAnt = () => {
 				</div>
 
 				<Divider>
-					<b>Icon</b>
+					<b>Random Time</b>
 				</Divider>
 
 				<div>
@@ -229,8 +228,10 @@ const FormAnt = () => {
 					</Form.Item>
 				</div>
 
-				<div className='mt-2'>
-					<Button onClick={randomTime}>Random Time</Button>
+				<div className='mt-2 flex justify-center'>
+					<Button className='flex-1' onClick={randomTime}>
+						Random Time
+					</Button>
 				</div>
 			</Form>
 		</Fragment>
