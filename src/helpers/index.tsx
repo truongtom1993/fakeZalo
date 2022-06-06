@@ -65,10 +65,10 @@ export const converCommentToDataForm = (data: Comment): IDataForm => {
 			break;
 		case 'call':
 			result.callType = data.comment.callType || '';
-			result.callDuration = data.comment.callDuration.toString() || '';
+			result.callDuration = data.comment.callDuration?.toString() || '';
 			break;
 		case 'record':
-			result.recordDuration = data.comment.recordDuration.toString() || '';
+			result.recordDuration = data.comment.recordDuration?.toString() || '';
 			break;
 		default:
 			break;

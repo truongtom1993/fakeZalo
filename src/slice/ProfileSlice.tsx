@@ -4,6 +4,8 @@ const initProfile: Profile = {
 	userName: 'Người lạ',
 	status: 6 * 60,
 	avatarURL: 'https://i.postimg.cc/J0Yq1kR6/avatar.png',
+	myName: 'Đặng Nhật Trường',
+	myAvatarUrl: 'https://i.postimg.cc/9Xb1jCQr/atphizyom.jpg',
 };
 
 const profile: Profile = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : initProfile;

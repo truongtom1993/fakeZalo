@@ -39,7 +39,7 @@ function App() {
 					{commentList.map((data, index) => {
 						let isFirstComment: boolean = false;
 						let isLastCommentAuthor: boolean = false;
-						if (data.author !== commentList[index - 1]?.author) {
+						if (data.author !== commentList[index - 1]?.author || commentList[index - 1].time.type === 'separate') {
 							isFirstComment = true;
 						}
 						if (data.author !== commentList[index + 1]?.author) {

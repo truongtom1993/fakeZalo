@@ -4,6 +4,7 @@ import { MdCallEnd, MdCallMade, MdCallMissed, MdCallReceived } from 'react-icons
 import { Comment } from '../../interface/IComment';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
+import TimeComponent from '../time/TimeComponent';
 interface Props {
 	index: number;
 	data: Comment;
@@ -32,61 +33,66 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 			switch (comment.callType) {
 				case 'incomming':
 					return (
-						<div className='call_container'>
-							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
-								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem]'>
-									<span className='tracking-wide'>Cuộc gọi thoại đến</span>
-								</div>
-								<div className='flex items-center ml-2 '>
-									<div className='relative'>
-										<IoMdCall className='fill-gray-500' />
-										<MdCallReceived className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
+						<Fragment>
+							<div className='call_container'>
+								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem]'>
+										<span className='tracking-wide'>Cuộc gọi thoại đến</span>
 									</div>
-									<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+									<div className='flex items-center ml-2 '>
+										<div className='relative'>
+											<IoMdCall className='fill-gray-500' />
+											<MdCallReceived className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
+										</div>
+										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+									</div>
 								</div>
+								{callFooter()}
 							</div>
-
-							{callFooter()}
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
-						</div>
+							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+						</Fragment>
 					);
 				case 'outgoing':
 					return (
-						<div className='call_container'>
-							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
-								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
-									<span className='tracking-wide'>Cuộc gọi thoại đi</span>
-								</div>
-								<div className='flex items-center ml-2 '>
-									<div className='relative'>
-										<IoMdCall className='fill-gray-500' />
-										<MdCallMade className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
+						<Fragment>
+							<div className='call_container'>
+								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
+										<span className='tracking-wide'>Cuộc gọi thoại đi</span>
 									</div>
-									<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+									<div className='flex items-center ml-2 '>
+										<div className='relative'>
+											<IoMdCall className='fill-gray-500' />
+											<MdCallMade className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
+										</div>
+										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+									</div>
 								</div>
+								{callFooter()}
 							</div>
-							{callFooter()}
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
-						</div>
+							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+						</Fragment>
 					);
 				case 'missed':
 					return (
-						<div className='call_container'>
-							<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
-								<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
-									<span className='text-red-500 tracking-wide'>Bạn bị nhỡ</span>
-								</div>
-								<div className='flex items-center ml-2 '>
-									<div className='relative h-full w-3'>
-										<MdCallEnd className='fill-red-500 absolute top-1' />
-										<MdCallMissed className='fill-red-500 scale-[.6] absolute bottom-[5px]' />
+						<Fragment>
+							<div className='call_container'>
+								<div className='flex-grow border-b border-gray-200 flex flex-col text-xs '>
+									<div className='flex-shrink-0 ml-2 flex items-end font-semibold mt-[0.35rem] '>
+										<span className='text-red-500 tracking-wide'>Bạn bị nhỡ</span>
 									</div>
-									<div className='call_duration ml-1 text-gray-700'>Cuộc gọi thoại</div>
+									<div className='flex items-center ml-2 '>
+										<div className='relative h-full w-3'>
+											<MdCallEnd className='fill-red-500 absolute top-1' />
+											<MdCallMissed className='fill-red-500 scale-[.6] absolute bottom-[5px]' />
+										</div>
+										<div className='call_duration ml-1 text-gray-700'>Cuộc gọi thoại</div>
+									</div>
 								</div>
+								{callFooter()}
 							</div>
-							{callFooter()}
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
-						</div>
+							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+						</Fragment>
 					);
 			}
 		}

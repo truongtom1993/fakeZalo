@@ -5,7 +5,7 @@ import React, { Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
 import { useAppSelector } from '../../hooks';
-import { Comment, TypeOfTime } from '../../interface/IComment';
+import { Comment, Emoji, TypeOfTime } from '../../interface/IComment';
 import { exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
 import { addComment, changeCommentById } from '../../slice/DataSlice';
 import FormCommentType from './FormCommentType';
@@ -50,10 +50,13 @@ const FormAnt = () => {
 
 	useEffect(() => {
 		setForm(currentComment, 'load');
-		currentCommentReply.idReply !== currentComment.id &&
-			currentComment.index > currentCommentReply.index &&
-			setFieldsValue({ idReply: currentCommentReply.idReply });
-	}, [currentComment, currentCommentReply]);
+	}, [currentComment]);
+
+	useEffect(() => {
+		// if (currentCommentReply.idReply !== currentComment.id && currentComment.index > currentCommentReply.index) {
+		setFieldsValue({ idReply: currentCommentReply.idReply });
+		// }
+	}, [currentCommentReply]);
 
 	const onFinish = (values: IDataForm) => {
 		setForm(values, 'edit');
@@ -64,13 +67,6 @@ const FormAnt = () => {
 	};
 	function onChange(value: any) {
 		console.log(`selected ${value}`);
-	}
-
-	function onSearch(val: any) {
-		console.log('search:', val);
-	}
-	function onOk(value: any) {
-		console.log('onOk: ', value);
 	}
 
 	const resetForm = () => {
@@ -176,19 +172,19 @@ const FormAnt = () => {
 				<div>
 					<Form.Item name='emoji' label='Emoji' labelAlign='left'>
 						<Select placeholder='Icon' allowClear onChange={e => handleChangeEmoji(e)}>
-							<Option value='/-strong'>👍 Like</Option>
-							<Option value='/-heart'>❤ Heart</Option>
-							<Option value=':>'>😁 Lol</Option>
-							<Option value=':o'>😮 Wow</Option>
-							<Option value=':-(('>😭 Cry</Option>
-							<Option value=':-h'>😡 Angry</Option>
+							<Option value={Emoji.Like}>👍 Like</Option>
+							<Option value={Emoji.Heart}>❤ Heart</Option>
+							<Option value={Emoji.Lol}>😁 Lol</Option>
+							<Option value={Emoji.Wow}>😮 Wow</Option>
+							<Option value={Emoji.Cry}>😭 Cry</Option>
+							<Option value={Emoji.Angry}>😡 Angry</Option>
 						</Select>
 					</Form.Item>
 				</div>
 				<div>
 					<Col span={24}>
 						<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
-							<InputNumber min={1} max={10} onChange={onChange} className='inputNumber' />
+							<InputNumber min={1} onChange={onChange} className='inputNumber' />
 						</Form.Item>
 					</Col>
 				</div>

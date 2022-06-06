@@ -1,4 +1,4 @@
-import { Col, Form, Input, Select } from 'antd';
+import { Col, Form, Input, InputNumber, Select } from 'antd';
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { Comment } from '../../interface/IComment';
 
@@ -15,6 +15,9 @@ const FormCommentType = ({ currentComment }: IProps) => {
 
 	useEffect(() => {
 		setCommentTypeState(currentComment.comment.type);
+		if (currentComment.comment.type === 'call') {
+			setCallType(currentComment.comment.callType);
+		}
 	}, [currentComment]);
 
 	function renderCommentInput(type: string = 'text') {
@@ -45,7 +48,7 @@ const FormCommentType = ({ currentComment }: IProps) => {
 						</Form.Item>
 						{callType !== 'missed' && (
 							<Form.Item name='callDuration' label='Duration' labelAlign='left' tooltip='Thời lượng cuộc gọi (giây)'>
-								<Input type='text' className='' name='callDuration' />
+								<InputNumber name='callDuration' min={1} className='inputNumber' />
 							</Form.Item>
 						)}
 					</Fragment>

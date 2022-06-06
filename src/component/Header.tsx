@@ -32,7 +32,7 @@ const Header = () => {
 
 				<div className='header-content flex flex-col h-full flex-grow font-segoe tracking-[-0.015rem]'>
 					<div className='text-white ml-[0.4rem] mt-[2px]'>{userName}</div>
-					<div className='text-xs ml-[0.4rem] mt-[-2px] text-white text-opacity-70'>{convertTime(status)}</div>
+					<div className='text-xs ml-[0.4rem] mt-[-2px] text-white text-opacity-70'>{convertTime(+status)}</div>
 				</div>
 
 				<div className='icon-call w-[48px] h-full flex justify-center items-center'>

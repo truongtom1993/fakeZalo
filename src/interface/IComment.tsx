@@ -53,4 +53,6 @@ export interface Profile {
 	userName: string;
 	status: number; //trang thai hoat dong x phut truoc, neu la 0 thi ghi vua moi truy cap
 	avatarURL: string;
+	myName: string;
+	myAvatarUrl: string;
 }

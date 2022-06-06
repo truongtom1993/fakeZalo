@@ -44,12 +44,12 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
-							{/* <EmojiComponent type={emoji?.type} number={emoji?.number} /> */}
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
 					</div>
-					{time.type && <TimeComponent time={time} author={author} comment={comment} />}
+
+					{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
 				</Fragment>
 			);
 		}
@@ -69,9 +69,9 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 							</div>
 
 							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
-							{/* <EmojiComponent type={emoji?.type} number={emoji?.number} /> */}
 						</div>
 					</div>
+					{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
 				</Fragment>
 			);
 		}

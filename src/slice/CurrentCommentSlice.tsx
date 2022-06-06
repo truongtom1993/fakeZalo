@@ -17,44 +17,38 @@ export const exampleCurrentCommentReply: ICurrentCommentReply = {
 	idReply: '',
 	index: -1,
 };
+export const exampleCurrentComment: Comment = {
+	index: -1,
+	id: 'abcde',
+	commentReply: {
+		idReply: '',
+		index: -1,
+	},
+	author: 'me',
+	comment: {
+		type: 'text',
+		textContent: '',
+	},
+	time: {
+		type: null,
+		value: moment().format('YYYY-MM-DD HH:mm:ss'),
+	},
+	emoji: {
+		show: false,
+		type: null,
+		number: 0,
+	},
+};
 
 const currentComment = localStorage.getItem('currentComment');
 
-const initCurrentComment: Comment = currentComment
-	? JSON.parse(currentComment)
-	: {
-			index: -1,
-			id: 'abcde',
-			commentReply: {
-				idReply: '',
-				index: -1,
-			},
-			author: 'me',
-			comment: {
-				type: 'text',
-				textContent: '',
-			},
-			time: {
-				type: null,
-				value: moment().format('YYYY-MM-DD HH:mm:ss'),
-			},
-			emoji: {
-				show: false,
-				type: null,
-				number: 0,
-			},
-	  };
-
-const initCurrentCommentReply: ICurrentCommentReply = {
-	idReply: '',
-	index: -1,
-};
+const initCurrentComment: Comment = currentComment ? JSON.parse(currentComment) : exampleCurrentComment;
 
 const currentCommentSlice = createSlice({
 	name: 'currentComment',
 	initialState: {
 		currentComment: initCurrentComment,
-		currentCommentReply: initCurrentCommentReply,
+		currentCommentReply: exampleCurrentCommentReply,
 	},
 	reducers: {
 		changeCurrentComment(state, action: PayloadAction<Comment>) {

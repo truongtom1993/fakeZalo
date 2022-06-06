@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { convertCommentToCommentReply } from '../../helpers';
 import { useAppSelector } from '../../hooks';
 import { Comment } from '../../interface/IComment';
-import { changeCurrentComment, changeCurrentCommentReply, ICommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
+import { changeCurrentComment, changeCurrentCommentReply, exampleCurrentComment, ICommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
 import { addComment, removeCommentByIndex } from '../../slice/DataSlice';
 import { createExampleComment } from '../../utils';
 import CommentCall from './CommentCall';
@@ -50,6 +50,7 @@ const CommentMain = (props: IProps) => {
 
 	const removeComment = () => {
 		dispatch(removeCommentByIndex(index));
+		dispatch(changeCurrentComment(exampleCurrentComment));
 	};
 	const addPrev = () => {
 		// tao comment moi
