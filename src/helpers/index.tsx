@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { IDataForm } from '../component/form/FormAnt';
 import { Comment, CommentType, Emoji } from '../interface/IComment';
-import { ICommentReply, ICurrentCommentReply } from '../slice/CurrentCommentSlice';
+import { exampleCurrentCommentReply, ICommentReply, ICurrentCommentReply } from '../slice/CurrentCommentSlice';
 
 export const converDataFormToComment = (data: IDataForm, currentCommentReply: ICurrentCommentReply): Comment => {
 	const comment: CommentType | object = { type: data.commentType };

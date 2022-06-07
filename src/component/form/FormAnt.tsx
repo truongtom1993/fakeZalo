@@ -82,7 +82,7 @@ const FormAnt = () => {
 
 		if (type === 'edit') {
 			const index = data.index;
-			const newData = converDataFormToComment({ ...data, index }, currentCommentReply);
+			const newData = converDataFormToComment({ ...data, index }, form.getFieldValue('idReply') ? currentCommentReply : exampleCurrentCommentReply);
 			dispatch(changeCommentById({ id: newData.id, data: newData }));
 			return;
 		}
