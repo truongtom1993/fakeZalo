@@ -83,11 +83,11 @@ const CommentMain = (props: IProps) => {
 				<Fragment>{renderComment(data.comment.type)}</Fragment>
 
 				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 w-auto flex items-center'>
-					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addPrev} />
-					<BiDownArrow className='cursor-pointer mx-2 w-10 h-10' onClick={addNext} />
-					<GoDiffRemoved className='cursor-pointer mx-2 w-9 h-9 stroke-[0.3]' onClick={removeComment} />
-					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10' onClick={() => getCommentReply(convertCommentToCommentReply(data, index))} />
-					<FiEdit className='cursor-pointer mx-2 w-9 h-9' onClick={changeFormData} />
+					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addPrev} />
+					<BiDownArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addNext} />
+					<GoDiffRemoved className='cursor-pointer mx-2 w-7 h-7 stroke-[0.3] hover:scale-125' onClick={removeComment} />
+					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={() => getCommentReply(convertCommentToCommentReply(data, index))} />
+					<FiEdit className='cursor-pointer mx-2 w-8 h-8 hover:scale-125' onClick={changeFormData} />
 				</div>
 			</div>
 		</Fragment>

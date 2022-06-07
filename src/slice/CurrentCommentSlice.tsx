@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { nanoid } from 'nanoid';
-import { Author, Comment, CommentType, Emoji } from '../interface/IComment';
+import { Author, Comment, CommentType } from '../interface/IComment';
 
 export interface ICurrentCommentReply {
 	idReply: string | undefined;
@@ -51,6 +50,10 @@ const currentCommentSlice = createSlice({
 		currentCommentReply: exampleCurrentCommentReply,
 	},
 	reducers: {
+		importCurrentComment(state, action: PayloadAction<any>) {
+			state.currentComment = action.payload.currentComment;
+			state.currentCommentReply = action.payload.currentCommentReply;
+		},
 		changeCurrentComment(state, action: PayloadAction<Comment>) {
 			state.currentComment = action.payload;
 		},
@@ -59,5 +62,5 @@ const currentCommentSlice = createSlice({
 		},
 	},
 });
-export const { changeCurrentComment, changeCurrentCommentReply } = currentCommentSlice.actions;
+export const { changeCurrentComment, changeCurrentCommentReply, importCurrentComment } = currentCommentSlice.actions;
 export default currentCommentSlice.reducer;
