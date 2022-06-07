@@ -1,16 +1,39 @@
 import { Button, Divider, Form, Input, InputNumber } from 'antd';
 import moment from 'moment';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Profile } from '../../interface/IComment';
 import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
 import { store } from '../../store/store';
+import UploadFile from '../upload/Upload';
+
+interface IFormData {
+	status: number;
+	userName: string;
+	avatarURL: string;
+	myName: string;
+	myAvatarUrl: string;
+}
+
+function mapDataToForm(profile: Profile): IFormData {
+	return {
+		avatarURL: profile.avatarURL,
+		myAvatarUrl: profile.myAvatarUrl,
+		myName: profile.myName,
+		status: profile.status,
+		userName: profile.userName,
+	};
+}
 
 const FormProfile = () => {
 	const [form] = Form.useForm();
 	const dispatch = useDispatch();
 	const profile = useSelector<RootState, Profile>(s => s.profileReducer.profile);
+
+	useEffect(() => {
+		form.setFieldsValue(mapDataToForm(profile));
+	}, [profile]);
 
 	const handleChangeProfile = () => {
 		const data = form.getFieldsValue();
@@ -18,9 +41,6 @@ const FormProfile = () => {
 	};
 	const getProfile = () => {
 		form.setFieldsValue(profile);
-	};
-	const handleImportData = () => {
-		console.info(`🎁 src/component/form/FormProfile.tsx	Line:21	ID:d2b70d`);
 	};
 	const handleExportData = () => {
 		const reduxStore = store.getState();
@@ -89,12 +109,12 @@ const FormProfile = () => {
 					<b>Import/Export</b>
 				</Divider>
 				<div className='flex gap-2 justify-center'>
-					<Button type='default' onClick={handleImportData}>
-						Import
-					</Button>
 					<Button type='default' onClick={handleExportData}>
 						Export
 					</Button>
+				</div>
+				<div>
+					<UploadFile />
 				</div>
 			</Form>
 		</Fragment>

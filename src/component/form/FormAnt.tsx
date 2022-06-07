@@ -18,7 +18,7 @@ export interface IDataForm {
 	timeType: TypeOfTime;
 	timeValue: moment.Moment | string;
 	emoji: string;
-	numberEmoji: number;
+	numberEmoji: number | undefined;
 	commentType: 'text' | 'call' | 'image' | 'record';
 	textContent?: string;
 	imageURL?: string;

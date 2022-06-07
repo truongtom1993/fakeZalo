@@ -14,10 +14,13 @@ const profileSlice = createSlice({
 	name: 'profile',
 	initialState: { profile },
 	reducers: {
+		importProfile(state, action: PayloadAction<any>) {
+			state.profile = action.payload.profile;
+		},
 		changeProfile(state, action: PayloadAction<Profile>) {
 			state.profile = action.payload;
 		},
 	},
 });
-export const { changeProfile } = profileSlice.actions;
+export const { changeProfile, importProfile } = profileSlice.actions;
 export default profileSlice.reducer;

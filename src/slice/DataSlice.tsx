@@ -22,6 +22,9 @@ const commentListSlice = createSlice({
 	name: 'commentList',
 	initialState: { data: initData },
 	reducers: {
+		importCommentList(state, action: PayloadAction<any>) {
+			state.data = action.payload.data;
+		},
 		addComment(state, action: PayloadAction<IAddComment>) {
 			if (action.payload.index >= 0) {
 				state.data.splice(action.payload.index, 0, { ...action.payload.data });
@@ -52,5 +55,5 @@ const commentListSlice = createSlice({
 function randomNumber(min: number, max: number) {
 	return Math.round(Math.random() * (max - min)) + min;
 }
-export const { addComment, removeCommentByIndex, changeCommentById, setRandomTime } = commentListSlice.actions;
+export const { addComment, removeCommentByIndex, changeCommentById, setRandomTime, importCommentList } = commentListSlice.actions;
 export default commentListSlice.reducer;
