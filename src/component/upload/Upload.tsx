@@ -1,6 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
-import Input from 'antd/lib/input/Input';
 import React, { ReactChild, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { importCurrentComment } from '../../slice/CurrentCommentSlice';
@@ -28,11 +27,15 @@ const UploadFile = ({ children }: IProps) => {
 			const result = newFile.result;
 			const json = JSON.parse(result.toString());
 			const { commentListReducer, currentCommentReducer, profileReducer } = json;
-			if (commentListReducer || currentCommentReducer || profileReducer) {
+			if (commentListReducer) {
+				dispatch(importCommentList({ data: commentListReducer.data }));
+			}
+			if (currentCommentReducer) {
 				dispatch(
 					importCurrentComment({ currentComment: currentCommentReducer.currentComment, currentCommentReply: currentCommentReducer.currentCommentReply }),
 				);
-				dispatch(importCommentList({ data: commentListReducer.data }));
+			}
+			if (profileReducer) {
 				dispatch(importProfile({ profile: profileReducer.profile }));
 			} else {
 				message.error('Dữ liệu không phù hợp nên không thể import, vui lòng kiểm tra lại');
