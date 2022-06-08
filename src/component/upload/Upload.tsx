@@ -1,12 +1,17 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
-import React, { useState } from 'react';
+import Input from 'antd/lib/input/Input';
+import React, { ReactChild, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { importCurrentComment } from '../../slice/CurrentCommentSlice';
 import { importCommentList } from '../../slice/DataSlice';
 import { importProfile } from '../../slice/ProfileSlice';
 
-const UploadFile = () => {
+interface IProps {
+	children?: ReactChild;
+}
+
+const UploadFile = ({ children }: IProps) => {
 	const [fileList, setFileList] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const dispatch = useDispatch();
@@ -44,31 +49,22 @@ const UploadFile = () => {
 			setFileList(newFileList);
 		},
 		beforeUpload: (file: any) => {
-			if (fileList.length >= 1) {
-				message.error('Chỉ cho phép upload 1 file cùng lúc');
-				return false;
-			}
-			setFileList([...fileList, file]);
+			setFileList([file]);
 			return false;
 		},
 		fileList,
 	};
 	return (
 		<>
-			<Upload accept='.json,application/json' {...props}>
-				<Button icon={<UploadOutlined />}>Select File</Button>
-			</Upload>
-			<Button
-				type='primary'
-				onClick={handleUpload}
-				disabled={fileList.length === 0}
-				loading={uploading}
-				style={{
-					marginTop: 16,
-				}}
-			>
-				{uploading ? 'Uploading' : 'Start Upload'}
-			</Button>
+			<div className='flex space-x-2 justify-center items-start'>
+				<Upload accept='.json,application/json' showUploadList={true} maxCount={1} className='max-w-[10rem]' {...props}>
+					<Button icon={<UploadOutlined />}>Import File</Button>
+				</Upload>
+				<Button className='m-0 text-white' type='dashed' onClick={handleUpload} disabled={fileList.length === 0} loading={uploading}>
+					{uploading ? 'Uploading' : 'Start Upload'}
+				</Button>
+				{children}
+			</div>
 		</>
 	);
 };

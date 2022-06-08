@@ -108,13 +108,13 @@ const FormProfile = () => {
 				<Divider>
 					<b>Import/Export</b>
 				</Divider>
-				<div className='flex gap-2 justify-center'>
-					<Button type='default' onClick={handleExportData}>
-						Export
-					</Button>
-				</div>
+				<div className='flex gap-2 justify-center'></div>
 				<div>
-					<UploadFile />
+					<UploadFile>
+						<Button type='default' onClick={handleExportData}>
+							Export
+						</Button>
+					</UploadFile>
 				</div>
 			</Form>
 		</Fragment>
