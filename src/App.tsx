@@ -12,6 +12,19 @@ import './stylesheet/App.css';
 import './stylesheet/reset.css';
 import './stylesheet/tailwind.css';
 
+function throttle(callback: Function, limit: number) {
+	let waiting = false;
+	return function () {
+		if (!waiting) {
+			callback.apply(this, arguments);
+			waiting = true;
+			setTimeout(function () {
+				waiting = false;
+			}, limit);
+		}
+	};
+}
+
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const commentList = useAppSelector<Comment[]>(state => state.commentListReducer.data);
@@ -23,7 +36,7 @@ function App() {
 		const containerScrollHeight = target.scrollHeight;
 		const containerScrollTop = target.scrollTop;
 
-		containerScrollTop / containerScrollHeight >= 0.23 ? setScrollProcess(false) : setScrollProcess(true);
+		containerScrollTop + 867 >= containerScrollHeight - 267 ? setScrollProcess(false) : setScrollProcess(true);
 	}
 
 	function changeCommentContainerScroll() {
@@ -35,7 +48,7 @@ function App() {
 		<div className='pl-2 pt-2 flex'>
 			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
-				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={getScrollProcess} ref={commentContainerRef}>
+				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 150)} ref={commentContainerRef}>
 					{commentList.map((data, index) => {
 						let isFirstComment: boolean = false;
 						let isLastCommentAuthor: boolean = false;
@@ -60,7 +73,7 @@ function App() {
 					})}
 				</div>
 
-				<div className='footer'>
+				<div className='footer' onClick={() => setScrollProcess(!scrollProcess)}>
 					<img src={Footer} alt='footer' className='h-[48px]' />
 				</div>
 

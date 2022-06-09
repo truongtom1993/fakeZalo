@@ -29,7 +29,7 @@ export enum Emoji {
 	Angry = ':-h',
 }
 
-export type Author = 'you' | 'me';
+export type Author = 'you' | 'me' | 'separate';
 export type TypeOfTime = 'separate' | 'auto';
 
 export interface Comment {

@@ -29,7 +29,7 @@ const CommentMain = (props: IProps) => {
 	const currentComment = useAppSelector<Comment>(s => s.currentCommentReducer.currentComment);
 
 	function renderComment(type: string) {
-		if (data.time.type === 'separate') {
+		if (data.author === 'separate' || data.time.type === 'separate') {
 			return <SeparateTime separateTime={data.time.value} />;
 		}
 		switch (type) {

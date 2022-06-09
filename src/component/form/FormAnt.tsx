@@ -127,6 +127,20 @@ const FormAnt = () => {
 		dispatch(setRandomTime({ startTime, stepTime: stepRandomTime }));
 	};
 	// ('YYYY-MM-DD HH:mm:ss')
+	const handleChangeUser = (e: string) => {
+		if (e === 'separate') {
+			form.setFieldsValue({ timeType: 'separate' });
+			return;
+		}
+		form.setFieldsValue({ timeType: 'auto' });
+	};
+
+	const handleChangeTimeType = (e: string) => {
+		if (e === 'separate') {
+			form.setFieldsValue({ user: 'separate' });
+		}
+	};
+
 	return (
 		<Fragment>
 			<Form
@@ -141,7 +155,8 @@ const FormAnt = () => {
 			>
 				<div>
 					<Form.Item label='User' name='user' labelAlign='left' required>
-						<Select>
+						<Select onChange={e => handleChangeUser(e)}>
+							<Option value='separate'>Separate Time</Option>
 							<Option value='you'>You</Option>
 							<Option value='me'>Me</Option>
 						</Select>
@@ -164,7 +179,7 @@ const FormAnt = () => {
 				</Divider>
 				<div>
 					<Form.Item label='Vị trí time' name='timeType' labelAlign='left'>
-						<Select>
+						<Select onChange={e => handleChangeTimeType(e)}>
 							<Option value='auto'>Auto</Option>
 							<Option value='separate'>Giữa</Option>
 						</Select>

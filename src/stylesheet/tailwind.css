@@ -74,3 +74,7 @@
 .type_text_you + .type_text_you {
 	/* margin-top: -0.75rem; */
 }
+
+.author_me + .author_you {
+	margin-top: 0.5rem;
+}
