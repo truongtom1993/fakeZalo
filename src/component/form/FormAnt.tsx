@@ -154,25 +154,40 @@ const FormAnt = () => {
 				form={form}
 			>
 				<div>
-					<Form.Item label='User' name='user' labelAlign='left' required>
-						<Select onChange={e => handleChangeUser(e)}>
-							<Option value='separate'>Separate Time</Option>
-							<Option value='you'>You</Option>
-							<Option value='me'>Me</Option>
-						</Select>
-					</Form.Item>
+					<div className='flex space-x-4'>
+						<div className='flex space-x-2 w-auto items-center'>
+							<span className='mb-6'>User</span>
+							<Form.Item name='user' wrapperCol={{ span: 24 }} required>
+								<Select onChange={e => handleChangeUser(e)}>
+									<Option value='separate'>Separate Time</Option>
+									<Option value='you'>You</Option>
+									<Option value='me'>Me</Option>
+								</Select>
+							</Form.Item>
+						</div>
+						<div className='flex space-x-2'>
+							<p className='mb-6'>Index: </p>
+							<Form.Item name='index'>
+								<Input disabled />
+							</Form.Item>
+						</div>
+					</div>
 
-					<Form.Item label='ID Comment' name='idComment' labelAlign='left'>
-						<Input disabled />
-					</Form.Item>
+					<div className='flex'>
+						<div className='flex items-center'>
+							<span className='w-auto mb-6 ml-2 mr-2 whitespace-nowrap'>ID Comment:</span>
+							<Form.Item name='idComment' wrapperCol={{ span: 24 }}>
+								<Input disabled />
+							</Form.Item>
+						</div>
 
-					<Form.Item label='Index' name='index' labelAlign='left'>
-						<Input disabled />
-					</Form.Item>
-
-					<Form.Item label='ID Reply' name='idReply' labelAlign='left'>
-						<Input allowClear />
-					</Form.Item>
+						<div className='flex items-center'>
+							<span className='w-auto mb-6 ml-2 mr-2 whitespace-nowrap'>ID Reply</span>
+							<Form.Item name='idReply' wrapperCol={{ span: 24 }}>
+								<Input allowClear disabled />
+							</Form.Item>
+						</div>
+					</div>
 				</div>
 				<Divider>
 					<b>Time</b>

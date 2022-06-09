@@ -48,7 +48,7 @@ function App() {
 		<div className='pl-2 pt-2 flex'>
 			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
-				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 150)} ref={commentContainerRef}>
+				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 200)} ref={commentContainerRef}>
 					{commentList.map((data, index) => {
 						let isFirstComment: boolean = false;
 						let isLastCommentAuthor: boolean = false;
