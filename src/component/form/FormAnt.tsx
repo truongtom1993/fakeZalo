@@ -3,24 +3,24 @@ import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Sele
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
+import { converMessageToDataForm, converDataFormToMessage } from '../../helpers';
 import { useAppSelector } from '../../hooks';
-import { Comment, Emoji, TypeOfTime } from '../../interface/IComment';
-import { changeCurrentComment, exampleCurrentComment, exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
-import { addComment, changeCommentById, exampleCommentList, importCommentList, setRandomTime } from '../../slice/DataSlice';
-import { createExampleComment } from '../../utils';
-import FormCommentType from './FormCommentType';
+import { Message, Emoji, TypeOfTime } from '../../interface/IMessage';
+import { changeCurrentMessage, exampleCurrentMessage, exampleCurrentMessageReply, ICurrentMessageReply } from '../../slice/CurrentMessageSlice';
+import { addMessage, changeMessageById, exampleMessageList, importMessageList, setRandomTime } from '../../slice/DataSlice';
+import { createExampleMessage } from '../../utils';
+import FormMessageType from './FormMessageType';
 
 export interface IDataForm {
 	index: number;
 	user: 'me' | 'you';
-	idComment: string;
+	idMessage: string;
 	idReply: string;
 	timeType: TypeOfTime;
 	timeValue: moment.Moment | string;
 	emoji: string;
 	numberEmoji: number | undefined;
-	commentType: 'text' | 'call' | 'image' | 'record';
+	messageType: 'text' | 'call' | 'image' | 'record';
 	textContent?: string;
 	imageURL?: string;
 	callType?: string;
@@ -32,13 +32,13 @@ const { Option } = Select;
 
 const initFormValues = {
 	user: 'me',
-	idComment: '',
+	idMessage: '',
 	idReply: '',
 	timeType: 'auto',
 	timeValue: moment(),
 	emoji: '',
 	numberEmoji: 0,
-	commentType: 'text',
+	messageType: 'text',
 	callType: 'incomming',
 	stepRandomTime: 600,
 };
@@ -47,16 +47,16 @@ const FormAnt = () => {
 	const [form] = Form.useForm();
 	const { setFieldsValue, getFieldsValue } = form;
 	const dispatch = useDispatch();
-	const currentComment = useAppSelector<Comment>(s => s.currentCommentReducer.currentComment);
-	const currentCommentReply = useAppSelector<ICurrentCommentReply>(s => s.currentCommentReducer.currentCommentReply);
+	const currentMessage = useAppSelector<Message>(s => s.currentMessageReducer.currentMessage);
+	const currentMessageReply = useAppSelector<ICurrentMessageReply>(s => s.currentMessageReducer.currentMessageReply);
 
 	useEffect(() => {
-		setForm(currentComment, 'load');
-	}, [currentComment]);
+		setForm(currentMessage, 'load');
+	}, [currentMessage]);
 
 	useEffect(() => {
-		setFieldsValue({ idReply: currentCommentReply.idReply });
-	}, [currentCommentReply]);
+		setFieldsValue({ idReply: currentMessageReply.idReply });
+	}, [currentMessageReply]);
 
 	const onFinish = (values: IDataForm) => {
 		setForm(values, 'edit');
@@ -74,30 +74,30 @@ const FormAnt = () => {
 	};
 	const setForm = (data: any, type: 'load' | 'edit' | 'add') => {
 		if (type === 'load') {
-			const result = converCommentToDataForm(data);
+			const result = converMessageToDataForm(data);
 			setFieldsValue(result);
 			return;
 		}
 
 		if (type === 'edit') {
 			const index = data.index;
-			const newData = converDataFormToComment({ ...data, index }, form.getFieldValue('idReply') ? currentCommentReply : exampleCurrentCommentReply);
-			dispatch(changeCommentById({ id: newData.id, data: newData }));
+			const newData = converDataFormToMessage({ ...data, index }, form.getFieldValue('idReply') ? currentMessageReply : exampleCurrentMessageReply);
+			dispatch(changeMessageById({ id: newData.id, data: newData }));
 			return;
 		}
 
 		if (type === 'add') {
-			const newData = createExampleComment(-1);
-			dispatch(addComment({ data: newData }));
-			dispatch(changeCurrentComment(newData));
+			const newData = createExampleMessage(-1);
+			dispatch(addMessage({ data: newData }));
+			dispatch(changeCurrentMessage(newData));
 			return;
 		}
 	};
 
 	const getForm = () => {
-		return { ...getFieldsValue(true), index: currentComment.index };
+		return { ...getFieldsValue(true), index: currentMessage.index };
 	};
-	const createComment = () => {
+	const createMessage = () => {
 		setForm(void 0, 'add');
 	};
 
@@ -112,7 +112,7 @@ const FormAnt = () => {
 		});
 	};
 	const confirmClearAllData = () => {
-		dispatch(importCommentList({ data: [] }));
+		dispatch(importMessageList({ data: [] }));
 	};
 	const handleChangeEmoji = (e: string) => {
 		const numberEmoji = form.getFieldValue('numberEmoji');
@@ -174,8 +174,8 @@ const FormAnt = () => {
 					</div>
 
 					<div className='flex items-center'>
-						<span className='w-28 mb-6 whitespace-nowrap'>ID Comment: </span>
-						<Form.Item name='idComment' className='flex-grow'>
+						<span className='w-28 mb-6 whitespace-nowrap'>ID Message: </span>
+						<Form.Item name='idMessage' className='flex-grow'>
 							<Input disabled />
 						</Form.Item>
 					</div>
@@ -227,16 +227,16 @@ const FormAnt = () => {
 				</div>
 
 				<Divider>
-					<b>Comment</b>
+					<b>Message</b>
 				</Divider>
 
-				<FormCommentType currentComment={currentComment} />
+				<FormMessageType currentMessage={currentMessage} />
 
 				<div className='flex gap-2 justify-center'>
 					<Button type='primary' htmlType='submit' className='flex-grow text-white'>
 						Edit
 					</Button>
-					<Button onClick={createComment}>Add</Button>
+					<Button onClick={createMessage}>Add</Button>
 					<Button type='dashed' onClick={resetForm}>
 						Reset Form
 					</Button>

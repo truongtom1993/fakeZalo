@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 import { IoMdCall } from 'react-icons/io';
 import { MdCallEnd, MdCallMade, MdCallMissed, MdCallReceived } from 'react-icons/md';
-import { Comment } from '../../interface/IComment';
+import { Message } from '../../interface/IMessage';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 interface Props {
 	index: number;
-	data: Comment;
-	isLastComment: boolean;
-	isFirstComment: boolean;
+	data: Message;
+	isLastMessage: boolean;
+	isFirstMessage: boolean;
 }
-const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
-	const { author, comment, time, emoji } = data;
-	const { type } = comment;
+const MessageCall = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
+	const { author, message, time, emoji } = data;
+	const { type } = message;
 
 	function secondsToMinutes(second: number) {
 		const minute = Math.floor(second / 60);
@@ -35,7 +35,7 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	}
 	function render() {
 		if (type === 'call') {
-			switch (comment.callType) {
+			switch (message.callType) {
 				case 'incomming':
 					return (
 						<Fragment>
@@ -49,12 +49,12 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 											<IoMdCall className='fill-gray-500' />
 											<MdCallReceived className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
 										</div>
-										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(message.callDuration)}</div>
 									</div>
 								</div>
 								{callFooter()}
 							</div>
-							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</Fragment>
 					);
 				case 'outgoing':
@@ -70,12 +70,12 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 											<IoMdCall className='fill-gray-500' />
 											<MdCallMade className='fill-green-500 scale-[.6] absolute left-[0.15rem] bottom-[0.15rem]' />
 										</div>
-										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(comment.callDuration)}</div>
+										<div className='call_duration ml-1 text-gray-700'>{secondsToMinutes(message.callDuration)}</div>
 									</div>
 								</div>
 								{callFooter()}
 							</div>
-							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</Fragment>
 					);
 				case 'missed':
@@ -96,7 +96,7 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 								</div>
 								{callFooter()}
 							</div>
-							{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</Fragment>
 					);
 			}
@@ -105,7 +105,7 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 	if (author === 'you') {
 		return (
 			<div className='flex mb-2'>
-				<Avatar isFirstComment={isFirstComment} />
+				<Avatar isFirstMessage={isFirstMessage} />
 				<div className='ml-1 '>{render()}</div>
 			</div>
 		);
@@ -118,4 +118,4 @@ const CommentCall = ({ index, data, isFirstComment, isLastComment }: Props) => {
 		);
 	}
 };
-export default CommentCall;
+export default MessageCall;

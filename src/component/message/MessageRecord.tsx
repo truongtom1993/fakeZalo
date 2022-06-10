@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 import { FaPlay } from 'react-icons/fa';
 import { IoVolumeMedium } from 'react-icons/io5';
-import { Comment } from '../../interface/IComment';
+import { Message } from '../../interface/IMessage';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
 	index: number;
-	data: Comment;
-	isLastComment: boolean;
-	isFirstComment: boolean;
+	data: Message;
+	isLastMessage: boolean;
+	isFirstMessage: boolean;
 }
-const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) => {
-	const { author, comment, time, emoji } = data;
+const MainRecord = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
+	const { author, message, time, emoji } = data;
 
 	function secondsToMinutes(second: number) {
 		const minute = Math.floor(second / 60);
@@ -31,7 +31,7 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 			return (
 				<Fragment>
 					<div className='flex'>
-						<Avatar isFirstComment={isFirstComment} />
+						<Avatar isFirstMessage={isFirstMessage} />
 						<div className='bg-white ml-1 rounded-xl border border-gray-300 border-opacity-80 flex flex-shrink-0 w-[146px] h-[47px] p-2 items-center relative'>
 							<div className='icon-play w-7 h-7 bg-blue-500 rounded-full flex justify-center items-center'>
 								<FaPlay className='fill-white ml-1' />
@@ -43,13 +43,13 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{message.type === 'record' && secondsToMinutes(message.recordDuration)}</div>
 						</div>
 
 						<IoVolumeMedium className='fill-blue-500 self-center ml-2 w-5 h-5' />
 					</div>
 
-					{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+					{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 				</Fragment>
 			);
 		}
@@ -68,10 +68,10 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 								<div className='w-[0.27rem] h-4 bg-gray-500 rounded-md self-end'></div>
 							</div>
 
-							<div className='time-duration ml-3 text-gray-700 self-center'>{comment.type === 'record' && secondsToMinutes(comment.recordDuration)}</div>
+							<div className='time-duration ml-3 text-gray-700 self-center'>{message.type === 'record' && secondsToMinutes(message.recordDuration)}</div>
 						</div>
 					</div>
-					{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+					{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 				</Fragment>
 			);
 		}
@@ -83,4 +83,4 @@ const CommentRecord = ({ index, data, isFirstComment, isLastComment }: Props) =>
 		</Fragment>
 	);
 };
-export default CommentRecord;
+export default MainRecord;

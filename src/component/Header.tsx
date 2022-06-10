@@ -4,7 +4,7 @@ import { HiOutlineVideoCamera } from 'react-icons/hi';
 import { IoCallOutline } from 'react-icons/io5';
 import { MdArrowBack } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { Profile } from '../interface/IComment';
+import { Profile } from '../interface/IMessage';
 import { RootState } from '../store/store';
 
 const Header = () => {

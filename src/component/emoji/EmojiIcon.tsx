@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
-import { Emoji } from '../../interface/IComment';
+import { Emoji } from '../../interface/IMessage';
 interface Props {
 	type?: string;
 }

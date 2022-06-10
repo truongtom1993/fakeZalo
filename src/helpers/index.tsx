@@ -1,31 +1,31 @@
 import moment from 'moment';
 import { IDataForm } from '../component/form/FormAnt';
-import { Comment, CommentType, Emoji } from '../interface/IComment';
-import { exampleCurrentCommentReply, ICommentReply, ICurrentCommentReply } from '../slice/CurrentCommentSlice';
+import { Emoji, Message, MessageType } from '../interface/IMessage';
+import { ICurrentMessageReply } from '../slice/CurrentMessageSlice';
 
-export const converDataFormToComment = (data: IDataForm, currentCommentReply: ICurrentCommentReply): Comment => {
-	const comment: CommentType | object = { type: data.commentType };
-	switch (data.commentType) {
+export const converDataFormToMessage = (data: IDataForm, currentMessageReply: ICurrentMessageReply): Message => {
+	const message: MessageType | object = { type: data.messageType };
+	switch (data.messageType) {
 		case 'text':
-			Object.assign(comment, { textContent: data.textContent });
+			Object.assign(message, { textContent: data.textContent });
 			break;
 		case 'call':
-			Object.assign(comment, { callType: data.callType, callDuration: data.callDuration });
+			Object.assign(message, { callType: data.callType, callDuration: data.callDuration });
 			break;
 		case 'image':
-			Object.assign(comment, { imageUrl: data.imageURL });
+			Object.assign(message, { imageUrl: data.imageURL });
 			break;
 		case 'record':
-			Object.assign(comment, { recordDuration: data.recordDuration });
+			Object.assign(message, { recordDuration: data.recordDuration });
 			break;
 	}
 
 	return {
 		index: data.index,
-		id: data.idComment,
-		commentReply: currentCommentReply,
+		id: data.idMessage,
+		messageReply: currentMessageReply,
 		author: data.user,
-		comment: comment as CommentType,
+		message: message as MessageType,
 		time: {
 			type: data.timeType,
 			value: typeof data.timeValue === 'object' ? data.timeValue?.format('YYYY-MM-DD HH:mm:ss') : '',
@@ -38,37 +38,37 @@ export const converDataFormToComment = (data: IDataForm, currentCommentReply: IC
 	};
 };
 
-export const converCommentToDataForm = (data: Comment): IDataForm => {
+export const converMessageToDataForm = (data: Message): IDataForm => {
 	const timeValue = data.time?.value;
 	const result = {
 		index: data.index,
 		user: data?.author,
-		idComment: data?.id || '',
-		idReply: data?.commentReply.idReply,
+		idMessage: data?.id || '',
+		idReply: data?.messageReply.idReply,
 		timeType: data?.time?.type || null,
 		timeValue: moment(new Date(timeValue)),
 		emoji: data?.emoji?.type || void 0,
 		numberEmoji: data?.emoji?.number || void 0,
-		commentType: data?.comment?.type,
+		messageType: data?.message?.type,
 		textContent: '',
 		imageURL: '',
 		callType: '',
 		callDuration: '',
 		recordDuration: '',
 	};
-	switch (data.comment.type) {
+	switch (data.message.type) {
 		case 'text':
-			result.textContent = data.comment.textContent || '';
+			result.textContent = data.message.textContent || '';
 			break;
 		case 'image':
-			result.imageURL = data.comment?.imageUrl || '';
+			result.imageURL = data.message?.imageUrl || '';
 			break;
 		case 'call':
-			result.callType = data.comment.callType || '';
-			result.callDuration = data.comment.callDuration?.toString() || '';
+			result.callType = data.message.callType || '';
+			result.callDuration = data.message.callDuration?.toString() || '';
 			break;
 		case 'record':
-			result.recordDuration = data.comment.recordDuration?.toString() || '';
+			result.recordDuration = data.message.recordDuration?.toString() || '';
 			break;
 		default:
 			break;
@@ -84,13 +84,13 @@ export const convertToShortenTime = (value: string) => {
 	return result;
 };
 
-export const convertCommentToCommentReply = (data: Comment, index: number): ICurrentCommentReply => {
+export const convertMessageToMessageReply = (data: Message, index: number): ICurrentMessageReply => {
 	return {
 		idReply: data.id,
 		index,
 		data: {
 			author: data.author,
-			comment: data.comment,
+			message: data.message,
 		},
 	};
 };

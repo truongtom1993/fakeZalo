@@ -4,15 +4,15 @@ import { useAppSelector } from '../hooks';
 interface IProps {
 	width?: string;
 	height?: string;
-	isFirstComment?: boolean;
-	isLastOfCommentList?: boolean;
+	isFirstMessage?: boolean;
+	isLastOfMessageList?: boolean;
 }
 
-const Avatar = ({ width, height, isFirstComment, isLastOfCommentList }: IProps) => {
+const Avatar = ({ width, height, isFirstMessage, isLastOfMessageList }: IProps) => {
 	const avatarURL = useAppSelector<any>(s => s.profileReducer.profile.avatarURL);
 	return (
 		<Fragment>
-			{isFirstComment || isLastOfCommentList ? (
+			{isFirstMessage || isLastOfMessageList ? (
 				<div
 					className='rounded-full w-7 h-7 border bg-center bg-cover bg-no-repeat box-content flex-shrink-0'
 					style={{ backgroundImage: `url(${avatarURL})`, width, height }}

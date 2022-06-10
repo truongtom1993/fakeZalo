@@ -1,28 +1,28 @@
 import React, { Fragment } from 'react';
 import { IoMdShareAlt } from 'react-icons/io';
-import { Comment } from '../../interface/IComment';
+import { Message } from '../../interface/IMessage';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
 
 interface Props {
 	index: number;
-	data: Comment;
-	isLastComment: boolean;
-	isFirstComment: boolean;
+	data: Message;
+	isLastMessage: boolean;
+	isFirstMessage: boolean;
 }
 
-const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => {
-	const { author, comment, time, emoji } = data;
+const MessageImage = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
+	const { author, message, time, emoji } = data;
 
 	function render() {
 		if (author === 'you') {
 			return (
 				<div className='flex flex-col mb-2'>
 					<div className='flex'>
-						<Avatar isFirstComment={isFirstComment} />
-						<div className='comment-image-flx'>
-							<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
+						<Avatar isFirstMessage={isFirstMessage} />
+						<div className='message-image-flx'>
+							<img src={message.type === 'image' && message.imageUrl} alt='image-content' className='message-image' />
 							<span className='hd-label'>HD</span>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 						</div>
@@ -30,7 +30,7 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 							<IoMdShareAlt />
 						</div>
 					</div>
-					{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}
+					{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 				</div>
 			);
 		}
@@ -39,8 +39,8 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 				<div className='flex flex-col mb-2'>
 					<>
 						<div className='flex flex-row-reverse mr-2'>
-							<div className='comment-image-flx'>
-								<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
+							<div className='message-image-flx'>
+								<img src={message.type === 'image' && message.imageUrl} alt='image-content' className='message-image' />
 								<span className='hd-label'>HD</span>
 								<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							</div>
@@ -49,7 +49,7 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 							</div>
 						</div>
 					</>
-					<div className='ml-10'>{isLastComment && <TimeComponent time={time} comment={comment} author={author} />}</div>
+					<div className='ml-10'>{isLastMessage && <TimeComponent time={time} message={message} author={author} />}</div>
 				</div>
 			);
 		}
@@ -57,4 +57,4 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 
 	return <Fragment>{render()}</Fragment>;
 };
-export default CommentImage;
+export default MessageImage;

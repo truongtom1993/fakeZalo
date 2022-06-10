@@ -1,31 +1,30 @@
 import React, { Fragment } from 'react';
 import { BiMicrophone } from 'react-icons/bi';
 import { useAppSelector } from '../../hooks';
-import { Profile } from '../../interface/IComment';
-import { ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
+import { Profile } from '../../interface/IMessage';
 interface IProps {
-	commentReply: any;
+	messageReply: any;
 }
-const CommentReply = ({ commentReply }: IProps) => {
-	const { idReply, data } = commentReply;
+const MessageReply = ({ messageReply }: IProps) => {
+	const { idReply, data } = messageReply;
 	const { myName } = useAppSelector<Profile>(s => s.profileReducer.profile);
 
-	function renderCommentReply(type: string) {
+	function renderMessageReply(type: string) {
 		if (type === 'text') {
 			return (
 				<div className='truncate pr-2'>
 					<p className='truncate my-0 font-semibold'>{myName}</p>
-					<p className='truncate text-gray-500 '>{data.comment?.textContent}</p>
+					<p className='truncate text-gray-500 '>{data.message?.textContent}</p>
 				</div>
 			);
 		}
 		if (type === 'image') {
 			return (
 				<Fragment>
-					<img src={data.comment?.imageUrl} alt='' className='h-9 aspect-square self-center mr-3' />
+					<img src={data.message?.imageUrl} alt='' className='h-9 aspect-square self-center mr-3' />
 					<div className='truncate pr-2 flex-grow'>
 						<p className='truncate my-0 font-semibold'>{myName}</p>
-						<div className='truncate text-gray-500 '>{data.comment?.imageUrl}</div>
+						<div className='truncate text-gray-500 '>{data.message?.imageUrl}</div>
 					</div>
 				</Fragment>
 			);
@@ -48,13 +47,13 @@ const CommentReply = ({ commentReply }: IProps) => {
 	}
 	return (
 		<Fragment>
-			{idReply && data.comment.type !== 'call' && (
+			{idReply && data.message.type !== 'call' && (
 				<div className='flex h-11 my-1 tracking-normal'>
 					<div className='separate_reply'></div>
-					<div className='flex flex-grow overflow-hidden'>{renderCommentReply(data.comment.type)}</div>
+					<div className='flex flex-grow overflow-hidden'>{renderMessageReply(data.message.type)}</div>
 				</div>
 			)}
 		</Fragment>
 	);
 };
-export default CommentReply;
+export default MessageReply;

@@ -6,7 +6,7 @@
 	.emoji-sizer {
 		@apply h-3 w-3 overflow-hidden text-transparent select-none;
 	}
-	.comment-text-main {
+	.message-text-main {
 		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border tracking-tight;
 	}
 	.icon-share-image {
@@ -25,10 +25,10 @@
 		@apply absolute bottom-[-0.7rem] right-1 flex items-center;
 	}
 
-	.comment-image {
+	.message-image {
 		@apply bg-contain rounded-xl border border-gray-300;
 	}
-	.comment-image-flx {
+	.message-image-flx {
 		@apply relative ml-1 max-w-[380px] min-w-[254px];
 	}
 	.time-stamp {
@@ -44,7 +44,7 @@
 	.timeStamp_text_you_inner {
 		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe tracking-widest;
 	}
-	.lastComment {
+	.lastMessage {
 		@apply flex flex-row-reverse px-4 mb-2;
 	}
 	.separate_reply {
@@ -52,13 +52,13 @@
 	}
 }
 
-.icon_edit_comment {
+.icon_edit_message {
 	display: none;
 }
-.comment_container:hover .icon_edit_comment {
+.message_container:hover .icon_edit_message {
 	display: flex;
 }
-.comment_form label {
+.message_form label {
 	cursor: pointer;
 }
 

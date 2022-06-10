@@ -1,24 +1,24 @@
 import moment from 'moment';
 import { nanoid } from 'nanoid';
-import { Comment } from '../interface/IComment';
+import { Message } from '../interface/IMessage';
 
-function createExampleComment(index: number): Comment {
+function createExampleMessage(index: number): Message {
 	const time = moment().format('YYYY-MM-DD HH:mm:ss');
-	const exampleComment: Comment = {
+	const exampleMessage: Message = {
 		index,
 		author: 'me',
-		commentReply: {
+		messageReply: {
 			index: -1,
 			idReply: '',
 		},
-		comment: { type: 'text', textContent: `Example Textcontent ${time}` },
+		message: { type: 'text', textContent: `Example Textcontent ${time}` },
 		id: nanoid(5),
 		time: { type: 'auto', value: time },
 		emoji: {
 			show: false,
 		},
 	};
-	return exampleComment;
+	return exampleMessage;
 }
 
-export { createExampleComment };
+export { createExampleMessage };

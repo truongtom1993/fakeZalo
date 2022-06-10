@@ -1,26 +1,26 @@
 import { Col, Form, Input, InputNumber, Select } from 'antd';
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
-import { Comment } from '../../interface/IComment';
+import { Message } from '../../interface/IMessage';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 interface IProps {
-	currentComment: Comment;
+	currentMessage: Message;
 }
 
-const FormCommentType = ({ currentComment }: IProps) => {
-	const [commentTypeState, setCommentTypeState] = useState<string>();
+const FormMessageType = ({ currentMessage }: IProps) => {
+	const [messageTypeState, setMessageTypeState] = useState<string>();
 	const [callType, setCallType] = useState('incomming');
 
 	useEffect(() => {
-		setCommentTypeState(currentComment.comment.type);
-		if (currentComment.comment.type === 'call') {
-			setCallType(currentComment.comment.callType);
+		setMessageTypeState(currentMessage.message.type);
+		if (currentMessage.message.type === 'call') {
+			setCallType(currentMessage.message.callType);
 		}
-	}, [currentComment]);
+	}, [currentMessage]);
 
-	function renderCommentInput(type: string = 'text') {
+	function renderMessageInput(type: string = 'text') {
 		switch (type) {
 			case 'text':
 				return (
@@ -64,8 +64,8 @@ const FormCommentType = ({ currentComment }: IProps) => {
 	return (
 		<Fragment>
 			<div>
-				<Form.Item label='Loại comment' name='commentType' labelAlign='left' required>
-					<Select placeholder='Chọn loại comment' onChange={e => setCommentTypeState(e)}>
+				<Form.Item label='Loại message' name='messageType' labelAlign='left' required>
+					<Select placeholder='Chọn loại tin nhắn' onChange={e => setMessageTypeState(e)}>
 						<Option value='text'>Văn bản</Option>
 						<Option value='image'>Ảnh</Option>
 						<Option value='call'>Cuộc gọi</Option>
@@ -74,8 +74,8 @@ const FormCommentType = ({ currentComment }: IProps) => {
 				</Form.Item>
 			</div>
 
-			<div>{renderCommentInput(commentTypeState)}</div>
+			<div>{renderMessageInput(messageTypeState)}</div>
 		</Fragment>
 	);
 };
-export default FormCommentType;
+export default FormMessageType;

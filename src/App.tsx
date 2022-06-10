@@ -2,12 +2,12 @@ import { Fragment, useRef, useState } from 'react';
 import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 import Footer from './assets/img/footer.png';
 import Avatar from './component/Avatar';
-import CommentMain from './component/comment/CommentMain';
+import MainMessage from './component/message/MainMessage';
 import FormAnt from './component/form/FormAnt';
 import FormProfile from './component/form/FormProfile';
 import Header from './component/Header';
 import { useAppSelector } from './hooks';
-import { Comment } from './interface/IComment';
+import { Message } from './interface/IMessage';
 import './stylesheet/App.css';
 import './stylesheet/reset.css';
 import './stylesheet/tailwind.css';
@@ -27,9 +27,9 @@ function throttle(callback: Function, limit: number) {
 
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
-	const commentList = useAppSelector<Comment[]>(state => state.commentListReducer.data);
-	const commentListLength = Array.isArray(commentList) ? commentList.length : 0;
-	const commentContainerRef = useRef(null);
+	const messageList = useAppSelector<Message[]>(state => state.messageListReducer.data);
+	const messageListLength = Array.isArray(messageList) ? messageList.length : 0;
+	const messageContainerRef = useRef(null);
 
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
 		const target = event.target as Element;
@@ -39,8 +39,8 @@ function App() {
 		containerScrollTop + 867 >= containerScrollHeight - 267 ? setScrollProcess(false) : setScrollProcess(true);
 	}
 
-	function changeCommentContainerScroll() {
-		const element = commentContainerRef.current as Element;
+	function changeMessageContainerScroll() {
+		const element = messageContainerRef.current as Element;
 		element.scrollTop = element.scrollHeight;
 	}
 
@@ -48,25 +48,25 @@ function App() {
 		<div className='pl-2 pt-2 flex'>
 			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
-				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 200)} ref={commentContainerRef}>
-					{commentList &&
-						commentList.map((data, index) => {
-							let isFirstComment: boolean = false;
-							let isLastCommentAuthor: boolean = false;
-							if (data.author !== commentList[index - 1]?.author || commentList[index - 1].time.type === 'separate') {
-								isFirstComment = true;
+				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 200)} ref={messageContainerRef}>
+					{messageList &&
+						messageList.map((data, index) => {
+							let isFirstMessage: boolean = false;
+							let isLastMessageAuthor: boolean = false;
+							if (data.author !== messageList[index - 1]?.author || messageList[index - 1].time.type === 'separate') {
+								isFirstMessage = true;
 							}
-							if (data.author !== commentList[index + 1]?.author || commentList[index + 1].time.type === 'separate') {
-								isLastCommentAuthor = true;
+							if (data.author !== messageList[index + 1]?.author || messageList[index + 1].time.type === 'separate') {
+								isLastMessageAuthor = true;
 							}
 
 							return (
 								<Fragment key={index}>
-									<CommentMain index={index} data={data} isLastComment={isLastCommentAuthor} isFirstComment={isFirstComment} />
+									<MainMessage index={index} data={data} isLastMessage={isLastMessageAuthor} isFirstMessage={isFirstMessage} />
 
-									{index === commentListLength - 1 && (
-										<div className='lastComment'>
-											<Avatar width='20px' height='20px' isLastOfCommentList />
+									{index === messageListLength - 1 && (
+										<div className='lastMessage'>
+											<Avatar width='20px' height='20px' isLastOfMessageList />
 										</div>
 									)}
 								</Fragment>
@@ -82,7 +82,7 @@ function App() {
 					{scrollProcess && (
 						<div
 							className='bg-white rounded-full shadow-lg absolute bottom-16 right-4 h-8 w-8 flex justify-center items-center cursor-pointer'
-							onClick={changeCommentContainerScroll}
+							onClick={changeMessageContainerScroll}
 						>
 							<HiOutlineChevronDoubleDown className='opacity-70' />
 						</div>

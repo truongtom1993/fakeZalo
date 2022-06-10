@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Profile } from '../interface/IComment';
+import { Profile } from '../interface/IMessage';
 const initProfile: Profile = {
 	userName: 'Người lạ',
 	status: 6 * 60,

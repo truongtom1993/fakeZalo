@@ -2,8 +2,8 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
 import React, { ReactChild, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { importCurrentComment } from '../../slice/CurrentCommentSlice';
-import { importCommentList } from '../../slice/DataSlice';
+import { importCurrentMessage } from '../../slice/CurrentMessageSlice';
+import { importMessageList } from '../../slice/DataSlice';
 import { importProfile } from '../../slice/ProfileSlice';
 
 interface IProps {
@@ -26,13 +26,13 @@ const UploadFile = ({ children }: IProps) => {
 		newFile.onload = function () {
 			const result = newFile.result;
 			const json = JSON.parse(result.toString());
-			const { commentListReducer, currentCommentReducer, profileReducer } = json;
-			if (commentListReducer) {
-				dispatch(importCommentList({ data: commentListReducer.data }));
+			const { messageListReducer, currentMessageReducer, profileReducer } = json;
+			if (messageListReducer) {
+				dispatch(importMessageList({ data: messageListReducer.data }));
 			}
-			if (currentCommentReducer) {
+			if (currentMessageReducer) {
 				dispatch(
-					importCurrentComment({ currentComment: currentCommentReducer.currentComment, currentCommentReply: currentCommentReducer.currentCommentReply }),
+					importCurrentMessage({ currentMessage: currentMessageReducer.currentMessage, currentMessageReply: currentMessageReducer.currentMessageReply }),
 				);
 			}
 			if (profileReducer) {

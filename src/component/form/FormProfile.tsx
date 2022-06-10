@@ -2,7 +2,7 @@ import { Button, Divider, Form, Input, InputNumber } from 'antd';
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Profile } from '../../interface/IComment';
+import { Profile } from '../../interface/IMessage';
 import { changeProfile } from '../../slice/ProfileSlice';
 import { RootState } from '../../store/store';
 import { store } from '../../store/store';

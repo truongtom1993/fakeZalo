@@ -1,24 +1,24 @@
-import { ICurrentCommentReply } from '../slice/CurrentCommentSlice';
+import { ICurrentMessageReply } from '../slice/CurrentMessageSlice';
 
-type TypeCommentImage = {
+type TypeMessageImage = {
 	type: 'image';
 	imageUrl: string;
 };
-type TypeCommentText = {
+type TypeMessageText = {
 	type: 'text';
 	textContent: string;
 };
-type TypeCommentCall = {
+type TypeMessageCall = {
 	type: 'call';
 	callType: 'incomming' | 'outgoing' | 'missed';
 	callDuration: number; //second
 };
-type TypeCommentRecord = {
+type TypeMassageRecord = {
 	type: 'record';
 	recordDuration: number;
 };
 
-export type CommentType = TypeCommentImage | TypeCommentText | TypeCommentCall | TypeCommentRecord;
+export type MessageType = TypeMessageImage | TypeMessageText | TypeMessageCall | TypeMassageRecord;
 
 export enum Emoji {
 	Like = '/-strong',
@@ -32,12 +32,12 @@ export enum Emoji {
 export type Author = 'you' | 'me' | 'separate';
 export type TypeOfTime = 'separate' | 'auto';
 
-export interface Comment {
+export interface Message {
 	index: number;
 	id: string;
-	commentReply: ICurrentCommentReply;
+	messageReply: ICurrentMessageReply;
 	author: Author;
-	comment: CommentType;
+	message: MessageType;
 	time: {
 		type: TypeOfTime;
 		value: string; // dinh dang YYYY-MM-DD HH:mm:ss
