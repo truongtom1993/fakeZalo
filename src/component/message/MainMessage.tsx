@@ -88,7 +88,7 @@ const MessageMain = (props: IProps) => {
 			>
 				<Fragment>{renderMessage(data.message.type)}</Fragment>
 
-				<div className='icon_edit_message absolute left-1/2 -translate-x-1/2 flex items-center bg-gray-100 bg-opacity-70 p-2 rounded-lg shadow-lg z-10'>
+				<div className='icon_edit_message absolute left-1/2 -translate-x-1/2 flex items-center bg-gray-100 bg-opacity-70 px-2 rounded-lg shadow-lg z-10'>
 					<Tooltip title='Thêm tin nhắn mới bên trên tin nhắn này'>
 						<BiUpArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addPrev} />
 					</Tooltip>

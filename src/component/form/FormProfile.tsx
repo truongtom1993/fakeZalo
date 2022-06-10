@@ -1,4 +1,5 @@
 import { Button, Divider, Form, Input, InputNumber } from 'antd';
+import html2canvas from 'html2canvas';
 import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,6 +53,25 @@ const FormProfile = () => {
 		a.click();
 		URL.revokeObjectURL(url);
 	};
+	const takeScreenShoot = () => {
+		html2canvas(document.getElementById('zalo_main'), {
+			allowTaint: true,
+			useCORS: true,
+		})
+			.then(function (canvas) {
+				// It will return a canvas element
+				let image = canvas.toDataURL('image/png', 1);
+				const a = document.createElement('a');
+				a.href = image;
+				a.download = `FakeZalo${new Date().toLocaleString('vi')}`;
+				a.click();
+				URL.revokeObjectURL(image);
+			})
+			.catch(e => {
+				// Handle errors
+				console.log(e);
+			});
+	};
 	return (
 		<Fragment>
 			<Form name='basic' labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} autoComplete='off' form={form} initialValues={profile}>
@@ -102,6 +122,9 @@ const FormProfile = () => {
 					</Button>
 					<Button type='default' onClick={getProfile}>
 						Get profile
+					</Button>
+					<Button type='default' onClick={takeScreenShoot}>
+						ScreenShoot
 					</Button>
 				</div>
 

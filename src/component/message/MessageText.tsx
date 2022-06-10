@@ -45,7 +45,6 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 				}
 				return `<a class="linkInText">${result}</a>`;
 			});
-			console.info(`🎁 src/component/message/MessageText.tsx	Line:36	ID:3b4945`, stringUrl);
 
 			contentRef.current && (contentRef.current.innerHTML = stringUrl);
 		}
@@ -59,9 +58,7 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 						<Avatar isFirstMessage={isFirstMessage} />
 						<div className={'message-text-main relative ml-1 bg-white'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
-							<div className='text-base text-gray-800 pb-1' ref={contentRef}>
-								{message.type === 'text' && message.textContent}
-							</div>
+							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</div>
@@ -75,9 +72,7 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 					<div className='flex'>
 						<div className={'message-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
-							<div className='text-base text-gray-800 pb-1' ref={contentRef}>
-								{message.type === 'text' && message.textContent}
-							</div>
+							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} />
 							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</div>

@@ -96,3 +96,6 @@
 .angryEmoji {
 	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 5% /5100%;
 }
+.linkInText {
+	text-decoration: underline;
+}
