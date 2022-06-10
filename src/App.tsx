@@ -11,6 +11,7 @@ import { Message } from './interface/IMessage';
 import './stylesheet/App.css';
 import './stylesheet/reset.css';
 import './stylesheet/tailwind.css';
+import { Tooltip } from 'antd';
 
 function throttle(callback: Function, limit: number) {
 	let waiting = false;
@@ -25,6 +26,9 @@ function throttle(callback: Function, limit: number) {
 	};
 }
 
+const mainHeigth = 867; //px
+const minHeigthToScrool = 267; //px
+
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const messageList = useAppSelector<Message[]>(state => state.messageListReducer.data);
@@ -36,7 +40,7 @@ function App() {
 		const containerScrollHeight = target.scrollHeight;
 		const containerScrollTop = target.scrollTop;
 
-		containerScrollTop + 867 >= containerScrollHeight - 267 ? setScrollProcess(false) : setScrollProcess(true);
+		containerScrollTop + mainHeigth >= containerScrollHeight - minHeigthToScrool ? setScrollProcess(false) : setScrollProcess(true);
 	}
 
 	function changeMessageContainerScroll() {
@@ -75,7 +79,9 @@ function App() {
 				</div>
 
 				<div className='footer' onClick={() => setScrollProcess(!scrollProcess)}>
-					<img src={Footer} alt='footer' className='h-[48px]' />
+					<Tooltip title='Click để ẩn hiện nút Scroll'>
+						<img src={Footer} alt='footer' className='h-[48px]' />
+					</Tooltip>
 				</div>
 
 				<Fragment>
