@@ -16,7 +16,7 @@ function throttle(callback: Function, limit: number) {
 	let waiting = false;
 	return function () {
 		if (!waiting) {
-			callback.apply(this, arguments);
+			callback.apply(callback, arguments);
 			waiting = true;
 			setTimeout(function () {
 				waiting = false;
