@@ -1,24 +1,24 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Modal, Select } from 'antd';
 import moment from 'moment';
-import React, { Fragment, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { converMessageToDataForm, converDataFormToMessage } from '../../helpers';
+import { converDataFormToMessage, converMessageToDataForm } from '../../helpers';
 import { useAppSelector } from '../../hooks';
-import { Message, Emoji, TypeOfTime } from '../../interface/IMessage';
-import { changeCurrentMessage, exampleCurrentMessage, exampleCurrentMessageReply, ICurrentMessageReply } from '../../slice/CurrentMessageSlice';
-import { addMessage, changeMessageById, exampleMessageList, importMessageList, setRandomTime } from '../../slice/DataSlice';
+import { Author, Emoji, Message, TypeOfTime } from '../../interface/IMessage';
+import { changeCurrentMessage, exampleCurrentMessageReply, ICurrentMessageReply } from '../../slice/CurrentMessageSlice';
+import { addMessage, changeMessageById, importMessageList, setRandomTime } from '../../slice/DataSlice';
 import { createExampleMessage } from '../../utils';
 import FormMessageType from './FormMessageType';
 
 export interface IDataForm {
 	index: number;
-	user: 'me' | 'you';
+	user: Author;
 	idMessage: string;
 	idReply: string;
 	timeType: TypeOfTime;
 	timeValue: moment.Moment | string;
-	emoji: string;
+	emoji: Emoji;
 	numberEmoji: number | undefined;
 	messageType: 'text' | 'call' | 'image' | 'record';
 	textContent?: string;

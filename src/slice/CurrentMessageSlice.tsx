@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Author, Message, MessageType } from '../interface/IMessage';
 
 export interface ICurrentMessageReply {
+	type?: string;
 	idReply: string | undefined;
 	index: number;
 	data?: IMessageReply;

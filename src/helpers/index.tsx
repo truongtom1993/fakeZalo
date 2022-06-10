@@ -86,6 +86,7 @@ export const convertToShortenTime = (value: string) => {
 
 export const convertMessageToMessageReply = (data: Message, index: number): ICurrentMessageReply => {
 	return {
+		type: data.message.type,
 		idReply: data.id,
 		index,
 		data: {

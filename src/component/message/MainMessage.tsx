@@ -74,6 +74,9 @@ const MessageMain = (props: IProps) => {
 		if (currentMessage.index <= messageReply.index) {
 			return message.warn('Tin nhắn reply phải phía trên tin nhắn hiện tại');
 		}
+		if (messageReply.type === 'call') {
+			return message.warn('Không thể reply cuộc gọi');
+		}
 		message.success('Lấy ID Reply thành công');
 		dispatch(changeCurrentMessageReply(messageReply));
 	};
