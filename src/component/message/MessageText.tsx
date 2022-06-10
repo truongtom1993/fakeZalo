@@ -1,5 +1,5 @@
 import React, { Fragment, memo, useEffect, useLayoutEffect, useRef } from 'react';
-import { Message } from '../../interface/IMessage';
+import { Emoji, Message } from '../../interface/IMessage';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
@@ -12,7 +12,10 @@ interface Props {
 	isFirstMessage: boolean;
 }
 
-const emailReg = new RegExp(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\-\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, 'gm');
+const emailReg = new RegExp(
+	/([(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\-\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))|(\/-strong)|(\/-heart)|(:>)|(:o)|(:-\(\()|(:-h)/,
+	'gm',
+);
 
 const emojiReg = /fd/g;
 
@@ -22,7 +25,28 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 
 	useLayoutEffect(() => {
 		if (message.type === 'text') {
-			const stringUrl = message.textContent.replace(emailReg, result => `<a class="linkInText">${result}</a>`);
+			const stringUrl = message.textContent.replace(emailReg, result => {
+				switch (result) {
+					case Emoji.Like:
+						return `<span class='emoji strongEmoji'></span>`;
+					case Emoji.Heart:
+						return `<span class='emoji heartEmoji'></span>`;
+					case Emoji.Lol:
+						return `<span class='emoji lolEmoji'></span>`;
+					case Emoji.Wow:
+						return `<span class='emoji wowEmoji'></span>`;
+					case Emoji.Cry:
+						return `<span class='emoji cryEmoji'></span>`;
+					case Emoji.Angry:
+						return `<span class='emoji angryEmoji'></span>`;
+
+					default:
+						break;
+				}
+				return `<a class="linkInText">${result}</a>`;
+			});
+			console.info(`🎁 src/component/message/MessageText.tsx	Line:36	ID:3b4945`, stringUrl);
+
 			contentRef.current && (contentRef.current.innerHTML = stringUrl);
 		}
 	}, [message]);

@@ -71,3 +71,28 @@
 .author_me + .author_you {
 	margin-top: 0.5rem;
 }
+
+.emoji {
+	display: inline-flex;
+	height: 1rem;
+	width: 1rem;
+}
+
+.strongEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 82.5%/5100%;
+}
+.heartEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 72.5% / 5100%;
+}
+.lolEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 82% 7.5% /5100%;
+}
+.wowEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 20%/5100%;
+}
+.cryEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 2.5% /5100%;
+}
+.angryEmoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 5% /5100%;
+}
