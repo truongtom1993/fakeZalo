@@ -28,7 +28,7 @@ function throttle(callback: Function, limit: number) {
 function App() {
 	const [scrollProcess, setScrollProcess] = useState(true);
 	const commentList = useAppSelector<Comment[]>(state => state.commentListReducer.data);
-	const commentListLength = commentList.length;
+	const commentListLength = Array.isArray(commentList) ? commentList.length : 0;
 	const commentContainerRef = useRef(null);
 
 	function getScrollProcess(event: React.UIEvent<HTMLElement>) {
@@ -49,28 +49,29 @@ function App() {
 			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 200)} ref={commentContainerRef}>
-					{commentList.map((data, index) => {
-						let isFirstComment: boolean = false;
-						let isLastCommentAuthor: boolean = false;
-						if (data.author !== commentList[index - 1]?.author || commentList[index - 1].time.type === 'separate') {
-							isFirstComment = true;
-						}
-						if (data.author !== commentList[index + 1]?.author || commentList[index + 1].time.type === 'separate') {
-							isLastCommentAuthor = true;
-						}
+					{commentList &&
+						commentList.map((data, index) => {
+							let isFirstComment: boolean = false;
+							let isLastCommentAuthor: boolean = false;
+							if (data.author !== commentList[index - 1]?.author || commentList[index - 1].time.type === 'separate') {
+								isFirstComment = true;
+							}
+							if (data.author !== commentList[index + 1]?.author || commentList[index + 1].time.type === 'separate') {
+								isLastCommentAuthor = true;
+							}
 
-						return (
-							<Fragment key={index}>
-								<CommentMain index={index} data={data} isLastComment={isLastCommentAuthor} isFirstComment={isFirstComment} />
+							return (
+								<Fragment key={index}>
+									<CommentMain index={index} data={data} isLastComment={isLastCommentAuthor} isFirstComment={isFirstComment} />
 
-								{index === commentListLength - 1 && (
-									<div className='lastComment'>
-										<Avatar width='20px' height='20px' isLastOfCommentList />
-									</div>
-								)}
-							</Fragment>
-						);
-					})}
+									{index === commentListLength - 1 && (
+										<div className='lastComment'>
+											<Avatar width='20px' height='20px' isLastOfCommentList />
+										</div>
+									)}
+								</Fragment>
+							);
+						})}
 				</div>
 
 				<div className='footer' onClick={() => setScrollProcess(!scrollProcess)}>

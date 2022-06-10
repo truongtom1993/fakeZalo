@@ -68,13 +68,6 @@
 	width: 100% !important;
 }
 
-.type_text_me + .type_text_me {
-	/* margin-top: -0.75rem; */
-}
-.type_text_you + .type_text_you {
-	/* margin-top: -0.75rem; */
-}
-
 .author_me + .author_you {
 	margin-top: 0.5rem;
 }

@@ -1,3 +1,4 @@
+import { message, Tooltip } from 'antd';
 import React, { Fragment, memo, useRef } from 'react';
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { BsReplyAll } from 'react-icons/bs';
@@ -67,9 +68,14 @@ const CommentMain = (props: IProps) => {
 		dispatch(changeCurrentComment(newData));
 	};
 	const getCommentReply = (commentReply: ICurrentCommentReply) => {
-		if (currentComment.index > commentReply.index) {
-			dispatch(changeCurrentCommentReply(commentReply));
+		if (currentComment.comment.type !== 'text') {
+			return message.warning('Tin nhắn hiện tại phải là dạng text mới có thể trở thành tin nhắn Reply');
 		}
+		if (currentComment.index <= commentReply.index) {
+			return message.warn('Tin nhắn reply phải phía trên tin nhắn hiện tại');
+		}
+		message.success('Lấy ID Reply thành công');
+		dispatch(changeCurrentCommentReply(commentReply));
 	};
 
 	return (
@@ -82,12 +88,23 @@ const CommentMain = (props: IProps) => {
 			>
 				<Fragment>{renderComment(data.comment.type)}</Fragment>
 
-				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 w-auto flex items-center'>
-					<BiUpArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addPrev} />
-					<BiDownArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addNext} />
-					<GoDiffRemoved className='cursor-pointer mx-2 w-7 h-7 stroke-[0.3] hover:scale-125' onClick={removeComment} />
-					<BsReplyAll className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={() => getCommentReply(convertCommentToCommentReply(data, index))} />
-					<FiEdit className='cursor-pointer mx-2 w-8 h-8 hover:scale-125' onClick={changeFormData} />
+				<div className='icon_edit_comment absolute left-1/2 -translate-x-1/2 flex items-center bg-gray-100 bg-opacity-70 p-2 rounded-lg shadow-lg'>
+					<Tooltip title='Thêm tin nhắn mới bên trên tin nhắn này'>
+						<BiUpArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addPrev} />
+					</Tooltip>
+					<Tooltip title='Thêm tin nhắn mới bên dưới tin nhắn này'>
+						<BiDownArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addNext} />
+					</Tooltip>
+					<Tooltip title='Xóa tin nhắn này'>
+						<GoDiffRemoved className='cursor-pointer mx-2 w-8 h-8 stroke-[0.3] hover:scale-125' onClick={removeComment} />
+					</Tooltip>
+					<Tooltip title='Lấy ID của tin nhắn làm ID Reply'>
+						<BsReplyAll className='cursor-pointer mx-2 w-11 h-11 hover:scale-125' onClick={() => getCommentReply(convertCommentToCommentReply(data, index))} />
+					</Tooltip>
+
+					<Tooltip title='Lấy dòng này làm tin nhắn hiện tại'>
+						<FiEdit className='cursor-pointer mx-2 w-8 h-8 hover:scale-125' onClick={changeFormData} />
+					</Tooltip>
 				</div>
 			</div>
 		</Fragment>

@@ -18,8 +18,8 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 	function render() {
 		if (author === 'you') {
 			return (
-				<div className='flex flex-col'>
-					<div className={`flex ` + (emoji?.number ? 'mt-2' : 'my-4')}>
+				<div className='flex flex-col mb-2'>
+					<div className='flex'>
 						<Avatar isFirstComment={isFirstComment} />
 						<div className='comment-image-flx'>
 							<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
@@ -36,9 +36,9 @@ const CommentImage = ({ index, data, isFirstComment, isLastComment }: Props) => 
 		}
 		if (author === 'me') {
 			return (
-				<div className='flex flex-col'>
+				<div className='flex flex-col mb-2'>
 					<>
-						<div className={`flex flex-row-reverse mr-2 ` + (emoji?.number ? 'mt-2' : 'my-4')}>
+						<div className='flex flex-row-reverse mr-2'>
 							<div className='comment-image-flx'>
 								<img src={comment.type === 'image' && comment.imageUrl} alt='image-content' className='comment-image' />
 								<span className='hd-label'>HD</span>

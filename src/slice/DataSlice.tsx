@@ -15,6 +15,29 @@ interface IRandomTime {
 	startTime: string;
 	stepTime: number;
 }
+interface IImportCommentList {
+	data: [] | Comment[];
+}
+
+export const exampleCommentList: Comment[] = [
+	{
+		index: 0,
+		id: nanoid(5),
+		commentReply: {
+			idReply: '',
+			index: -1,
+		},
+		author: 'me',
+		comment: {
+			type: 'text',
+			textContent: 'Example content',
+		},
+		time: {
+			type: 'auto',
+			value: moment().format('YYYY-MM-DD HH:mm:ss'),
+		},
+	},
+];
 
 const initData: Comment[] = localStorage.getItem('commentList') ? JSON.parse(localStorage.getItem('commentList')) : listComment;
 
@@ -22,7 +45,7 @@ const commentListSlice = createSlice({
 	name: 'commentList',
 	initialState: { data: initData },
 	reducers: {
-		importCommentList(state, action: PayloadAction<any>) {
+		importCommentList(state, action: PayloadAction<IImportCommentList>) {
 			state.data = action.payload.data;
 		},
 		addComment(state, action: PayloadAction<IAddComment>) {

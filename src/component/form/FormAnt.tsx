@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import { converCommentToDataForm, converDataFormToComment } from '../../helpers';
 import { useAppSelector } from '../../hooks';
 import { Comment, Emoji, TypeOfTime } from '../../interface/IComment';
-import { exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
-import { addComment, changeCommentById, setRandomTime } from '../../slice/DataSlice';
+import { changeCurrentComment, exampleCurrentComment, exampleCurrentCommentReply, ICurrentCommentReply } from '../../slice/CurrentCommentSlice';
+import { addComment, changeCommentById, exampleCommentList, importCommentList, setRandomTime } from '../../slice/DataSlice';
+import { createExampleComment } from '../../utils';
 import FormCommentType from './FormCommentType';
 
 export interface IDataForm {
@@ -54,9 +55,7 @@ const FormAnt = () => {
 	}, [currentComment]);
 
 	useEffect(() => {
-		// if (currentCommentReply.idReply !== currentComment.id && currentComment.index > currentCommentReply.index) {
 		setFieldsValue({ idReply: currentCommentReply.idReply });
-		// }
 	}, [currentCommentReply]);
 
 	const onFinish = (values: IDataForm) => {
@@ -88,8 +87,9 @@ const FormAnt = () => {
 		}
 
 		if (type === 'add') {
-			const newData = converDataFormToComment(getForm(), exampleCurrentCommentReply);
+			const newData = createExampleComment(-1);
 			dispatch(addComment({ data: newData }));
+			dispatch(changeCurrentComment(newData));
 			return;
 		}
 	};
@@ -98,7 +98,7 @@ const FormAnt = () => {
 		return { ...getFieldsValue(true), index: currentComment.index };
 	};
 	const createComment = () => {
-		setForm(currentComment, 'add');
+		setForm(void 0, 'add');
 	};
 
 	const confirm = () => {
@@ -112,7 +112,7 @@ const FormAnt = () => {
 		});
 	};
 	const confirmClearAllData = () => {
-		console.info(`🎁 src/component/form/FormAnt.tsx	Line:128	ID:9aeeab`, 'clear all data');
+		dispatch(importCommentList({ data: [] }));
 	};
 	const handleChangeEmoji = (e: string) => {
 		const numberEmoji = form.getFieldValue('numberEmoji');
@@ -159,9 +159,9 @@ const FormAnt = () => {
 							<span className='mb-6'>User</span>
 							<Form.Item name='user' wrapperCol={{ span: 24 }} required>
 								<Select onChange={e => handleChangeUser(e)}>
-									<Option value='separate'>Separate Time</Option>
 									<Option value='you'>You</Option>
 									<Option value='me'>Me</Option>
+									<Option value='separate'>Separate Time</Option>
 								</Select>
 							</Form.Item>
 						</div>
@@ -173,23 +173,21 @@ const FormAnt = () => {
 						</div>
 					</div>
 
-					<div className='flex'>
-						<div className='flex items-center'>
-							<span className='w-auto mb-6 ml-2 mr-2 whitespace-nowrap'>ID Comment:</span>
-							<Form.Item name='idComment' wrapperCol={{ span: 24 }}>
-								<Input disabled />
-							</Form.Item>
-						</div>
+					<div className='flex items-center'>
+						<span className='w-28 mb-6 whitespace-nowrap'>ID Comment: </span>
+						<Form.Item name='idComment' className='flex-grow'>
+							<Input disabled />
+						</Form.Item>
+					</div>
 
-						<div className='flex items-center'>
-							<span className='w-auto mb-6 ml-2 mr-2 whitespace-nowrap'>ID Reply</span>
-							<Form.Item name='idReply' wrapperCol={{ span: 24 }}>
-								<Input allowClear disabled />
-							</Form.Item>
-						</div>
+					<div className='flex items-center mb-0'>
+						<span className='w-28 mb-6 whitespace-nowrap'>ID Reply: </span>
+						<Form.Item name='idReply' className='flex-grow'>
+							<Input allowClear disabled className='inputTextField' />
+						</Form.Item>
 					</div>
 				</div>
-				<Divider>
+				<Divider style={{ marginTop: '0' }}>
 					<b>Time</b>
 				</Divider>
 				<div>
@@ -202,7 +200,7 @@ const FormAnt = () => {
 				</div>
 				<div>
 					<Form.Item label='Chọn thời gian' name='timeValue' labelAlign='left'>
-						<DatePicker showTime className='datePicker' />
+						<DatePicker showTime className='datePicker' placeholder='Chọn ngày giờ' />
 					</Form.Item>
 				</div>
 				<Divider>
@@ -234,13 +232,17 @@ const FormAnt = () => {
 
 				<FormCommentType currentComment={currentComment} />
 
-				<div className='flex gap-2'>
-					<Button type='default' htmlType='submit'>
+				<div className='flex gap-2 justify-center'>
+					<Button type='primary' htmlType='submit' className='flex-grow text-white'>
 						Edit
 					</Button>
 					<Button onClick={createComment}>Add</Button>
-					<Button onClick={resetForm}>Reset Form</Button>
-					<Button onClick={confirm}>ClearAllData</Button>
+					<Button type='dashed' onClick={resetForm}>
+						Reset Form
+					</Button>
+					<Button type='dashed' onClick={confirm}>
+						ClearAllData
+					</Button>
 				</div>
 
 				<Divider>
@@ -249,7 +251,7 @@ const FormAnt = () => {
 
 				<div>
 					<Form.Item label='Start Time' name='randomTime' labelAlign='left'>
-						<DatePicker showTime className='datePicker' />
+						<DatePicker showTime className='datePicker' placeholder='Chọn ngày giờ' />
 					</Form.Item>
 				</div>
 				<div>
