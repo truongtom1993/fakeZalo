@@ -79,7 +79,7 @@ const MainRecord = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
 
 	return (
 		<Fragment>
-			<div className='mb-2 flex flex-col'>{render()}</div>
+			<div className='mb-1 flex flex-col'>{render()}</div>
 		</Fragment>
 	);
 };
