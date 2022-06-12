@@ -24,7 +24,7 @@ const MessageImage = ({ index, data, isFirstMessage, isLastMessage }: Props) => 
 						<div className='message-image-flx'>
 							<img src={message.type === 'image' && message.imageUrl} alt='image-content' className='message-image' />
 							<span className='hd-label'>HD</span>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
+							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
 						</div>
 						<div className='icon-share-image'>
 							<IoMdShareAlt />
@@ -42,7 +42,7 @@ const MessageImage = ({ index, data, isFirstMessage, isLastMessage }: Props) => 
 							<div className='message-image-flx'>
 								<img src={message.type === 'image' && message.imageUrl} alt='image-content' className='message-image' />
 								<span className='hd-label'>HD</span>
-								<EmojiComponent type={emoji?.type} number={emoji?.number} />
+								<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
 							</div>
 							<div className='icon-share-image'>
 								<IoMdShareAlt />
