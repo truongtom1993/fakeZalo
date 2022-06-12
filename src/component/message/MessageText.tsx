@@ -81,6 +81,6 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 			);
 		}
 	}
-	return <div className='mb-2 flex flex-col'>{render()}</div>;
+	return <div className='mb-1 flex flex-col'>{render()}</div>;
 };
 export default memo(MessageText);

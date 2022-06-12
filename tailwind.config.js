@@ -6,6 +6,7 @@ module.exports = {
 			segoe: ['Segoe UI', 'SegoeuiPc', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'sans-serif'],
 			robo: ['Roboto'],
 			apple: ['apple-system', 'system-ui', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue'],
+			lato: ['Lato', 'sans-serif'],
 		},
 	},
 	plugins: [],

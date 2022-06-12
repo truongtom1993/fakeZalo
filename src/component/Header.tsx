@@ -30,9 +30,9 @@ const Header = () => {
 					<MdArrowBack className='w-[50%] h-[50%] ml-1 fill-white' />
 				</div>
 
-				<div className='header-content flex flex-col h-full flex-grow font-segoe tracking-[-0.015rem]'>
-					<div className='text-white ml-[0.4rem] mt-[2px]'>{userName}</div>
-					<div className='text-xs ml-[0.4rem] mt-[-2px] text-white text-opacity-70'>{convertTime(+status)}</div>
+				<div className='header-content flex flex-col h-full flex-grow font-segoe '>
+					<span className='text-gray-50 ml-[0.4rem] mt-[4px] font-robo font-medium'>{userName}</span>
+					<div className='text-[0.7rem] ml-[0.4rem] mt-[-2px] text-white text-opacity-70 leading-3 tracking-[-0.015rem]'>{convertTime(+status)}</div>
 				</div>
 
 				<div className='icon-call w-[48px] h-full flex justify-center items-center'>
