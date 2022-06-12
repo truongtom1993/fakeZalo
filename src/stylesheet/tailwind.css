@@ -81,7 +81,7 @@
 }
 
 .emoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll var(--position);
+	background: url('https://i.postimg.cc/yxT1L8my/all-emoji.png') no-repeat scroll var(--position);
 }
 .linkInText {
 	text-decoration: underline;
