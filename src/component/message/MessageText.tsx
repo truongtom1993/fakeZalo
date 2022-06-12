@@ -28,17 +28,17 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 			const stringUrl = message.textContent.replace(emailReg, result => {
 				switch (result) {
 					case Emoji.Like:
-						return `<span class='emoji strongEmoji'></span>`;
+						return `<span class='emoji' style='--position: 84% 82.5%/5100%'></span>`;
 					case Emoji.Heart:
-						return `<span class='emoji heartEmoji'></span>`;
+						return `<span class='emoji' style='--position: 84% 72.5% / 5100%'></span>`;
 					case Emoji.Lol:
-						return `<span class='emoji lolEmoji'></span>`;
+						return `<span class='emoji' style='--position: 82% 7.5% /5100%'></span>`;
 					case Emoji.Wow:
-						return `<span class='emoji wowEmoji'></span>`;
+						return `<span class='emoji' style='--position: 84% 20%/5100%'></span>`;
 					case Emoji.Cry:
-						return `<span class='emoji cryEmoji'></span>`;
+						return `<span class='emoji' style='--position: 84% 2.5% /5100%'></span>`;
 					case Emoji.Angry:
-						return `<span class='emoji angryEmoji'></span>`;
+						return `<span class='emoji' style='--position: 84% 5% /5100%'></span>`;
 
 					default:
 						break;
@@ -59,7 +59,7 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 						<div className={'message-text-main relative ml-1 bg-white'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
 							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
+							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
 							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</div>
 					</div>
@@ -73,7 +73,7 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 						<div className={'message-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
 							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} />
+							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
 							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</div>
 					</div>

@@ -13,18 +13,17 @@
 		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border border-gray-200 shadow-sm;
 	}
 	.icon_count_emoji {
-		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm border box-content;
+		@apply bg-white px-[0.3rem] h-[18px] rounded-xl flex items-center text-xs border box-content;
+	}
+	.flex_emoji {
+		@apply absolute bottom-[-14px] right-[2px] flex items-center;
 	}
 	.icon-emoji {
-		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center   shadow-sm border box-content;
+		@apply bg-white h-[23px] aspect-square rounded-full flex justify-center items-center border box-border;
 	}
 	.hd-label {
 		@apply bg-white rounded-[4px] absolute top-2 left-2 px-1 font-medium text-xs font-robo;
 	}
-	.flex_emoji {
-		@apply absolute bottom-[-0.7rem] right-1 flex items-center;
-	}
-
 	.message-image {
 		@apply bg-contain rounded-xl border border-gray-300;
 	}
@@ -81,23 +80,8 @@
 	width: 1rem;
 }
 
-.strongEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 82.5%/5100%;
-}
-.heartEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 72.5% / 5100%;
-}
-.lolEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 82% 7.5% /5100%;
-}
-.wowEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 20%/5100%;
-}
-.cryEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 2.5% /5100%;
-}
-.angryEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 5% /5100%;
+.emoji {
+	background: url('src/assets/icons/all_emoji.png') no-repeat scroll var(--position);
 }
 .linkInText {
 	text-decoration: underline;

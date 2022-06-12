@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState, useContext, useReducer, useRef, Suspense, memo, lazy, Fragment } from 'react';
+import { IoMdHeartEmpty } from 'react-icons/io';
 import { Emoji } from '../../interface/IMessage';
 interface Props {
 	type?: string;
@@ -7,6 +8,8 @@ interface Props {
 const EmojiIcon = ({ type }: Props) => {
 	function renderEmoji(type: string | undefined) {
 		switch (type) {
+			case Emoji.HeartEmpty:
+				return <IoMdHeartEmpty className='opacity-70' />;
 			case Emoji.Like:
 				return (
 					<span className='emoji-sizer' style={{ background: `url(src/assets/icons/all_emoji.png) repeat scroll 84% 82.5% / 5100%` }}>

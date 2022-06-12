@@ -41,9 +41,9 @@ const FormMessageType = ({ currentMessage }: IProps) => {
 					<Fragment>
 						<Form.Item name='callType' label='callType' labelAlign='left'>
 							<Select placeholder='Call Type' onChange={e => setCallType(e)}>
-								<Option value='incomming'>Incomming</Option>
-								<Option value='outgoing'>Outgoing</Option>
-								<Option value='missed'>Missed</Option>
+								<Option value='incomming'>Cuộc gọi đến</Option>
+								<Option value='outgoing'>Cuộc gọi đi</Option>
+								<Option value='missed'>Cuộc gọi nhỡ</Option>
 							</Select>
 						</Form.Item>
 						{callType !== 'missed' && (
