@@ -21,6 +21,7 @@ type TypeMassageRecord = {
 export type MessageType = TypeMessageImage | TypeMessageText | TypeMessageCall | TypeMassageRecord;
 
 export enum Emoji {
+	HeartEmpty = 'heartEmpty',
 	Like = '/-strong',
 	Heart = '/-heart',
 	Lol = ':>',

@@ -65,9 +65,6 @@ const FormAnt = () => {
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
-	function onChange(value: any) {
-		console.log(`selected ${value}`);
-	}
 
 	const resetForm = () => {
 		form.resetFields();
@@ -146,7 +143,7 @@ const FormAnt = () => {
 			<Form
 				name='basic'
 				labelCol={{ span: 8 }}
-				wrapperCol={{ span: 16 }}
+				wrapperCol={{ span: 24 }}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				initialValues={initFormValues}
@@ -154,25 +151,6 @@ const FormAnt = () => {
 				form={form}
 			>
 				<div>
-					<div className='flex space-x-4'>
-						<div className='flex space-x-2 w-auto items-center'>
-							<span className='mb-6'>User</span>
-							<Form.Item name='user' wrapperCol={{ span: 24 }} required>
-								<Select onChange={e => handleChangeUser(e)}>
-									<Option value='you'>You</Option>
-									<Option value='me'>Me</Option>
-									<Option value='separate'>Separate Time</Option>
-								</Select>
-							</Form.Item>
-						</div>
-						<div className='flex space-x-2'>
-							<p className='mb-6'>Index: </p>
-							<Form.Item name='index'>
-								<Input disabled />
-							</Form.Item>
-						</div>
-					</div>
-
 					<div className='flex items-center'>
 						<span className='w-28 mb-6 whitespace-nowrap'>ID Message: </span>
 						<Form.Item name='idMessage' className='flex-grow'>
@@ -221,7 +199,7 @@ const FormAnt = () => {
 				<div>
 					<Col span={24}>
 						<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
-							<InputNumber min={1} onChange={onChange} className='inputNumber' />
+							<InputNumber min={1} className='inputNumber' />
 						</Form.Item>
 					</Col>
 				</div>
@@ -229,6 +207,24 @@ const FormAnt = () => {
 				<Divider>
 					<b>Message</b>
 				</Divider>
+				<div className='flex gap-4'>
+					<div className='flex flex-grow space-x-2 w-auto items-center'>
+						<span className='mb-6'>User</span>
+						<Form.Item name='user' wrapperCol={{ span: 24 }} required>
+							<Select onChange={e => handleChangeUser(e)}>
+								<Option value='you'>You</Option>
+								<Option value='me'>Me</Option>
+								<Option value='separate'>Separate Time</Option>
+							</Select>
+						</Form.Item>
+					</div>
+					<div className='flex flex-grow space-x-2'>
+						<p className='mb-6'>Index: </p>
+						<Form.Item name='index'>
+							<Input disabled />
+						</Form.Item>
+					</div>
+				</div>
 
 				<FormMessageType currentMessage={currentMessage} />
 
@@ -255,7 +251,7 @@ const FormAnt = () => {
 					</Form.Item>
 				</div>
 				<div>
-					<Form.Item label='Step Time' name='stepRandomTime' labelAlign='left'>
+					<Form.Item label='Step Time' name='stepRandomTime' labelAlign='left' tooltip='Bước nhảy giữa các tin nhắn, đơn vị giây'>
 						<InputNumber step={100} min={100} className='inputNumber' />
 					</Form.Item>
 				</div>

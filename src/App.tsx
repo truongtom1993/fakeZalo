@@ -80,7 +80,7 @@ function App() {
 
 				<div className='footer' onClick={() => setScrollProcess(!scrollProcess)}>
 					<Tooltip title='Click để ẩn hiện nút Scroll'>
-						<img src={Footer} alt='footer' className='h-[48px]' />
+						<img src='https://i.postimg.cc/7YJ7yq5V/footer-zalo.png' alt='footer' className='h-[48px]' />
 					</Tooltip>
 				</div>
 

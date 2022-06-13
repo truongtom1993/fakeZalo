@@ -104,7 +104,7 @@ const MessageCall = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
 	}
 	if (author === 'you') {
 		return (
-			<div className='flex mb-2'>
+			<div className='flex mb-1'>
 				<Avatar isFirstMessage={isFirstMessage} />
 				<div className='ml-1 '>{render()}</div>
 			</div>
@@ -112,7 +112,7 @@ const MessageCall = ({ index, data, isFirstMessage, isLastMessage }: Props) => {
 	}
 	if (author === 'me') {
 		return (
-			<div className='flex mb-2 mr-2 '>
+			<div className='flex mb-1 mr-2 '>
 				<div className='ml-auto'>{render()}</div>
 			</div>
 		);

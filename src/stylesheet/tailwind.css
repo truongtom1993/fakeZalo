@@ -7,24 +7,23 @@
 		@apply h-3 w-3 overflow-hidden text-transparent select-none;
 	}
 	.message-text-main {
-		@apply rounded-xl py-2 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border tracking-tight;
+		@apply rounded-xl py-1 px-3 flex flex-col max-w-[366px] min-w-[80px] border border-gray-300 border-opacity-80 box-border tracking-tight;
 	}
 	.icon-share-image {
 		@apply rounded-full flex justify-center items-center bg-white w-7 h-7 self-center ml-2 border border-gray-200 shadow-sm;
 	}
 	.icon_count_emoji {
-		@apply bg-white px-[0.3rem] h-4 rounded-xl flex items-center text-xs shadow-sm border box-content;
+		@apply bg-white px-[0.3rem] h-[18px] rounded-xl flex items-center text-xs border box-content;
+	}
+	.flex_emoji {
+		@apply absolute bottom-[-14px] right-[2px] flex items-center;
 	}
 	.icon-emoji {
-		@apply bg-white h-5 w-5 rounded-full flex justify-center items-center   shadow-sm border box-content;
+		@apply bg-white h-[23px] aspect-square rounded-full flex justify-center items-center border box-border;
 	}
 	.hd-label {
 		@apply bg-white rounded-[4px] absolute top-2 left-2 px-1 font-medium text-xs font-robo;
 	}
-	.flex_emoji {
-		@apply absolute bottom-[-0.7rem] right-1 flex items-center;
-	}
-
 	.message-image {
 		@apply bg-contain rounded-xl border border-gray-300;
 	}
@@ -42,7 +41,7 @@
 	}
 	.timeStamp_text_me_inner,
 	.timeStamp_text_you_inner {
-		@apply text-[10px] -mb-1 text-gray-400 self-start font-segoe tracking-widest;
+		@apply text-[10px] -mt-1 mb-0 text-gray-400 self-start font-lato tracking-normal;
 	}
 	.lastMessage {
 		@apply flex flex-row-reverse px-4 mb-2;
@@ -71,6 +70,9 @@
 .author_me + .author_you {
 	margin-top: 0.5rem;
 }
+.author_you + .author_me {
+	margin-top: 0.5rem;
+}
 
 .emoji {
 	display: inline-flex;
@@ -78,23 +80,8 @@
 	width: 1rem;
 }
 
-.strongEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 82.5%/5100%;
-}
-.heartEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 72.5% / 5100%;
-}
-.lolEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 82% 7.5% /5100%;
-}
-.wowEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 20%/5100%;
-}
-.cryEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 2.5% /5100%;
-}
-.angryEmoji {
-	background: url('src/assets/icons/all_emoji.png') no-repeat scroll 84% 5% /5100%;
+.emoji {
+	background: url('https://i.postimg.cc/yxT1L8my/all-emoji.png') no-repeat scroll var(--position);
 }
 .linkInText {
 	text-decoration: underline;

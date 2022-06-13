@@ -79,7 +79,8 @@ export const converMessageToDataForm = (data: Message): IDataForm => {
 export const convertToShortenTime = (value: string) => {
 	const timeSplit = value.split(':');
 	const minute = timeSplit[1];
-	const hour = timeSplit[0].split(' ').at(-1);
+	const hourArray = timeSplit[0].split(' ');
+	const hour = hourArray[hourArray.length - 1];
 	let result = `${Number.parseInt(hour)}:${minute}`;
 	return result;
 };
