@@ -55,8 +55,8 @@ function App() {
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 100)} ref={messageContainerRef}>
 					{messageList &&
 						messageList.map((data, index) => {
-							let isFirstMessage: boolean = false;
-							let isLastMessageAuthor: boolean = false;
+							let isFirstMessage = false;
+							let isLastMessageAuthor = false;
 							if (data.author !== messageList[index - 1]?.author || messageList[index - 1].time.type === 'separate') {
 								isFirstMessage = true;
 							}
@@ -68,7 +68,7 @@ function App() {
 								<Fragment key={index}>
 									<MainMessage index={index} data={data} isLastMessage={isLastMessageAuthor} isFirstMessage={isFirstMessage} />
 
-									{index === messageListLength - 1 && (
+									{index === messageListLength - 1 && data.author === 'me' && (
 										<div className='lastMessage'>
 											<Avatar width='20px' height='20px' isLastOfMessageList />
 										</div>

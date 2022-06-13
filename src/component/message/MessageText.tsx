@@ -1,5 +1,6 @@
 import React, { Fragment, memo, useEffect, useLayoutEffect, useRef } from 'react';
 import { Emoji, Message } from '../../interface/IMessage';
+import { store } from '../../store/store';
 import Avatar from '../Avatar';
 import EmojiComponent from '../emoji/EmojiComponent';
 import TimeComponent from '../time/TimeComponent';
@@ -21,6 +22,8 @@ const emojiReg = /fd/g;
 
 const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 	const { author, message, time, emoji, messageReply } = data;
+	const messageListLength = store.getState().messageListReducer.data.length;
+	const isEndOfList = messageListLength - 1 === index;
 	const contentRef = useRef<HTMLDivElement>();
 
 	useLayoutEffect(() => {
@@ -54,12 +57,12 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 		if (author === 'you') {
 			return (
 				<Fragment>
-					<div className='flex'>
+					<div className={`flex ${isEndOfList ? 'mb-6' : ''}`}>
 						<Avatar isFirstMessage={isFirstMessage} />
 						<div className={'message-text-main relative ml-1 bg-white'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
 							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
-							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
+							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} isEndOfList={isEndOfList ? true : false} />
 							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
 						</div>
 					</div>
