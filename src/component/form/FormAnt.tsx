@@ -65,9 +65,6 @@ const FormAnt = () => {
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
-	function onChange(value: any) {
-		console.log(`selected ${value}`);
-	}
 
 	const resetForm = () => {
 		form.resetFields();
@@ -146,7 +143,7 @@ const FormAnt = () => {
 			<Form
 				name='basic'
 				labelCol={{ span: 8 }}
-				wrapperCol={{ span: 16 }}
+				wrapperCol={{ span: 24 }}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				initialValues={initFormValues}
@@ -202,7 +199,7 @@ const FormAnt = () => {
 				<div>
 					<Col span={24}>
 						<Form.Item name='numberEmoji' label='Số lượng' labelAlign='left'>
-							<InputNumber min={1} onChange={onChange} className='inputNumber' />
+							<InputNumber min={1} className='inputNumber' />
 						</Form.Item>
 					</Col>
 				</div>
