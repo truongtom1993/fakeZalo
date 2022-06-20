@@ -69,7 +69,7 @@ const messageListSlice = createSlice({
 			state.data.forEach(element => {
 				const newTime = startTime.add(randomTime, 's').format('YYYY-MM-DD HH:mm:ss');
 				element.time.value = newTime;
-				randomTime += randomNumber(100, action.payload.stepTime);
+				randomTime = randomNumber(100, action.payload.stepTime);
 			});
 		},
 	},

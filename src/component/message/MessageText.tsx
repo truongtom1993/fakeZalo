@@ -18,8 +18,6 @@ const emailReg = new RegExp(
 	'gm',
 );
 
-const emojiReg = /fd/g;
-
 const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 	const { author, message, time, emoji, messageReply } = data;
 	const messageListLength = store.getState().messageListReducer.data.length;
