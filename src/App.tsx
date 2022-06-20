@@ -52,7 +52,7 @@ function App() {
 		<div className='pl-2 pt-2 flex'>
 			<div id='zalo_main' className='App font-segoe relative mr-2'>
 				<Header />
-				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 100)} ref={messageContainerRef}>
+				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 50)} ref={messageContainerRef}>
 					{messageList &&
 						messageList.map((data, index) => {
 							let isFirstMessage = false;
