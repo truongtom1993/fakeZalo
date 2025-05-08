@@ -10,6 +10,7 @@ import { changeCurrentMessage, exampleCurrentMessageReply, ICurrentMessageReply 
 import { addMessage, changeMessageById, importMessageList, setRandomTime } from '../../slice/DataSlice';
 import { createExampleMessage } from '../../utils';
 import FormMessageType from './FormMessageType';
+import { Slider } from 'antd';
 
 export interface IDataForm {
 	index: number;
@@ -165,6 +166,7 @@ const FormAnt = () => {
 						</Form.Item>
 					</div>
 				</div>
+
 				<Divider style={{ marginTop: '0' }}>
 					<b>Time</b>
 				</Divider>
