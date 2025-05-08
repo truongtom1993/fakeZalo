@@ -1,7 +1,10 @@
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
+.message-text-main {
+	font-family: "Roboto" !important;
+	font-weight: normal;
+}
 .App {
 	width: 480px;
 	height: 960px;

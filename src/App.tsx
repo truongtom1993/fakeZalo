@@ -50,8 +50,8 @@ function App() {
 
 	return (
 		<div className='pl-2 pt-2 flex'>
-			<div id='zalo_main' className='App font-segoe relative mr-2'>
-				<Header />
+			<div id='zalo_main' className='App font-segoe relative mr-2 border-b'>
+				<Header type='custome'/>
 				<div className='main bg-[#E2E9F1] overflow-y-scroll flex-grow flex-col w-[480px]' onScroll={throttle(getScrollProcess, 50)} ref={messageContainerRef}>
 					{messageList &&
 						messageList.map((data, index) => {
@@ -80,14 +80,14 @@ function App() {
 
 				<div className='footer' onClick={() => setScrollProcess(!scrollProcess)}>
 					<Tooltip title='Click để ẩn hiện nút Scroll'>
-						<img src='https://i.postimg.cc/7YJ7yq5V/footer-zalo.png' alt='footer' className='h-[48px]' />
+						<img src='https://i.postimg.cc/4xQrZWF2/image.png' alt='footer' className='h-[92px] w-full' />
 					</Tooltip>
 				</div>
 
 				<Fragment>
 					{scrollProcess && (
 						<div
-							className='bg-white rounded-full shadow-lg absolute bottom-16 right-4 h-8 w-8 flex justify-center items-center cursor-pointer'
+							className='bg-white rounded-full shadow-lg absolute bottom-28 right-4 h-8 w-8 flex justify-center items-center cursor-pointer'
 							onClick={changeMessageContainerScroll}
 						>
 							<HiOutlineChevronDoubleDown className='opacity-70' />

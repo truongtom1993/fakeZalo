@@ -59,9 +59,14 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 						<Avatar isFirstMessage={isFirstMessage} />
 						<div className={'message-text-main relative ml-1 bg-white'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
-							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
+							<div className='text-lg text-gray-800' ref={contentRef}></div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} isEndOfList={isEndOfList ? true : false} />
-							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
+
+							{isLastMessage && (
+								<div className='pt-1'>
+									<TimeComponent time={time} message={message} author={author} />
+								</div>
+							)}
 						</div>
 					</div>
 				</Fragment>
@@ -73,9 +78,13 @@ const MessageText = ({ data, isLastMessage, isFirstMessage, index }: Props) => {
 					<div className='flex'>
 						<div className={'message-text-main relative ml-auto mr-2 bg-[#D5F1FF]'}>
 							{messageReply.idReply && <MessageReply messageReply={messageReply} />}
-							<div className='text-base text-gray-800 pb-1' ref={contentRef}></div>
+							<div className='text-lg text-gray-800' ref={contentRef}></div>
 							<EmojiComponent type={emoji?.type} number={emoji?.number} author={author} />
-							{isLastMessage && <TimeComponent time={time} message={message} author={author} />}
+							{isLastMessage && (
+								<div className='pt-1'>
+									<TimeComponent time={time} message={message} author={author} />
+								</div>
+							)}
 						</div>
 					</div>
 				</Fragment>

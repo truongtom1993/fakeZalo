@@ -95,7 +95,7 @@ const FormProfile = () => {
 				</div>
 
 				<div>
-					<Form.Item label='Your Avatar' name='avatarURL' labelAlign='left'>
+					<Form.Item label='Guess Avatar' name='avatarURL' labelAlign='left'>
 						<Input allowClear />
 					</Form.Item>
 				</div>

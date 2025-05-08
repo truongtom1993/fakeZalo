@@ -6,8 +6,19 @@ import { MdArrowBack } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { Profile } from '../interface/IMessage';
 import { RootState } from '../store/store';
+type IProps = {
+	type: string;
+};
+const Header = (props: IProps) => {
+	const { type } = props;
+	if (type === 'custome') {
+		return <HeaderCustome />;
+	} else {
+		return <HeaderLogic />;
+	}
+};
 
-const Header = () => {
+const HeaderLogic = () => {
 	const profile = useSelector<RootState, Profile>(s => s.profileReducer.profile);
 	const { userName, status } = profile;
 
@@ -47,5 +58,9 @@ const Header = () => {
 			</div>
 		</Fragment>
 	);
+};
+
+const HeaderCustome = () => {
+	return <div><img src="https://i.postimg.cc/wTPVSLVy/image.png" alt="header_zalo" className=''/></div>;
 };
 export default memo(Header);
