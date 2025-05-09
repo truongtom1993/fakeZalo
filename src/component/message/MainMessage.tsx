@@ -1,14 +1,14 @@
 import { message, Tooltip } from 'antd';
-import React, { Fragment, memo, useRef } from 'react';
+import { Fragment, memo } from 'react';
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { BsReplyAll } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import { GoDiffRemoved } from 'react-icons/go';
+import { MdDeleteOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { convertMessageToMessageReply } from '../../helpers';
 import { useAppSelector } from '../../hooks';
 import { Message } from '../../interface/IMessage';
-import { changeCurrentMessage, changeCurrentMessageReply, exampleCurrentMessage, IMessageReply, ICurrentMessageReply } from '../../slice/CurrentMessageSlice';
+import { changeCurrentMessage, changeCurrentMessageReply, exampleCurrentMessage, ICurrentMessageReply } from '../../slice/CurrentMessageSlice';
 import { addMessage, removeMessageByIndex } from '../../slice/DataSlice';
 import { createExampleMessage } from '../../utils';
 import MessageCall from './MessageCall';
@@ -99,7 +99,7 @@ const MessageMain = (props: IProps) => {
 						<BiDownArrow className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={addNext} />
 					</Tooltip>
 					<Tooltip title='Xóa tin nhắn này'>
-						<GoDiffRemoved className='cursor-pointer mx-2 w-8 h-8 stroke-[0.3] hover:scale-125' onClick={removeMessage} />
+						<MdDeleteOutline className='cursor-pointer mx-2 w-10 h-10 hover:scale-125' onClick={removeMessage} />
 					</Tooltip>
 					<Tooltip title='Lấy ID của tin nhắn làm ID Reply'>
 						<BsReplyAll className='cursor-pointer mx-2 w-11 h-11 hover:scale-125' onClick={() => getReplyId(convertMessageToMessageReply(data, index))} />
